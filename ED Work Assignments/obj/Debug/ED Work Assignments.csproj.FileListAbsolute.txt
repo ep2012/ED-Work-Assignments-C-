@@ -1,0 +1,39 @@
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.exe.config
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.exe
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.pdb
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csprojResolveAssemblyReference.cache
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\MainWindow.baml
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\MainWindow.g.cs
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\App.g.cs
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments_MarkupCompile.cache
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.g.resources
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED_Work_Assignments.Properties.Resources.resources
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.GenerateResource.Cache
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.exe
+c:\users\eliprice\documents\visual studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ChangeTracker.baml
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ExcelAssignments.baml
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\IndividualSchedule.baml
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\NewAssignment.baml
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ChangeTracker.g.cs
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ExcelAssignments.g.cs
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\IndividualSchedule.g.cs
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\NewAssignment.g.cs
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ReportCreator.baml
+C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ReportCreator.g.cs

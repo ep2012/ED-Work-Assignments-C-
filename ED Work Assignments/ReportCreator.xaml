@@ -1,0 +1,32 @@
+﻿<Window x:Class="ED_Work_Assignments.ReportCreator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        Title="ReportCreator" Height="800" Width="800" Background="#FF9B9999" FontFamily="Bookman Old Style">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="134" Margin="10,46,0,0" VerticalAlignment="Top" Width="763" Background="#FFC9C7C7"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="134" Margin="10,185,0,0" VerticalAlignment="Top" Width="763" Background="#FFC9C7C7"/>
+        <Label Content= "Reports Creator" HorizontalAlignment="Center" Height="36" Margin="10,10,0,0" VerticalAlignment="Top" Width="202" FontFamily="Perpetua Titling MT" FontSize="20"/>
+        <Label Content= "Employee" HorizontalAlignment="Left" Height="26" Margin="10,51,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content= "Seat" HorizontalAlignment="Left" Height="26" Margin="10,82,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content= "Time Period" HorizontalAlignment="Left" Height="26" Margin="427,51,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="135,51,0,0" VerticalAlignment="Top" Width="209"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="135,82,0,0" VerticalAlignment="Top" Width="209"/>
+        <Label Content="Leave blank for any" HorizontalAlignment="Left" Height="26" Margin="427,82,0,0" VerticalAlignment="Top" Width="120" FontStyle="Italic" FontSize="10"/>
+        <DatePicker HorizontalAlignment="Left" Height="26" Margin="603,51,0,0" VerticalAlignment="Top" Width="161"/>
+        <DatePicker HorizontalAlignment="Left" Height="26" Margin="603,82,0,0" VerticalAlignment="Top" Width="161"/>
+        <Label Content= "Start" HorizontalAlignment="Left" Height="26" Margin="552,50,0,0" VerticalAlignment="Top" Width="46"/>
+        <Label Content= "End" HorizontalAlignment="Left" Height="26" Margin="552,80,0,0" VerticalAlignment="Top" Width="46"/>
+        <Label Content= "Time of Day" HorizontalAlignment="Left" Height="26" Margin="427,113,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Leave blank for any" HorizontalAlignment="Left" Height="26" Margin="427,144,0,0" VerticalAlignment="Top" Width="120" FontStyle="Italic" FontSize="10"/>
+        <wpfTool:TimePicker HorizontalAlignment="Left" Height="26" Margin="603,113,0,0" VerticalAlignment="Top" Width="161"/>
+        <wpfTool:TimePicker HorizontalAlignment="Left" Height="26" Margin="603,144,0,0" VerticalAlignment="Top" Width="161"/>
+        <Label Content= "Start" HorizontalAlignment="Left" Height="26" Margin="552,111,0,0" VerticalAlignment="Top" Width="46"/>
+        <Label Content= "End" HorizontalAlignment="Left" Height="26" Margin="552,142,0,0" VerticalAlignment="Top" Width="46"/>
+        <DataGrid HorizontalAlignment="Left" Height="381" Margin="10,324,0,0" VerticalAlignment="Top" Width="763"/>
+        <Label Content= "Special Tag" HorizontalAlignment="Left" Height="26" Margin="10,113,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="135,113,0,0" VerticalAlignment="Top" Width="209"/>
+        <RadioButton Content="Get total hours per employee (instead of hours per day)" HorizontalAlignment="Left" Margin="15,201,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

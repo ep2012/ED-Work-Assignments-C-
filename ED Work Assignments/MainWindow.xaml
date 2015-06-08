@@ -1,0 +1,57 @@
+﻿<Window x:Class="ED_Work_Assignments.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="800" Width="800" ResizeMode="CanMinimize" Left="0" Top="0" FontFamily="Bookman Old Style" FontSize="20" Background="#FF9B9999">
+    <Grid>
+        <TabControl x:Name="tbControl" HorizontalAlignment="Left" Height="625" Margin="10,74,0,0" VerticalAlignment="Top" Width="765">
+            <TabItem Header="WOW 1" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaWOW1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="WOW 2" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaWOW2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Check In" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaCheckIn" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Check Out" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaCheckOut" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="POD 1/2" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaPOD12" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="POD 3/4" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaPOD34" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Jet/Peds" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaJetPeds" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="iPad" Margin="-2,-2,-2,-1">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dtaiPad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="btnAddAssignment" Content="Add Assignment" BorderThickness="1"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="265,704,0,0" VerticalAlignment="Top" Width="254" Height="50" BorderBrush="Black" Background="#FFB8F190" FontFamily="Perpetua Titling MT" Click="btnAddAssignment_Click"/>
+        <Button x:Name="btnChangeTracker" Content="Open Change Tracker" BorderThickness="1"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="270,10,0,0" VerticalAlignment="Top" Width="252" Height="50" BorderBrush="Black" Background="#FFB8F190" FontFamily="Perpetua Titling MT" Click="btnChangeTracker_Click"/>
+        <DatePicker x:Name="dtPicker" Margin="10,38,554,0" VerticalAlignment="Top" CalendarClosed="dtPicker_CalendarClosed"/>
+        <Label x:Name="lblWelcome" Content="Hello!" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnUploadAssignment" Content="Upload From Excel" BorderThickness="1"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="519,704,0,0" VerticalAlignment="Top" Width="255" Height="50" BorderBrush="Black" Background="#FFB8F190" FontFamily="Perpetua Titling MT"/>
+        <Button x:Name="btnIndividualSchedule" Content="Individual Schedule" BorderThickness="1"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="522,10,0,0" VerticalAlignment="Top" Width="252" Height="50" BorderBrush="Black" Background="#FFB8F190" FontFamily="Perpetua Titling MT" Click="btnIndividualSchedule_Click"/>
+        <Button x:Name="btnReportCreator" Content="Report Creator" BorderThickness="1"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="10,704,0,0" VerticalAlignment="Top" Width="255" Height="50" BorderBrush="Black" Background="#FFB8F190" FontFamily="Perpetua Titling MT" Click="btnReportCreator_Click"/>
+
+    </Grid>
+</Window>
