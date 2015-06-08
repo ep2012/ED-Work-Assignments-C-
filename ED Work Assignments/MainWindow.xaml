@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ED_Work_Assignments.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="800" Width="800" ResizeMode="CanMinimize" Left="0" Top="0" FontFamily="Bookman Old Style" FontSize="20" Background="#FF9B9999">
+        Title="ED Work Assignments" Height="800" Width="800" ResizeMode="CanMinimize" Left="0" Top="0" FontFamily="Bookman Old Style" FontSize="20" Background="#FF9B9999">
     <Grid>
         <TabControl x:Name="tbControl" HorizontalAlignment="Left" Height="625" Margin="10,74,0,0" VerticalAlignment="Top" Width="765">
             <TabItem Header="WOW 1" Margin="-2,-2,-2,-1">
