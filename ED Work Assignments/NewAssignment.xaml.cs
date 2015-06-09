@@ -18,30 +18,26 @@ namespace ED_Work_Assignments
     /// <summary>
     /// Interaction logic for NewAssignment.xaml
     /// </summary>
+    /// 
     public partial class NewAssignment : Window
     {
+        Users users = new Users();
+        Seats seats = new Seats();
+
         public NewAssignment()
         {
             InitializeComponent();
 
-            Users listData1 = new Users();
             Binding binding1 = new Binding();
 
-            binding1.Source = listData1;
+            binding1.Source = users;
             cboEmployee.SetBinding(ListBox.ItemsSourceProperty, binding1);
 
-            //cboEmployee.Items.Add("Eli Price");
 
-            cboSeat.Items.Add("WOW1");
-            cboSeat.Items.Add("WOW2");
-            cboSeat.Items.Add("Check In");
-            cboSeat.Items.Add("Check Out");
-            cboSeat.Items.Add("POD 1/2");
-            cboSeat.Items.Add("POD 3/4");
-            cboSeat.Items.Add("Jet/Peds");
-            cboSeat.Items.Add("iPad");
+            Binding binding2 = new Binding();
 
-            cboSpecialTag.Items.Add("Manager");
+            binding2.Source = seats;
+            cboSeat.SetBinding(ListBox.ItemsSourceProperty, binding2);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -57,24 +53,34 @@ namespace ED_Work_Assignments
 
                     OdbcCommand cmd = new OdbcCommand();
 
-                    cmd.CommandText = "{CALL ed_newWorkAssignment(?, ?, ?, ?, ?, ?)}";
+                    cmd.CommandText = "{CALL ed_newWorkAssignment(?, ?, ?, ?)}";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Connection = dbConnection;
 
-                    String[] firstLast = cboEmployee.Text.ToString().Split(null as string[], StringSplitOptions.RemoveEmptyEntries);
-
-                    cmd.Parameters.Add("@firstName", OdbcType.NVarChar, 100).Value = firstLast[0];
-                    cmd.Parameters.Add("@lastName", OdbcType.NVarChar, 100).Value =  firstLast[1];
-                    cmd.Parameters.Add("@seat", OdbcType.NVarChar, 100).Value = cboSeat.Text;
-                    cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Text;
-                    cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Text;
-                    cmd.Parameters.Add("@specialTag", OdbcType.NVarChar, 100).Value = cboSpecialTag.Text;
+                    cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
+                    cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
+                    cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
+                    cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
 
                     cmd.ExecuteNonQuery();
 
                     dbConnection.Close();
                 }
             }
+
+            this.Close();
+        }
+
+        private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            ManageEmployees win = new ManageEmployees();
+
+            win.Show();
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

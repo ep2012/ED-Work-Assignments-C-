@@ -28,7 +28,13 @@ namespace ED_Work_Assignments
             dtPicker.Text = DateTime.Today.ToString();
             //dtPicker.Text = "5/6/2015";
             setWindows();
-            lblWelcome.Content = "Hello, " + Environment.UserName + "!";
+
+            Users users = new Users();
+
+            String [] name = users.getName(Environment.UserName).Split(null as string[], StringSplitOptions.RemoveEmptyEntries);
+
+            lblWelcome.Content = "Hello, " + name[0] + " " + name[1] + "!";
+            
             if (!isAdmin())
             {
                 btnAddAssignment.Visibility = Visibility.Hidden;
@@ -38,12 +44,16 @@ namespace ED_Work_Assignments
         }
         private void setWindows()
         {
-            DateTime day;
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
             DateTime lastDay; 
             DateTime.TryParse(dtPicker.Text.ToString(), out lastDay);
             String otherDate = lastDay.AddDays(1).ToString();
-            String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time] FROM ed_employeeWorkTable WHERE ((start BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') OR ([end] BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "')) AND seat = '";
+            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[FirstName] AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time] "+
+                "FROM [REVINT].[dbo].[ED_Shifts] "+
+                "JOIN [REVINT].[dbo].[ED_Employees] "+
+                "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] "+
+                "WHERE Seat = ";
+            //String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time] FROM ed_employeeWorkTable WHERE ((start BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') OR ([end] BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "')) AND seat = '";
             
             //create an OdbcConnection object and connect it to the data source.
             using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
@@ -52,14 +62,15 @@ namespace ED_Work_Assignments
                 dbConnection.Open();
 
                 //Create adapter from connection and sql to obtain desired data
-                OdbcDataAdapter dadapterWOW1 = new OdbcDataAdapter(sqlString + "WOW1'", dbConnection);
-                OdbcDataAdapter dadapterWOW2 = new OdbcDataAdapter(sqlString + "WOW2'", dbConnection);
-                OdbcDataAdapter dadapterCheckIn = new OdbcDataAdapter(sqlString + "Check In'", dbConnection);
-                OdbcDataAdapter dadapterCheckOut = new OdbcDataAdapter(sqlString + "Check Out'", dbConnection);
-                OdbcDataAdapter dadapterPOD12 = new OdbcDataAdapter(sqlString + "POD 1/2'", dbConnection);
-                OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + "POD 3/4'", dbConnection);
-                OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + "Jet/Peds'", dbConnection);
-                OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + "iPad'", dbConnection);
+                OdbcDataAdapter dadapterWOW1 = new OdbcDataAdapter(sqlString + "3" , dbConnection);
+                OdbcDataAdapter dadapterWOW2 = new OdbcDataAdapter(sqlString + "4" , dbConnection);
+                OdbcDataAdapter dadapterCheckIn = new OdbcDataAdapter(sqlString + "1" , dbConnection);
+                OdbcDataAdapter dadapterCheckOut = new OdbcDataAdapter(sqlString + "5" , dbConnection);
+                OdbcDataAdapter dadapterPOD12 = new OdbcDataAdapter(sqlString + "6" , dbConnection);
+                OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + "7" , dbConnection);
+                OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + "8" , dbConnection);
+                OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + "2", dbConnection);
+                //OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + "9", dbConnection);
 
                 //Create a table and fill it with the data from the adapter
                 DataTable dtableWOW1 = new DataTable();
@@ -120,9 +131,9 @@ namespace ED_Work_Assignments
         {
             setWindows();
         }
-        private bool isAdmin() 
+        public bool isAdmin() 
         {
-            String [] admins = {"eliprice", "miaria", "soversm", "jensend"};
+            String [] admins = {"eliprice", "miaria", "soversm", "jensend", "stoutk"};
             for (int i = 0; i < admins.Length; i++ )
             {
                 if (Environment.UserName == admins[i])
@@ -145,6 +156,7 @@ namespace ED_Work_Assignments
             IndividualSchedule win = new IndividualSchedule();
 
             win.Show();
+            this.Close();
         }
 
         private void btnChangeTracker_Click(object sender, RoutedEventArgs e)
@@ -159,6 +171,7 @@ namespace ED_Work_Assignments
             ReportCreator win = new ReportCreator();
 
             win.Show();
+            this.Close();
         }
     }
 }

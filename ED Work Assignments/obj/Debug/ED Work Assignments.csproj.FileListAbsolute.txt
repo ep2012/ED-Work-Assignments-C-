@@ -70,3 +70,7 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.g.resources
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED_Work_Assignments.Properties.Resources.resources
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.GenerateResource.Cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\AddEditEmployee.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ManageEmployees.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\AddEditEmployee.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ManageEmployees.g.cs
