@@ -156,7 +156,6 @@ namespace ED_Work_Assignments
             IndividualSchedule win = new IndividualSchedule();
 
             win.Show();
-            this.Close();
         }
 
         private void btnChangeTracker_Click(object sender, RoutedEventArgs e)
@@ -171,7 +170,6 @@ namespace ED_Work_Assignments
             ReportCreator win = new ReportCreator();
 
             win.Show();
-            this.Close();
         }
     }
 }

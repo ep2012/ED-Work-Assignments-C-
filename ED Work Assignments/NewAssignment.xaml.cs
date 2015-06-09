@@ -53,7 +53,7 @@ namespace ED_Work_Assignments
 
                     OdbcCommand cmd = new OdbcCommand();
 
-                    cmd.CommandText = "{CALL ed_newWorkAssignment(?, ?, ?, ?)}";
+                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Connection = dbConnection;
 

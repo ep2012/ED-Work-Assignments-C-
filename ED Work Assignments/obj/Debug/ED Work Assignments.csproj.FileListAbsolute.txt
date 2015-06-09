@@ -42,16 +42,6 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.pdb
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.pdb
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csprojResolveAssemblyReference.cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ChangeTracker.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ExcelAssignments.baml
@@ -74,3 +64,9 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ManageEmployees.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\AddEditEmployee.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ManageEmployees.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.Toolkit.dll

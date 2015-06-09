@@ -37,7 +37,7 @@ namespace ED_Work_Assignments
         {
             lblSchedule.Content = name[0] + " " + name[1] + "'s Schedule";
 
-            String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time], seat AS [Seat] FROM ed_employeeWorkTable WHERE (firstName = '" + name[0] + "' AND lastName = '" + name[1] + "') AND ((start BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([end] BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "'))";
+            String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time], seat AS [Seat] FROM [REVINT].[Healthcare\\eliprice].ed_employeeWorkTable WHERE (firstName = '" + name[0] + "' AND lastName = '" + name[1] + "') AND ((start BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([end] BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "'))";
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
             //create an OdbcConnection object and connect it to the data source.
