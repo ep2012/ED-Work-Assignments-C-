@@ -6,42 +6,42 @@
         <TabControl x:Name="tbControl" HorizontalAlignment="Left" Height="625" Margin="10,74,0,0" VerticalAlignment="Top" Width="765">
             <TabItem Header="WOW 1" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaWOW1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaWOW1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="WOW 2" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaWOW2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaWOW2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Check In" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaCheckIn" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaCheckIn" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Check Out" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaCheckOut" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaCheckOut" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="POD 1/2" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaPOD12" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaPOD12" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="POD 3/4" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaPOD34" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaPOD34" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Jet/Peds" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaJetPeds" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaJetPeds" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="iPad" Margin="-2,-2,-2,-1">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dtaiPad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735"/>
+                    <DataGrid x:Name="dtaiPad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="566" Width="735" MouseDoubleClick="dta_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
         </TabControl>

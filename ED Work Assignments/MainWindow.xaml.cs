@@ -48,11 +48,12 @@ namespace ED_Work_Assignments
             DateTime lastDay; 
             DateTime.TryParse(dtPicker.Text.ToString(), out lastDay);
             String otherDate = lastDay.AddDays(1).ToString();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[FirstName] AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time] "+
-                "FROM [REVINT].[dbo].[ED_Shifts] "+
-                "JOIN [REVINT].[dbo].[ED_Employees] "+
-                "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] "+
-                "WHERE Seat = ";
+            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[FirstName] AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time] " +
+                "FROM [REVINT].[dbo].[ED_Shifts] " +
+                "JOIN [REVINT].[dbo].[ED_Employees] " +
+                "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
+                "WHERE (StartShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "' OR EndShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') "+
+                "AND Seat = ";
             //String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time] FROM ed_employeeWorkTable WHERE ((start BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') OR ([end] BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "')) AND seat = '";
             
             //create an OdbcConnection object and connect it to the data source.
@@ -134,7 +135,7 @@ namespace ED_Work_Assignments
 
         private void btnAddAssignment_Click(object sender, RoutedEventArgs e)
         {
-            NewAssignment win = new NewAssignment();
+            NewAssignment win = new NewAssignment(this);
 
             win.Show();
         }
@@ -158,6 +159,15 @@ namespace ED_Work_Assignments
             ReportCreator win = new ReportCreator();
 
             win.Show();
+        }
+        public void update()
+        {
+            setWindows();
+        }
+
+        private void dta_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

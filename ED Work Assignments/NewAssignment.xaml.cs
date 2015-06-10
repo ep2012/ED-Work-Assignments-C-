@@ -28,10 +28,14 @@ namespace ED_Work_Assignments
 
         AssignmentType assignmentType;
 
-        public NewAssignment()
+        MainWindow mainWindow;
+
+        public NewAssignment(MainWindow main)
         {
             InitializeComponent();
-            
+
+            mainWindow = main;
+
             Binding binding1 = new Binding();
 
             binding1.Source = users;
@@ -54,46 +58,70 @@ namespace ED_Work_Assignments
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (assignmentType == AssignmentType.New)
+            if (validInputs())
             {
-                String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-                var dialogResult = MessageBox.Show("Are you sure you would like to add this work assignment?", "Inserting into database", MessageBoxButton.YesNo);
-
-                if (dialogResult == MessageBoxResult.Yes)
+                if (assignmentType == AssignmentType.New)
                 {
-                    using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                    String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+                    var dialogResult = MessageBox.Show("Are you sure you would like to add this work assignment?", "Inserting into database", MessageBoxButton.YesNo);
+
+                    if (dialogResult == MessageBoxResult.Yes)
                     {
-                        //open OdbcConnection object
-                        dbConnection.Open();
+                        using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                        {
+                            //open OdbcConnection object
+                            dbConnection.Open();
 
-                        OdbcCommand cmd = new OdbcCommand();
+                            OdbcCommand cmd = new OdbcCommand();
 
-                        cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Connection = dbConnection;
+                            cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Connection = dbConnection;
 
-                        cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
-                        cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
-                        cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
-                        cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
+                            cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
+                            cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
+                            cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
+                            cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
 
-                        cmd.ExecuteNonQuery();
+                            cmd.ExecuteNonQuery();
 
-                        dbConnection.Close();
+                            dbConnection.Close();
+                        }
                     }
+
+
                 }
+                else
+                {
 
+                }
+                if (mainWindow.ShowActivated)
+                {
+                    mainWindow.update();
+                }
+                this.Close();
+            }
+        
+       }
+        private bool validInputs()
+        {
+            if (cboEmployee.Text == "" || cboSeat.Text == "" || dtpEnd.Value.ToString() == "" || dtpStart.Value.ToString() == "")
+            {
+                var dialogBox = MessageBox.Show("Please fill in all the required values.", "Invalid Input", MessageBoxButton.OK);
 
+                return false;
+            }
+            else if (dtpEnd.Value < dtpStart.Value)
+            {
+                var dialogBox = MessageBox.Show("The end date must be after the start date.", "Invalid Input", MessageBoxButton.OK);
+
+                return false;
             }
             else
             {
-
+                return true;
             }
-
-
-            this.Close();
-        
-       }
+        }
 
         private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
         {
