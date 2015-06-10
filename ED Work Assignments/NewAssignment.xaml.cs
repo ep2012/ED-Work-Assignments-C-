@@ -24,52 +24,76 @@ namespace ED_Work_Assignments
         Users users = new Users();
         Seats seats = new Seats();
 
+        enum AssignmentType { New, Update };
+
+        AssignmentType assignmentType;
+
         public NewAssignment()
         {
             InitializeComponent();
-
+            
             Binding binding1 = new Binding();
 
             binding1.Source = users;
             cboEmployee.SetBinding(ListBox.ItemsSourceProperty, binding1);
 
-
             Binding binding2 = new Binding();
 
             binding2.Source = seats;
             cboSeat.SetBinding(ListBox.ItemsSourceProperty, binding2);
+
+            assignmentType = AssignmentType.New;
+
+        }
+        public NewAssignment(int junkThatNeedsToBeRowsActually)
+        {
+            InitializeComponent();
+
+            assignmentType = AssignmentType.Update;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-            var dialogResult = MessageBox.Show("Are you sure you would like to add this work assignment?", "Inserting into database", MessageBoxButton.YesNo);
-            if (dialogResult == MessageBoxResult.Yes)
+            if (assignmentType == AssignmentType.New)
             {
-                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+                var dialogResult = MessageBox.Show("Are you sure you would like to add this work assignment?", "Inserting into database", MessageBoxButton.YesNo);
+
+                if (dialogResult == MessageBoxResult.Yes)
                 {
-                    //open OdbcConnection object
-                    dbConnection.Open();
+                    using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                    {
+                        //open OdbcConnection object
+                        dbConnection.Open();
 
-                    OdbcCommand cmd = new OdbcCommand();
+                        OdbcCommand cmd = new OdbcCommand();
 
-                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Connection = dbConnection;
+                        cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Connection = dbConnection;
 
-                    cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
-                    cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
-                    cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
-                    cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
+                        cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
+                        cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
+                        cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
+                        cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
 
-                    dbConnection.Close();
+                        dbConnection.Close();
+                    }
                 }
+
+
+            }
+            else
+            {
+
             }
 
+
             this.Close();
-        }
+        
+       }
 
         private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
         {
@@ -82,5 +106,7 @@ namespace ED_Work_Assignments
         {
             this.Close();
         }
+
+
     }
 }

@@ -31,11 +31,11 @@ namespace ED_Work_Assignments
 
             Users users = new Users();
 
-            String [] name = users.getName(Environment.UserName).Split(null as string[], StringSplitOptions.RemoveEmptyEntries);
+            String name = users.getName(Environment.UserName);
 
-            lblWelcome.Content = "Hello, " + name[0] + " " + name[1] + "!";
+            lblWelcome.Content = "Hello, " + name + "!";
             
-            if (!isAdmin())
+            if (!users.isAdmin(Environment.UserName))
             {
                 btnAddAssignment.Visibility = Visibility.Hidden;
                 btnUploadAssignment.Visibility = Visibility.Hidden;
@@ -130,18 +130,6 @@ namespace ED_Work_Assignments
         private void dtPicker_CalendarClosed(object sender, RoutedEventArgs e)
         {
             setWindows();
-        }
-        public bool isAdmin() 
-        {
-            String [] admins = {"eliprice", "miaria", "soversm", "jensend", "stoutk"};
-            for (int i = 0; i < admins.Length; i++ )
-            {
-                if (Environment.UserName == admins[i])
-                {
-                    return true;
-                }
-            }    
-            return false;
         }
 
         private void btnAddAssignment_Click(object sender, RoutedEventArgs e)

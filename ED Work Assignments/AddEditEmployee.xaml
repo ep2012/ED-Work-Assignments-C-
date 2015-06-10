@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ED_Work_Assignments.AddEditEmployee"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddEditEmployee" Height="425" Width="500" FontFamily="Bookman Old Style" FontSize="14" Left="0" Top="0">
+        Title="AddEditEmployee" Height="425" Width="500" FontFamily="Bookman Old Style" FontSize="14" Left="0" Top="0" ResizeMode="CanMinimize">
     <Grid>
         <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="26" Margin="133,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104"/>
         <Label Content="First Name" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="117"/>
@@ -23,10 +23,11 @@
         <Label Content="Phone #" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="117"/>
         <TextBox x:Name="txtHealthcareID" HorizontalAlignment="Left" Height="26" Margin="133,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="335"/>
         <Label Content="Healthcare ID" HorizontalAlignment="Left" Margin="10,294,0,0" VerticalAlignment="Top" Width="117"/>
-        <Label Content="Add/Edit Employee" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.426,-0.154" FontFamily="Perpetua Titling MT" FontSize="20"/>
-        <Button x:Name="btnAddUpdate" Content="Add/Update" HorizontalAlignment="Left" Margin="318,325,0,0" VerticalAlignment="Top" Width="150" Height="50" FontFamily="Perpetua Titling MT" Click="btnAddUpdate_Click"/>
+        <Label x:Name="lblAddEdit" Content="Add/Edit Employee" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.426,-0.154" FontFamily="Perpetua Titling MT" FontSize="20"/>
+        <Button x:Name="btnAddUpdate" Content="Add/Update" HorizontalAlignment="Left" Margin="268,325,0,0" VerticalAlignment="Top" Width="200" Height="50" FontFamily="Perpetua Titling MT" Click="btnAddUpdate_Click"/>
         <ComboBox x:Name="cboRole" HorizontalAlignment="Left" Height="26" Margin="133,80,0,0" VerticalAlignment="Top" Width="103"/>
         <Label Content="Role" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="118"/>
+        <Button x:Name="btnDeleteEmployee" Content="Delete Employee" HorizontalAlignment="Left" Margin="10,325,0,0" VerticalAlignment="Top" Width="200" Height="50" FontFamily="Perpetua Titling MT" Click="btnDeleteEmployee_Click"/>
 
     </Grid>
 </Window>

@@ -12,23 +12,27 @@ namespace ED_Work_Assignments
     {
         Dictionary<String, String> employeeNames = new Dictionary<String, String>();
         Dictionary<String, String> employeeID = new Dictionary<String, String>();
+        Dictionary<String, String> employeeRole = new Dictionary<String, String>();
 
         String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
         
         object[] employeeUserNames = new object[10];
         object[] employeeFirstNames = new object[10];
         object[] employeeLastNames = new object[10];
+        object[] employeeRoles = new object[10];
         object[] employeeIDs = new object[10];
         
         OdbcConnection connectionFirstName;
         OdbcConnection connectionLastName;
         OdbcConnection connectionUserName;
+        OdbcConnection connectionRole;
         OdbcConnection connectionID;
 
         public Users()
         {
             connectionLastName = new OdbcConnection(cxnString);
             connectionUserName = new OdbcConnection(cxnString);
+            connectionRole = new OdbcConnection(cxnString);
             connectionID = new OdbcConnection(cxnString);
 
             using (connectionFirstName = new OdbcConnection(cxnString))
@@ -36,24 +40,28 @@ namespace ED_Work_Assignments
                 OdbcCommand commandFirstName = new OdbcCommand("SELECT FirstName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionFirstName);
                 OdbcCommand commandLastName = new OdbcCommand("SELECT LastName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionLastName);
                 OdbcCommand commandUserName = new OdbcCommand("SELECT UserName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionUserName);
+                OdbcCommand commandRole = new OdbcCommand("SELECT Role FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionRole);
                 OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionID);
-                
+
                 connectionFirstName.Open();
                 connectionLastName.Open();
                 connectionUserName.Open();
+                connectionRole.Open();
                 connectionID.Open();
 
                 OdbcDataReader firstNameReader = commandFirstName.ExecuteReader();
                 OdbcDataReader lastNameReader = commandLastName.ExecuteReader();
                 OdbcDataReader userNameReader = commandUserName.ExecuteReader();
+                OdbcDataReader roleReader = commandRole.ExecuteReader();
                 OdbcDataReader iDReader = commandID.ExecuteReader();
 
-                if(firstNameReader.Read() == true && lastNameReader.Read() == true && userNameReader.Read() == true && iDReader.Read() == true)
+                if(firstNameReader.Read() == true && lastNameReader.Read() == true && userNameReader.Read() == true && iDReader.Read() == true && roleReader.Read() == true)
                 {
                     do {
                         int numCols = firstNameReader.GetValues(employeeFirstNames);
                         numCols = lastNameReader.GetValues(employeeLastNames);
                         numCols = userNameReader.GetValues(employeeUserNames);
+                        numCols = roleReader.GetValues(employeeRoles);
                         numCols = iDReader.GetValues(employeeIDs);
 
                         for (int i = 0; i < numCols; i++)
@@ -66,12 +74,14 @@ namespace ED_Work_Assignments
                             {
                                 employeeID.Add(employeeFirstNames[i].ToString() + " " + employeeLastNames[i].ToString(), employeeIDs[i].ToString());
                             }
+                            if (!employeeRole.ContainsKey(employeeUserNames[i].ToString()))
+                            {
+                                employeeRole.Add(employeeUserNames[i].ToString(), employeeRoles[i].ToString());
+                            }
                             Add(employeeFirstNames[i].ToString() + " " + employeeLastNames[i].ToString());
                         }
-                    } while (firstNameReader.Read() == true && lastNameReader.Read() == true && userNameReader.Read() == true && iDReader.Read() == true);
+                    } while (firstNameReader.Read() == true && lastNameReader.Read() == true && userNameReader.Read() == true && iDReader.Read() == true && roleReader.Read() == true);
                 }
-                employeeNames.Add("eliprice", "Eli Price");
-                employeeNames.Add("miaria","Mike Iaria");
 
                 connectionFirstName.Close();
                 connectionLastName.Close();
@@ -102,6 +112,17 @@ namespace ED_Work_Assignments
             }
             else
                 return employeeID[strName];
+        }
+        public bool isAdmin(String userID)
+        {
+            if (employeeRole[userID] == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
     public class Seats : ObservableCollection<string>
@@ -158,6 +179,63 @@ namespace ED_Work_Assignments
             else
                 return seatIDs[strName];
         }
-    }
 
+
+    }
+    public class Roles : ObservableCollection<string>
+    {
+        Dictionary<String, String> titleIDs = new Dictionary<String, String>();
+
+        String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+        object[] titles = new object[10];
+        object[] iDs = new object[10];
+
+        OdbcConnection connectionTitle;
+        OdbcConnection connectionID;
+
+        public Roles()
+        {
+            connectionID = new OdbcConnection(cxnString);
+
+            using (connectionTitle = new OdbcConnection(cxnString))
+            {
+                OdbcCommand commandTitle = new OdbcCommand("SELECT Title FROM [REVINT].[dbo].[ED_Roles] ORDER BY Id", connectionTitle);
+                OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[dbo].[ED_Roles] ORDER BY Id", connectionID);
+
+                connectionTitle.Open();
+                connectionID.Open();
+
+                OdbcDataReader titleReader = commandTitle.ExecuteReader();
+                OdbcDataReader iDReader = commandID.ExecuteReader();
+
+                if (titleReader.Read() == true && iDReader.Read() == true)
+                {
+                    do
+                    {
+                        int numCols = titleReader.GetValues(titles);
+                        numCols = iDReader.GetValues(iDs);
+
+                        for (int i = 0; i < numCols; i++)
+                        {
+                            titleIDs.Add(titles[i].ToString(), iDs[i].ToString());
+                            Add(titles[i].ToString());
+                        }
+                    } while (titleReader.Read() == true && iDReader.Read() == true);
+                }
+
+                connectionTitle.Close();
+                connectionID.Close();
+            }
+        }
+        public String getID(string strName)
+        {
+            if (!titleIDs.ContainsKey(strName))
+            {
+                return "-1";
+            }
+            else
+                return titleIDs[strName];
+        }
+    }
 }

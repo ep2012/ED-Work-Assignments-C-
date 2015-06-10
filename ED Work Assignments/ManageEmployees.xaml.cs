@@ -51,7 +51,9 @@ namespace ED_Work_Assignments
         private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
         {
             AddEditEmployee win = new AddEditEmployee();
+            
             win.Show();
+            this.Close();
         }
 
         private void dtaEmployee_MouseDoubleClick(object sender, MouseButtonEventArgs e)
