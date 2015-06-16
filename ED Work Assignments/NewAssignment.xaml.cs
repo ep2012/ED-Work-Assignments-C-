@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Odbc;
 using System.Linq;
 using System.Text;
@@ -30,30 +31,58 @@ namespace ED_Work_Assignments
 
         MainWindow mainWindow;
 
+        String newAssignment = "New Work Assignment";
+        String updateAssignment = "Update Work Assignment";
+
+        int id;
+
         public NewAssignment(MainWindow main)
         {
             InitializeComponent();
 
             mainWindow = main;
 
+            setBindings();
+
+            assignmentType = AssignmentType.New;
+
+            lblWorkAssignment.Content = newAssignment;
+        }
+
+        public NewAssignment(MainWindow main, DataRowView row, String seat)
+        {
+            InitializeComponent();
+
+            mainWindow = main;
+
+            setBindings();
+
+            cboEmployee.Text = row["First Name"].ToString() + " " + row["Last Name"].ToString();
+
+            cboSeat.Text = seat;
+
+            
+            dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
+            dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
+
+            assignmentType = AssignmentType.Update;
+
+            id = int.Parse(row["Id"].ToString());
+
+            lblWorkAssignment.Content = updateAssignment;
+
+        }
+
+        private void setBindings()
+        {
             Binding binding1 = new Binding();
 
             binding1.Source = users;
             cboEmployee.SetBinding(ListBox.ItemsSourceProperty, binding1);
-
             Binding binding2 = new Binding();
 
             binding2.Source = seats;
             cboSeat.SetBinding(ListBox.ItemsSourceProperty, binding2);
-
-            assignmentType = AssignmentType.New;
-
-        }
-        public NewAssignment(int junkThatNeedsToBeRowsActually)
-        {
-            InitializeComponent();
-
-            assignmentType = AssignmentType.Update;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -93,7 +122,33 @@ namespace ED_Work_Assignments
                 }
                 else
                 {
+                    String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+                    var dialogResult = MessageBox.Show("Are you sure you would like to add this work assignment?", "Inserting into database", MessageBoxButton.YesNo);
 
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                        {
+                            //open OdbcConnection object
+                            dbConnection.Open();
+
+                            OdbcCommand cmd = new OdbcCommand();
+
+                            cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateWorkAssignment(?, ?, ?, ?, ?)}";
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Connection = dbConnection;
+
+                            cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
+                            cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
+                            cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
+                            cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
+                            cmd.Parameters.Add("@id", OdbcType.Int).Value = id.ToString();
+
+                            cmd.ExecuteNonQuery();
+
+                            dbConnection.Close();
+                        }
+                    }
                 }
                 if (mainWindow.ShowActivated)
                 {
@@ -128,6 +183,8 @@ namespace ED_Work_Assignments
             ManageEmployees win = new ManageEmployees();
 
             win.Show();
+
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

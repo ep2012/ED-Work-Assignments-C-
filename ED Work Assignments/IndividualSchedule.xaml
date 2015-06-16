@@ -8,7 +8,7 @@
         <DatePicker x:Name="dtEnd" HorizontalAlignment="Left" Height="33" Margin="578,43,0,0" VerticalAlignment="Top" Width="196" FontSize="20" CalendarClosed="CalendarClosed"/>
         <Label Content="Start" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top" FontSize="20" Width="179"/>
         <Label Content="End" HorizontalAlignment="Left" Margin="395,43,0,0" VerticalAlignment="Top" FontSize="20" Width="178"/>
-        <DataGrid x:Name="dgSchedule" HorizontalAlignment="Left" Height="674" Margin="10,81,0,0" VerticalAlignment="Top" Width="764" FontSize="18"/>
+        <DataGrid x:Name="dgSchedule" HorizontalAlignment="Left" Height="674" Margin="10,81,0,0" VerticalAlignment="Top" Width="764" FontSize="18" IsReadOnly="True"/>
 
     </Grid>
 </Window>

@@ -23,11 +23,13 @@
         <wpfTool:TimePicker x:Name="tmDayEnd" HorizontalAlignment="Left" Height="26" Margin="603,144,0,0" VerticalAlignment="Top" Width="161"/>
         <Label Content= "Start" HorizontalAlignment="Left" Height="26" Margin="552,111,0,0" VerticalAlignment="Top" Width="46"/>
         <Label Content= "End" HorizontalAlignment="Left" Height="26" Margin="552,142,0,0" VerticalAlignment="Top" Width="46"/>
-        <DataGrid x:Name="dtaReport" HorizontalAlignment="Left" Height="463" Margin="10,239,0,0" VerticalAlignment="Top" Width="763"/>
-        <Label Content= "Special Tag" HorizontalAlignment="Left" Height="26" Margin="10,113,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="cboSpecialTag" HorizontalAlignment="Left" Height="26" Margin="135,113,0,0" VerticalAlignment="Top" Width="209"/>
+        <DataGrid x:Name="dtaReport" HorizontalAlignment="Left" Height="409" Margin="10,293,0,0" VerticalAlignment="Top" Width="763"/>
         <RadioButton x:Name="rdoTotalHours" Content="Get total hours per employee (instead of hours per day)" HorizontalAlignment="Left" Margin="15,201,0,0" VerticalAlignment="Top" Click="rdoTotalHours_Click"/>
         <Button x:Name="btnGenerateReport" Content="Generate Report" HorizontalAlignment="Left" Margin="552,707,0,0" VerticalAlignment="Top" Width="221" Height="50" Click="btnGenerateReport_Click"/>
+        <Label Content= "Role" HorizontalAlignment="Left" Height="26" Margin="10,113,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cboRole" HorizontalAlignment="Left" Height="26" Margin="135,113,0,0" VerticalAlignment="Top" Width="209"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="49" Margin="10,239,0,0" VerticalAlignment="Top" Width="763" Background="#FFC9C7C7"/>
+        <RadioButton x:Name="rdoMinStaffing" Content="Get minimum staffing report for time period" HorizontalAlignment="Left" Margin="15,255,0,0" VerticalAlignment="Top" Click="rdoMinStaffing_Click"/>
 
     </Grid>
 </Window>

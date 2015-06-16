@@ -48,7 +48,7 @@ namespace ED_Work_Assignments
             DateTime lastDay; 
             DateTime.TryParse(dtPicker.Text.ToString(), out lastDay);
             String otherDate = lastDay.AddDays(1).ToString();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[FirstName] AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time] " +
+            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[FirstName] AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time], [REVINT].[dbo].[ED_Shifts].[Id] " +
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
                 "JOIN [REVINT].[dbo].[ED_Employees] " +
                 "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
@@ -167,7 +167,28 @@ namespace ED_Work_Assignments
 
         private void dta_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            ((DataGrid)sender).CancelEdit();
+            NewAssignment win = new NewAssignment(this, (DataRowView)((DataGrid)sender).SelectedValue,((TabItem) tbControl.SelectedItem).Header.ToString());
 
+            win.Show();
         }
+
+        private void btnNextDay_Click(object sender, RoutedEventArgs e)
+        {
+            dtPicker.Text = DateTime.Parse(dtPicker.Text).AddDays(1).ToString();
+            setWindows();
+        }
+
+        private void btnPreviousDay_Click(object sender, RoutedEventArgs e)
+        {
+            dtPicker.Text = DateTime.Parse(dtPicker.Text).AddDays(-1).ToString();
+            setWindows();
+        }
+
+        private void dta_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            ((DataGrid)sender).CancelEdit();
+        }
+
     }
 }

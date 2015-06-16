@@ -23,11 +23,13 @@ namespace ED_Work_Assignments
     {
         Users users = new Users();
         String name;
+        String[] names;
         public IndividualSchedule()
         {
             InitializeComponent();
 
             name = users.getName(Environment.UserName);
+            names = users.getName(Environment.UserName).Split(null);
             dtStart.Text = DateTime.Today.ToString();
             dtEnd.Text = DateTime.Today.AddDays(7).ToString();
 
@@ -37,7 +39,11 @@ namespace ED_Work_Assignments
         {
             lblSchedule.Content = name + "'s Schedule";
 
-            String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time], seat AS [Seat] FROM [REVINT].[Healthcare\\eliprice].ed_employeeWorkTable WHERE (firstName = '" + name[0] + "' AND lastName = '" + name[1] + "') AND ((start BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([end] BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "'))";
+            String sqlString = "Select [REVINT].[dbo].[ED_Shifts].StartShift AS [Start Time], [REVINT].[dbo].[ED_Shifts].EndShift AS [End Time], [REVINT].[dbo].[ED_Seats].Name AS [Seat] "+
+                "FROM [REVINT].[dbo].[ED_Shifts] " +
+                "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].Employee " +
+                "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].Id = [REVINT].[dbo].[ED_Shifts].Seat " +
+                "WHERE ([REVINT].[dbo].[ED_Employees].FirstName = '" + names[0] + "' AND [REVINT].[dbo].[ED_Employees].LastName = '" + names[1] + "') AND (([REVINT].[dbo].[ED_Shifts].StartShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([REVINT].[dbo].[ED_Shifts].EndShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "'))";
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
             //create an OdbcConnection object and connect it to the data source.

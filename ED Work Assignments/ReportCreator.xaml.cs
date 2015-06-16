@@ -22,10 +22,12 @@ namespace ED_Work_Assignments
     public partial class ReportCreator : Window
     {
         bool totalHours;
+        bool minStaffing;
         public ReportCreator()
         {
             InitializeComponent();
             totalHours = false;
+            minStaffing = false;
 
             Users listData1 = new Users();
             Binding binding1 = new Binding();
@@ -44,6 +46,9 @@ namespace ED_Work_Assignments
 
         private void rdoTotalHours_Click(object sender, RoutedEventArgs e)
         {
+            rdoMinStaffing.IsChecked = false;
+            minStaffing = false;
+
             if (!totalHours)
             {
                 rdoTotalHours.IsChecked = true;
@@ -56,29 +61,48 @@ namespace ED_Work_Assignments
             }
         }
 
-        private void btnGenerateReport_Click(object sender, RoutedEventArgs e)
+        private void rdoMinStaffing_Click(object sender, RoutedEventArgs e)
         {
-            String sqlString = "SELECT lastName AS [Last Name], firstName AS [First Name]";
+            rdoTotalHours.IsChecked = false;
+            totalHours = false;
 
-            if (totalHours)
+            if (!minStaffing)
             {
-                sqlString += ", SUM(DATEDIFF(MI, start, [end])/60.0) AS [Hours Worked] ";
+                rdoMinStaffing.IsChecked = true;
+                minStaffing = true;
             }
             else
             {
-                sqlString += ", seat AS [Seat], start AS [Start Date], [end] AS [End Date], DATEDIFF(MI, start, [end])/60.0 AS [Hours Worked] ";
+                rdoMinStaffing.IsChecked = false;
+                minStaffing = false;
+            }
+        }
+
+        private void btnGenerateReport_Click(object sender, RoutedEventArgs e)
+        {
+            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Employees].FirstName AS [First Name]";
+
+            if (totalHours)
+            {
+                sqlString += ", SUM(DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0) AS [Hours Worked] ";
+            }
+            else
+            {
+                sqlString += ", [REVINT].[dbo].[ED_Seats].Name AS [Seat], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Date], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Date], DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0 AS [Hours Worked] ";
             }
 
-            sqlString += "FROM [REVINT].[HEALTHCARE\\eliprice].ed_employeeWorkTable ";
-            if (cboEmployee.Text != "" || cboSeat.Text != "" || cboSpecialTag.Text != "" || (dtTPEnd.Text != "" && dtTPStart.Text != "") || (tmDayEnd.Value.ToString() != "" && tmDayStart.Value.ToString() != ""))
+            sqlString += "FROM [REVINT].[dbo].[ED_Shifts] ";
+            sqlString += "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].Id = [REVINT].[dbo].[ED_Shifts].Seat ";
+            sqlString += "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].Employee ";
+            if (cboEmployee.Text != "" || cboSeat.Text != "" || cboRole.Text != "" || (dtTPEnd.Text != "" && dtTPStart.Text != "") || (tmDayEnd.Value.ToString() != "" && tmDayStart.Value.ToString() != ""))
             {
                 sqlString += "WHERE ";
                 bool first = true;
 
                 if (cboEmployee.Text != "")
                 {
-                    String[] firstLast = cboEmployee.Text.ToString().Split(null as string[], StringSplitOptions.RemoveEmptyEntries);
-                    sqlString += "(firstName = '" + firstLast[0] + "' AND lastName = '" + firstLast [1] + "')";
+                    String[] firstLast = cboEmployee.Text.ToString().Split(null);
+                    sqlString += "([REVINT].[dbo].[ED_Employees].FirstName = '" + firstLast[0] + "' AND [REVINT].[dbo].[ED_Employees].LastName = '" + firstLast[1] + "')";
                     first = false;
                 }
                 if (cboSeat.Text != "")
@@ -87,7 +111,7 @@ namespace ED_Work_Assignments
                     {
                         sqlString += " AND ";
                     }
-                    sqlString += "(seat = '" + cboSeat.Text + "')";
+                    sqlString += "([REVINT].[dbo].[ED_Seats].Name = '" + cboSeat.Text + "')";
                 }
                 if (dtTPEnd.Text != "" && dtTPStart.Text != "") 
                 {
@@ -95,7 +119,7 @@ namespace ED_Work_Assignments
                     {
                         sqlString += " AND ";
                     }
-                    sqlString += "(start BETWEEN '" + dtTPStart + "' AND '" + dtTPEnd + "')";
+                    sqlString += "([REVINT].[dbo].[ED_Shifts].[StartShift] BETWEEN '" + dtTPStart + "' AND '" + dtTPEnd + "')";
                 }
                 /*if (tmDayEnd.Value != null && tmDayStart.Value != null)
                 {
@@ -109,7 +133,7 @@ namespace ED_Work_Assignments
 
             if (totalHours) 
             {
-                sqlString += " GROUP BY lastName, firstName;";
+                sqlString += " GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName;";
             }
 
             setWindows(sqlString);

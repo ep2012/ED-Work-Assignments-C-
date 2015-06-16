@@ -13,6 +13,7 @@ namespace ED_Work_Assignments
         Dictionary<String, String> employeeNames = new Dictionary<String, String>();
         Dictionary<String, String> employeeID = new Dictionary<String, String>();
         Dictionary<String, String> employeeRole = new Dictionary<String, String>();
+        Dictionary<String, int> employeeComboBox = new Dictionary<String, int>();
 
         String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
         
@@ -20,12 +21,14 @@ namespace ED_Work_Assignments
         object[] employeeFirstNames = new object[10];
         object[] employeeLastNames = new object[10];
         object[] employeeRoles = new object[10];
+        object[] employeeEmployed = new object[10];
         object[] employeeIDs = new object[10];
         
         OdbcConnection connectionFirstName;
         OdbcConnection connectionLastName;
         OdbcConnection connectionUserName;
         OdbcConnection connectionRole;
+        OdbcConnection connectionEmployed;
         OdbcConnection connectionID;
 
         public Users()
@@ -33,7 +36,10 @@ namespace ED_Work_Assignments
             connectionLastName = new OdbcConnection(cxnString);
             connectionUserName = new OdbcConnection(cxnString);
             connectionRole = new OdbcConnection(cxnString);
+            connectionEmployed = new OdbcConnection(cxnString);
             connectionID = new OdbcConnection(cxnString);
+
+            int num = 0;
 
             using (connectionFirstName = new OdbcConnection(cxnString))
             {
@@ -41,27 +47,31 @@ namespace ED_Work_Assignments
                 OdbcCommand commandLastName = new OdbcCommand("SELECT LastName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionLastName);
                 OdbcCommand commandUserName = new OdbcCommand("SELECT UserName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionUserName);
                 OdbcCommand commandRole = new OdbcCommand("SELECT Role FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionRole);
+                OdbcCommand commandEmployed = new OdbcCommand("SELECT CurrentlyEmployed FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionEmployed);
                 OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionID);
 
                 connectionFirstName.Open();
                 connectionLastName.Open();
                 connectionUserName.Open();
                 connectionRole.Open();
+                connectionEmployed.Open();
                 connectionID.Open();
 
                 OdbcDataReader firstNameReader = commandFirstName.ExecuteReader();
                 OdbcDataReader lastNameReader = commandLastName.ExecuteReader();
                 OdbcDataReader userNameReader = commandUserName.ExecuteReader();
                 OdbcDataReader roleReader = commandRole.ExecuteReader();
+                OdbcDataReader employedReader = commandEmployed.ExecuteReader();
                 OdbcDataReader iDReader = commandID.ExecuteReader();
 
-                if(firstNameReader.Read() == true && lastNameReader.Read() == true && userNameReader.Read() == true && iDReader.Read() == true && roleReader.Read() == true)
+                if(firstNameReader.Read() && lastNameReader.Read() && userNameReader.Read() && iDReader.Read() && roleReader.Read() && employedReader.Read())
                 {
                     do {
                         int numCols = firstNameReader.GetValues(employeeFirstNames);
                         numCols = lastNameReader.GetValues(employeeLastNames);
                         numCols = userNameReader.GetValues(employeeUserNames);
                         numCols = roleReader.GetValues(employeeRoles);
+                        numCols = employedReader.GetValues(employeeEmployed);
                         numCols = iDReader.GetValues(employeeIDs);
 
                         for (int i = 0; i < numCols; i++)
@@ -78,17 +88,25 @@ namespace ED_Work_Assignments
                             {
                                 employeeRole.Add(employeeUserNames[i].ToString(), employeeRoles[i].ToString());
                             }
-                            Add(employeeFirstNames[i].ToString() + " " + employeeLastNames[i].ToString());
+                            if (employeeEmployed[i].ToString().ToLower() == "true")
+                            {
+                                Add(employeeFirstNames[i].ToString() + " " + employeeLastNames[i].ToString());
+                                employeeComboBox.Add(employeeFirstNames[i].ToString() + " " + employeeLastNames[i].ToString(), num);
+                                num++;
+                            }
                         }
-                    } while (firstNameReader.Read() == true && lastNameReader.Read() == true && userNameReader.Read() == true && iDReader.Read() == true && roleReader.Read() == true);
+                    } while (firstNameReader.Read() && lastNameReader.Read() && userNameReader.Read() && iDReader.Read() && roleReader.Read() && employedReader.Read());
                 }
 
                 connectionFirstName.Close();
                 connectionLastName.Close();
                 connectionUserName.Close();
+                connectionRole.Close();
+                connectionEmployed.Close();
                 connectionID.Close();
             }
         }
+
         public String getName(string strUserName)
         {
             if (!employeeNames.ContainsKey(strUserName))
@@ -113,6 +131,12 @@ namespace ED_Work_Assignments
             else
                 return employeeID[strName];
         }
+
+        public int getComboIndex(String strName)
+        {
+            return employeeComboBox[strName]; 
+        }
+
         public bool isAdmin(String userID)
         {
             if (employeeRole[userID] == "1")
@@ -124,51 +148,39 @@ namespace ED_Work_Assignments
                 return false;
             }
         }
+        public bool userNameCanBeCreated(String userName)
+        {
+            if (employeeID.ContainsKey(userName))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public bool userIDCanBeCreated(String userID)
+        {
+            if (employeeNames.ContainsKey(userID) && userID != "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
     public class Seats : ObservableCollection<string>
     {
         Dictionary<String, String> seatIDs = new Dictionary<String, String>();
 
-        String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-        
-        object[] seats = new object[10];
-        object[] iDs = new object[10];
-        
-        OdbcConnection connectionSeat;
-        OdbcConnection connectionID;
-
         public Seats()
         {
-            connectionID = new OdbcConnection(cxnString);
+            String seatSQL = "SELECT Name FROM [REVINT].[dbo].[ED_Seats] ORDER BY Name";
+            String seatIDSQL = "SELECT Id FROM [REVINT].[dbo].[ED_Seats] ORDER BY Name";
 
-            using (connectionSeat = new OdbcConnection(cxnString))
-            {
-                OdbcCommand commandSeat = new OdbcCommand("SELECT Name FROM [REVINT].[dbo].[ED_Seats] ORDER BY Id", connectionSeat);
-                OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[dbo].[ED_Seats] ORDER BY Id", connectionID);
-                
-                connectionSeat.Open();
-                connectionID.Open();
-
-                OdbcDataReader seatReader = commandSeat.ExecuteReader();
-                OdbcDataReader iDReader = commandID.ExecuteReader();
-
-                if(seatReader.Read() == true && iDReader.Read() == true)
-                {
-                    do {
-                        int numCols = seatReader.GetValues(seats);
-                        numCols = iDReader.GetValues(iDs);
-
-                        for (int i = 0; i < numCols; i++)
-                        {
-                            seatIDs.Add(seats[i].ToString(), iDs[i].ToString());
-                            Add(seats[i].ToString());
-                        }
-                    } while (seatReader.Read() == true && iDReader.Read() == true);
-                }
-
-                connectionSeat.Close();
-                connectionID.Close();
-            }
+            new comboMaker(seatSQL, seatIDSQL, seatIDs, this);
         }
         public String getID(string strName)
         {
@@ -186,47 +198,14 @@ namespace ED_Work_Assignments
     {
         Dictionary<String, String> titleIDs = new Dictionary<String, String>();
 
-        String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-
-        object[] titles = new object[10];
-        object[] iDs = new object[10];
-
-        OdbcConnection connectionTitle;
-        OdbcConnection connectionID;
-
         public Roles()
         {
-            connectionID = new OdbcConnection(cxnString);
+            String titleSQL = "SELECT Title FROM [REVINT].[dbo].[ED_Roles] ORDER BY Id";
+            String titleIDSQL = "SELECT Id FROM [REVINT].[dbo].[ED_Roles] ORDER BY Id";
 
-            using (connectionTitle = new OdbcConnection(cxnString))
-            {
-                OdbcCommand commandTitle = new OdbcCommand("SELECT Title FROM [REVINT].[dbo].[ED_Roles] ORDER BY Id", connectionTitle);
-                OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[dbo].[ED_Roles] ORDER BY Id", connectionID);
 
-                connectionTitle.Open();
-                connectionID.Open();
+            new comboMaker(titleSQL, titleIDSQL, titleIDs, this);
 
-                OdbcDataReader titleReader = commandTitle.ExecuteReader();
-                OdbcDataReader iDReader = commandID.ExecuteReader();
-
-                if (titleReader.Read() == true && iDReader.Read() == true)
-                {
-                    do
-                    {
-                        int numCols = titleReader.GetValues(titles);
-                        numCols = iDReader.GetValues(iDs);
-
-                        for (int i = 0; i < numCols; i++)
-                        {
-                            titleIDs.Add(titles[i].ToString(), iDs[i].ToString());
-                            Add(titles[i].ToString());
-                        }
-                    } while (titleReader.Read() == true && iDReader.Read() == true);
-                }
-
-                connectionTitle.Close();
-                connectionID.Close();
-            }
         }
         public String getID(string strName)
         {
@@ -236,6 +215,46 @@ namespace ED_Work_Assignments
             }
             else
                 return titleIDs[strName];
+        }
+    }
+    public class comboMaker
+    {
+        public comboMaker(String sqlCmd, String sqlCmdID, Dictionary<String, String> dictionary, ObservableCollection<string> comboClass)
+        {
+            object[] obj = new object[10];
+            object[] objID = new object[10];
+
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+            OdbcConnection connection = new OdbcConnection(cxnString);
+
+            using (OdbcConnection connectionID = new OdbcConnection(cxnString))
+            {
+                OdbcCommand command = new OdbcCommand(sqlCmd, connection);
+                OdbcCommand commandID = new OdbcCommand(sqlCmdID, connectionID);
+
+                connection.Open();
+                connectionID.Open();
+
+                OdbcDataReader reader = command.ExecuteReader();
+                OdbcDataReader reader2 = commandID.ExecuteReader();
+
+                if (reader.Read() && reader2.Read())
+                {
+                    do
+                    {
+                        int numCols = reader.GetValues(obj);
+                        numCols = reader2.GetValues(objID);
+
+                        for (int i = 0; i < numCols; i++)
+                        {
+                            dictionary.Add(obj[i].ToString(), objID[i].ToString());
+                            comboClass.Add(obj[i].ToString());
+                        }
+                    } while (reader.Read() && reader2.Read());
+                }
+            }
+
         }
     }
 }
