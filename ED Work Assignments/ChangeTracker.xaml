@@ -4,7 +4,7 @@
         Title="ED Change Tracker" Height="800" Width="800" Background="#FF9B9999" FontFamily="Bookman Old Style" FontSize="19" Left="0" Top="0">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="706" Margin="10,50,0,0" VerticalAlignment="Top" Width="762" Background="#FFC9C7C7">
-            <DataGrid x:Name="dtaChanges" HorizontalAlignment="Left" Height="724" Margin="9,11,0,0" VerticalAlignment="Top" Width="742"/>
+            <DataGrid x:Name="dtaChanges" HorizontalAlignment="Left" Height="724" Margin="9,11,0,0" VerticalAlignment="Top" Width="742" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
         </Border>
         <Label Content="Change Tracker" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="194" FontSize="20"/>
 

@@ -23,16 +23,27 @@ namespace ED_Work_Assignments
     {
         Users users = new Users();
         String name;
-        String[] names;
         public IndividualSchedule()
         {
             InitializeComponent();
 
             name = users.getName(Environment.UserName);
-            names = users.getName(Environment.UserName).Split(null);
             dtStart.Text = DateTime.Today.ToString();
             dtEnd.Text = DateTime.Today.AddDays(7).ToString();
 
+            if (!users.isAdmin(Environment.UserName))
+            {
+                bdrEmployeeSchedule.Visibility = Visibility.Hidden;
+                cboEmployee.Visibility = Visibility.Hidden;
+                lblEmployeeSchedule.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                Binding binding1 = new Binding();
+
+                binding1.Source = users;
+                cboEmployee.SetBinding(ListBox.ItemsSourceProperty, binding1);
+            }
             setWindow();
         }
         private void setWindow()
@@ -43,7 +54,7 @@ namespace ED_Work_Assignments
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
                 "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].Employee " +
                 "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].Id = [REVINT].[dbo].[ED_Shifts].Seat " +
-                "WHERE ([REVINT].[dbo].[ED_Employees].FirstName = '" + names[0] + "' AND [REVINT].[dbo].[ED_Employees].LastName = '" + names[1] + "') AND (([REVINT].[dbo].[ED_Shifts].StartShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([REVINT].[dbo].[ED_Shifts].EndShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "'))";
+                "WHERE ([REVINT].[dbo].[ED_Shifts].Employee = '" + users.getID(name) + "') AND (([REVINT].[dbo].[ED_Shifts].StartShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([REVINT].[dbo].[ED_Shifts].EndShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "'))";
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
             //create an OdbcConnection object and connect it to the data source.
@@ -71,6 +82,12 @@ namespace ED_Work_Assignments
 
         private void CalendarClosed(object sender, RoutedEventArgs e)
         {
+            setWindow();
+        }
+
+        private void cboEmployee_DropDownClosed(object sender, EventArgs e)
+        {
+            name = cboEmployee.Text;
             setWindow();
         }
     }

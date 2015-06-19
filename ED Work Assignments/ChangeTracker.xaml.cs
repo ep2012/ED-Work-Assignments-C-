@@ -25,7 +25,9 @@ namespace ED_Work_Assignments
         {
             InitializeComponent();
 
-            String sqlString = "SELECT username,notes FROM [REVINT].[Healthcare\\eliprice].ed_changesTracker";
+            String sqlString = "SELECT username AS [User], notes AS [Notes] "+
+                "FROM [REVINT].[Healthcare\\eliprice].ed_changesTracker "+
+                "ORDER BY Id DESC";
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
             //create an OdbcConnection object and connect it to the data source.

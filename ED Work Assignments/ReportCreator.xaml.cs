@@ -133,9 +133,13 @@ namespace ED_Work_Assignments
 
             if (totalHours) 
             {
-                sqlString += " GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName;";
+                sqlString += " GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName "+ 
+                    "ORDER BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName";
             }
-
+            else
+            {
+                sqlString += "ORDER BY [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift]";
+            }
             setWindows(sqlString);
             
         }

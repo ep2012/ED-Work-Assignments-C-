@@ -40,6 +40,7 @@ namespace ED_Work_Assignments
                 btnAddAssignment.Visibility = Visibility.Hidden;
                 btnUploadAssignment.Visibility = Visibility.Hidden;
                 btnChangeTracker.Visibility = Visibility.Hidden;
+                btnReportCreator.Visibility = Visibility.Hidden;
             }
         }
         private void setWindows()

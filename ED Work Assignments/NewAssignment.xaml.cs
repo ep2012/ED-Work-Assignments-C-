@@ -33,6 +33,7 @@ namespace ED_Work_Assignments
 
         String newAssignment = "New Work Assignment";
         String updateAssignment = "Update Work Assignment";
+        String previousRecordDetail;
 
         int id;
 
@@ -45,6 +46,8 @@ namespace ED_Work_Assignments
             setBindings();
 
             assignmentType = AssignmentType.New;
+
+            btnDeleteAssignment.Visibility = Visibility.Hidden;
 
             lblWorkAssignment.Content = newAssignment;
         }
@@ -61,7 +64,6 @@ namespace ED_Work_Assignments
 
             cboSeat.Text = seat;
 
-            
             dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
             dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
 
@@ -70,6 +72,8 @@ namespace ED_Work_Assignments
             id = int.Parse(row["Id"].ToString());
 
             lblWorkAssignment.Content = updateAssignment;
+
+            previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
 
         }
 
@@ -116,14 +120,31 @@ namespace ED_Work_Assignments
 
                             dbConnection.Close();
                         }
+                        using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                        {
+                            //open OdbcConnection object
+                            dbConnection.Open();
+
+                            OdbcCommand cmd = new OdbcCommand();
+
+                            cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Connection = dbConnection;
+
+                            cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                            cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Created record for " + cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
+
+                            cmd.ExecuteNonQuery();
+
+                            dbConnection.Close();
+                        }
                     }
-
-
+                    
                 }
                 else
                 {
                     String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-                    var dialogResult = MessageBox.Show("Are you sure you would like to add this work assignment?", "Inserting into database", MessageBoxButton.YesNo);
+                    var dialogResult = MessageBox.Show("Are you sure you would like to update this work assignment?", "Updating Assignment", MessageBoxButton.YesNo);
 
                     if (dialogResult == MessageBoxResult.Yes)
                     {
@@ -148,6 +169,24 @@ namespace ED_Work_Assignments
 
                             dbConnection.Close();
                         }
+                        using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                        {
+                            //open OdbcConnection object
+                            dbConnection.Open();
+
+                            OdbcCommand cmd = new OdbcCommand();
+
+                            cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Connection = dbConnection;
+
+                            cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                            cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Updated record from:\nEmployee: " + previousRecordDetail + "\n\nTo:\nEmployee: " + cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
+
+                            cmd.ExecuteNonQuery();
+
+                            dbConnection.Close();
+                        }
                     }
                 }
                 if (mainWindow.ShowActivated)
@@ -156,8 +195,8 @@ namespace ED_Work_Assignments
                 }
                 this.Close();
             }
-        
-       }
+
+        }
         private bool validInputs()
         {
             if (cboEmployee.Text == "" || cboSeat.Text == "" || dtpEnd.Value.ToString() == "" || dtpStart.Value.ToString() == "")
@@ -190,6 +229,59 @@ namespace ED_Work_Assignments
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnDeleteAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+            var dialogResult = MessageBox.Show("Are you sure you would like to delete this work assignment?", "Deleting Assignment", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                {
+                    //open OdbcConnection object
+                    dbConnection.Open();
+
+                    OdbcCommand cmd = new OdbcCommand();
+
+                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_deleteWorkAssignment(?)}";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Connection = dbConnection;
+
+                    cmd.Parameters.Add("@id", OdbcType.Int).Value = id.ToString();
+
+                    cmd.ExecuteNonQuery();
+
+                    dbConnection.Close();
+                }
+
+                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                {
+                    //open OdbcConnection object
+                    dbConnection.Open();
+
+                    OdbcCommand cmd = new OdbcCommand();
+
+                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Connection = dbConnection;
+
+                    cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                    cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Deleted record for " + previousRecordDetail;
+
+                    cmd.ExecuteNonQuery();
+
+                    dbConnection.Close();
+                }
+
+                if (mainWindow.ShowActivated)
+                {
+                    mainWindow.update();
+                }
+                this.Close();
+            }
+
         }
 
 

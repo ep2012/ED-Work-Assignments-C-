@@ -23,7 +23,7 @@
         <wpfTool:TimePicker x:Name="tmDayEnd" HorizontalAlignment="Left" Height="26" Margin="603,144,0,0" VerticalAlignment="Top" Width="161"/>
         <Label Content= "Start" HorizontalAlignment="Left" Height="26" Margin="552,111,0,0" VerticalAlignment="Top" Width="46"/>
         <Label Content= "End" HorizontalAlignment="Left" Height="26" Margin="552,142,0,0" VerticalAlignment="Top" Width="46"/>
-        <DataGrid x:Name="dtaReport" HorizontalAlignment="Left" Height="409" Margin="10,293,0,0" VerticalAlignment="Top" Width="763"/>
+        <DataGrid x:Name="dtaReport" HorizontalAlignment="Left" Height="409" Margin="10,293,0,0" VerticalAlignment="Top" Width="763"  IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
         <RadioButton x:Name="rdoTotalHours" Content="Get total hours per employee (instead of hours per day)" HorizontalAlignment="Left" Margin="15,201,0,0" VerticalAlignment="Top" Click="rdoTotalHours_Click"/>
         <Button x:Name="btnGenerateReport" Content="Generate Report" HorizontalAlignment="Left" Margin="552,707,0,0" VerticalAlignment="Top" Width="221" Height="50" Click="btnGenerateReport_Click"/>
         <Label Content= "Role" HorizontalAlignment="Left" Height="26" Margin="10,113,0,0" VerticalAlignment="Top" Width="120"/>
