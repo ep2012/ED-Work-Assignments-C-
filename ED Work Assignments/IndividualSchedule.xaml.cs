@@ -28,6 +28,9 @@ namespace ED_Work_Assignments
             InitializeComponent();
 
             name = users.getName(Environment.UserName);
+
+            this.Title = "ED " + name + "'s Work Assignments";
+
             dtStart.Text = DateTime.Today.ToString();
             dtEnd.Text = DateTime.Today.AddDays(7).ToString();
 
@@ -89,6 +92,7 @@ namespace ED_Work_Assignments
         {
             name = cboEmployee.Text;
             setWindow();
+            this.Title = "ED " + name + "'s Work Assignments";
         }
     }
 }

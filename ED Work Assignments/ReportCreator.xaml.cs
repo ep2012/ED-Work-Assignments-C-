@@ -26,6 +26,7 @@ namespace ED_Work_Assignments
         public ReportCreator()
         {
             InitializeComponent();
+
             totalHours = false;
             minStaffing = false;
 
@@ -35,13 +36,19 @@ namespace ED_Work_Assignments
             binding1.Source = listData1;
             cboEmployee.SetBinding(ListBox.ItemsSourceProperty, binding1);
 
-            //cboEmployee.Items.Add("Eli Price");
-
             Seats listData2 = new Seats();
             Binding binding2 = new Binding();
 
             binding2.Source = listData2;
             cboSeat.SetBinding(ListBox.ItemsSourceProperty, binding2);
+
+            Roles listData3 = new Roles();
+            Binding binding3 = new Binding();
+
+            binding3.Source = listData3;
+            cboRole.SetBinding(ListBox.ItemsSourceProperty, binding3);
+
+            btnExportToExcel.Visibility = Visibility.Hidden;
         }
 
         private void rdoTotalHours_Click(object sender, RoutedEventArgs e)
@@ -80,68 +87,119 @@ namespace ED_Work_Assignments
 
         private void btnGenerateReport_Click(object sender, RoutedEventArgs e)
         {
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Employees].FirstName AS [First Name]";
+            String sqlString;
 
-            if (totalHours)
+            if (!minStaffing)
             {
-                sqlString += ", SUM(DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0) AS [Hours Worked] ";
+                sqlString = "SELECT CONCAT([REVINT].[dbo].[ED_Employees].[FirstName], ' ' , [REVINT].[dbo].[ED_Employees].[LastName]) AS [Employee], ";
+
+                if (totalHours)
+                {
+                    sqlString += "SUM(DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0) AS [Hours Worked] ";
+                }
+                else
+                {
+                    sqlString += "[REVINT].[dbo].[ED_Roles].[Title] AS [Role], [REVINT].[dbo].[ED_Seats].Name AS [Seat], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Date], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Date], DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0 AS [Hours Worked] ";
+                }
+
+                sqlString += "FROM [REVINT].[dbo].[ED_Shifts] ";
+                sqlString += "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].[Id] = [REVINT].[dbo].[ED_Shifts].Seat ";
+                sqlString += "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].[Id] = [REVINT].[dbo].[ED_Shifts].Employee ";
+                sqlString += "JOIN [REVINT].[dbo].[ED_Roles] ON [REVINT].[dbo].[ED_Roles].[Id] = [REVINT].[dbo].[ED_Employees].[Role] ";
+
+                if (cboEmployee.Text != "" || cboSeat.Text != "" || cboRole.Text != "" || dtTPEnd.Text != "" || dtTPStart.Text != "" || tmDayEnd.Value.ToString() != "" || tmDayStart.Value.ToString() != "")
+                {
+                    sqlString += "WHERE ";
+                    bool first = true;
+
+                    if (cboEmployee.Text != "")
+                    {
+                        String[] firstLast = cboEmployee.Text.ToString().Split(null);
+                        sqlString += "([REVINT].[dbo].[ED_Employees].[FirstName] = '" + firstLast[0] + "' AND [REVINT].[dbo].[ED_Employees].LastName = '" + firstLast[1] + "') ";
+                        first = false;
+                    }
+                    if (cboSeat.Text != "")
+                    {
+                        if (!first)
+                        {
+                            sqlString += " AND ";
+                        }
+                        sqlString += "([REVINT].[dbo].[ED_Seats].[Name] = '" + cboSeat.Text + "') ";
+                        first = false;
+                    }
+                    if (cboRole.Text != "")
+                    {
+                        if (!first)
+                        {
+                            sqlString += " AND ";
+                        }
+                        sqlString += "([REVINT].[dbo].[ED_Roles].[Title] = '" + cboRole.Text + "') ";
+                        first = false;
+                    }
+                    if (dtTPStart.Text != "")
+                    {
+                        if (!first)
+                        {
+                            sqlString += " AND ";
+                        }
+                        sqlString += "([REVINT].[dbo].[ED_Shifts].[StartShift] >= '" + dtTPStart.Text + "') ";
+                        first = false;
+                    }
+                    if (dtTPEnd.Text != "")
+                    {
+                        if (!first)
+                        {
+                            sqlString += " AND ";
+                        }
+                        sqlString += "([REVINT].[dbo].[ED_Shifts].[EndShift] <= '" + dtTPEnd.Text + "') ";
+                        first = false;
+                    }
+                    if (tmDayStart.Value.ToString() != "")
+                    {
+                        if (!first)
+                        {
+                            sqlString += " AND ";
+                        }
+                        sqlString += "(CAST([REVINT].[dbo].[ED_Shifts].[StartShift] AS time) >= '" + tmDayStart.Value.ToString() + "') ";
+                        first = false;
+                    }
+                    if (tmDayEnd.Value.ToString() != "")
+                    {
+                        if (!first)
+                        {
+                            sqlString += " AND ";
+                        }
+                        sqlString += "(CAST([REVINT].[dbo].[ED_Shifts].[EndShift] AS time) <= '" + tmDayEnd.Value.ToString() + "') ";
+                        first = false;
+                    }
+                }
+
+                if (totalHours)
+                {
+                    sqlString += "GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName " +
+                        "ORDER BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName";
+                }
+                else
+                {
+                    sqlString += "ORDER BY [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift]";
+                }
             }
             else
             {
-                sqlString += ", [REVINT].[dbo].[ED_Seats].Name AS [Seat], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Date], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Date], DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0 AS [Hours Worked] ";
-            }
-
-            sqlString += "FROM [REVINT].[dbo].[ED_Shifts] ";
-            sqlString += "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].Id = [REVINT].[dbo].[ED_Shifts].Seat ";
-            sqlString += "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].Employee ";
-            if (cboEmployee.Text != "" || cboSeat.Text != "" || cboRole.Text != "" || (dtTPEnd.Text != "" && dtTPStart.Text != "") || (tmDayEnd.Value.ToString() != "" && tmDayStart.Value.ToString() != ""))
-            {
-                sqlString += "WHERE ";
-                bool first = true;
-
-                if (cboEmployee.Text != "")
+                sqlString = "SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement]" +
+                    ", COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed], CASE WHEN COUNT([REVINT].[dbo].[ED_Shifts].Id) < [REVINT].[dbo].[ED_Staffing].MinStaffing THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status] " +
+                    "FROM [REVINT].[dbo].[ED_Staffing] " +
+                    "LEFT JOIN [REVINT].[dbo].[ED_Shifts] " +
+                    "ON [REVINT].[dbo].[ED_Staffing].TimeSlot BETWEEN CAST([REVINT].[dbo].[ED_Shifts].StartShift AS time) AND CAST([REVINT].[dbo].[ED_Shifts].EndShift AS time)";
+                if (dtTPEnd.Text != "" && dtTPStart.Text != "")
                 {
-                    String[] firstLast = cboEmployee.Text.ToString().Split(null);
-                    sqlString += "([REVINT].[dbo].[ED_Employees].FirstName = '" + firstLast[0] + "' AND [REVINT].[dbo].[ED_Employees].LastName = '" + firstLast[1] + "')";
-                    first = false;
+                    sqlString += "AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].EndShift <'" + dtTPEnd.Text + "'";
                 }
-                if (cboSeat.Text != "")
-                {
-                    if (!first)
-                    {
-                        sqlString += " AND ";
-                    }
-                    sqlString += "([REVINT].[dbo].[ED_Seats].Name = '" + cboSeat.Text + "')";
-                }
-                if (dtTPEnd.Text != "" && dtTPStart.Text != "") 
-                {
-                    if (!first)
-                    {
-                        sqlString += " AND ";
-                    }
-                    sqlString += "([REVINT].[dbo].[ED_Shifts].[StartShift] BETWEEN '" + dtTPStart + "' AND '" + dtTPEnd + "')";
-                }
-                /*if (tmDayEnd.Value != null && tmDayStart.Value != null)
-                {
-                    if (!first)
-                    {
-                        sqlString += " AND ";
-                    }
-                    sqlString += "";
-                }*/
-            }
-
-            if (totalHours) 
-            {
-                sqlString += " GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName "+ 
-                    "ORDER BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName";
-            }
-            else
-            {
-                sqlString += "ORDER BY [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift]";
+                sqlString += "GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
             }
             setWindows(sqlString);
-            
+            btnExportToExcel.Visibility = Visibility.Visible;
+
         }
         private void setWindows(String sqlString)
         {
@@ -167,6 +225,81 @@ namespace ED_Work_Assignments
                 //Close connection
                 dbConnection.Close();
             }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            cboEmployee.SelectedIndex = -1;
+            cboRole.SelectedIndex = -1;
+            cboSeat.SelectedIndex = -1;
+            dtTPEnd.Text = "";
+            dtTPStart.Text = "";
+            tmDayEnd.Value = null;
+            tmDayStart.Value = null;
+            minStaffing = false;
+            totalHours = false;
+            rdoMinStaffing.IsChecked = false;
+            rdoTotalHours.IsChecked = false;
+
+            dtaReport.ItemsSource = null;
+            btnExportToExcel.Visibility = Visibility.Hidden;
+        }
+
+        private void btnExportToExcel_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application app = null;
+            Microsoft.Office.Interop.Excel.Workbook workbook = null;
+            Microsoft.Office.Interop.Excel.Worksheet worksheet = null;
+
+            try
+            {
+                app = new Microsoft.Office.Interop.Excel.Application();
+                workbook = app.Workbooks.Add();
+                worksheet = (Microsoft.Office.Interop.Excel.Worksheet)app.ActiveSheet;
+
+                // Put Column Header into excel work sheet
+                for (int i = 0; i < dtaReport.Columns.Count; i++)
+                {
+                    worksheet.Range["A1"].Offset[0, i].Value = dtaReport.Columns[i].Header;
+                }
+
+                Microsoft.Office.Interop.Excel.Range firstRow = (Microsoft.Office.Interop.Excel.Range)worksheet.Rows[1];
+                firstRow.Cells.Interior.ColorIndex = 36;
+
+                worksheet.Application.ActiveWindow.SplitRow = 1;
+                worksheet.Application.ActiveWindow.FreezePanes = true;
+                firstRow.EntireRow.Font.Bold = true;
+
+                BorderAround(firstRow, 0);
+
+                for (int rowIndex = 0; rowIndex < dtaReport.Items.Count; rowIndex++)
+                    for (int columnIndex = 0; columnIndex < dtaReport.Columns.Count; columnIndex++)
+                    {
+                        worksheet.Range["A2"].Offset[rowIndex, columnIndex].Value =
+                          (dtaReport.Items[rowIndex] as DataRowView).Row.ItemArray[columnIndex].ToString();
+                    }
+                worksheet.Columns.AutoFit();
+                app.Visible = true;
+            }
+            catch (Exception)
+            {
+                Console.Write("Error");
+            }
+        }
+
+        private void BorderAround(Microsoft.Office.Interop.Excel.Range range, int color)
+        {
+            Microsoft.Office.Interop.Excel.Borders borders = range.Borders;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeTop].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeRight].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            borders.Color = color;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlInsideVertical].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
+            borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlDiagonalDown].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlLineStyleNone;
+            borders = null;
         }
     }
 }

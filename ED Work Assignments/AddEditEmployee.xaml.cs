@@ -38,6 +38,7 @@ namespace ED_Work_Assignments
         public AddEditEmployee()
         {
             InitializeComponent();
+            this.Title = "ED Add Employee";
 
             assignmentType = AssignmentType.New;
 
@@ -52,6 +53,7 @@ namespace ED_Work_Assignments
         public AddEditEmployee(DataRowView row)
         {
             InitializeComponent();
+            this.Title = "ED Edit Employee"; 
 
             name = row["First Name"].ToString() + " " + row["Last Name"].ToString();
             username = row["Healthcare ID"].ToString();
@@ -103,15 +105,18 @@ namespace ED_Work_Assignments
                         }
                         else
                         {
-                            var dialogBox = MessageBox.Show("An employee with the Healthcare ID '" + txtHealthcareID.Text + "' already exists.", "Error Creating Employee", MessageBoxButton.OK);
+                            var dialogBox = MessageBox.Show("An employee with the Healthcare ID '" + txtHealthcareID.Text + "' already exists.", 
+                                "Error Creating Employee", MessageBoxButton.OK);
                         }
                     }
                     else
                     {
-                        var dialogBox = MessageBox.Show("An employee with the name '" + txtFirstName.Text + " " + txtLastName.Text + "' already exists.", "Error Creating Employee", MessageBoxButton.OK);
+                        var dialogBox = MessageBox.Show("An employee with the name '" + txtFirstName.Text + " " + txtLastName.Text + "' already exists.", 
+                            "Error Creating Employee", MessageBoxButton.OK);
                         if (users.userIDCanBeCreated(txtHealthcareID.Text))
                         {
-                            var dialogBox2 = MessageBox.Show("An employee with the Healthcare ID '" + txtHealthcareID.Text + "' already exists.", "Error Creating Employee", MessageBoxButton.OK);
+                            var dialogBox2 = MessageBox.Show("An employee with the Healthcare ID '" + txtHealthcareID.Text + "' already exists.", 
+                                "Error Creating Employee", MessageBoxButton.OK);
                         }
                     }
                 }
@@ -192,6 +197,35 @@ namespace ED_Work_Assignments
 
                 dbConnection.Close();
             }
+
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Added Employee: \n" +
+                    "Name: " + txtFirstName.Text + " " + txtLastName.Text + "\n" +
+                    "Role: " + cboRole.Text + "\n" +
+                    "Address 1: " + txtAddress1.Text + "\n" +
+                    "Address 2: " + txtAddress2.Text + "\n" +
+                    "City: " + txtCity.Text + "\n" +
+                    "State: " + txtState.Text + "\n" +
+                    "Zip: " + txtZip.Text + "\n" +
+                    "Phone: " + txtPhone.Text + "\n" +
+                    "Email: " + txtEmail.Text + "\n" +
+                    "Healthcare ID: " + txtHealthcareID.Text;
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
         }
 
         private void update()
@@ -226,6 +260,35 @@ namespace ED_Work_Assignments
 
                 dbConnection.Close();
             }
+
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Updated Employee: \n" +
+                    "Name: " + txtFirstName.Text + " " + txtLastName.Text + "\n" +
+                    "Role: " + cboRole.Text + "\n" +
+                    "Address 1: " + txtAddress1.Text + "\n" +
+                    "Address 2: " + txtAddress2.Text + "\n" +
+                    "City: " + txtCity.Text + "\n" +
+                    "State: " + txtState.Text + "\n" +
+                    "Zip: " + txtZip.Text + "\n" +
+                    "Phone: " + txtPhone.Text + "\n" +
+                    "Email: " + txtEmail.Text + "\n" +
+                    "Healthcare ID: " + txtHealthcareID.Text;
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
         }
 
         private bool checkEssentials()
@@ -242,7 +305,10 @@ namespace ED_Work_Assignments
 
         private void btnDeleteEmployee_Click(object sender, RoutedEventArgs e)
         {
-            var dialogBox = MessageBox.Show("Are you sure you would like to delete this employee?\n\nEmployee '" + name + "' is about to be deleted.", "Delete Employee", MessageBoxButton.YesNo);
+            var dialogBox = MessageBox.Show("Employee '" + name + "' is about to be deleted.\n"+
+                "Are you sure you would like to delete this employee?\n\n"+
+                "This can only be undone by contacting the system administrator.", 
+                "Delete Employee", MessageBoxButton.YesNo);
             if (dialogBox == MessageBoxResult.Yes)
             {
                 String id = users.getID(name);
@@ -266,7 +332,34 @@ namespace ED_Work_Assignments
 
                     dbConnection.Close();
                 }
-                
+                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                {
+                    //open OdbcConnection object
+                    dbConnection.Open();
+
+                    OdbcCommand cmd = new OdbcCommand();
+
+                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Connection = dbConnection;
+
+                    cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                    cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Deleted Employee: \n" +
+                        "Name: " + txtFirstName.Text + " " + txtLastName.Text + "\n" +
+                        "Role: " + cboRole.Text + "\n" +
+                        "Address 1: " + txtAddress1.Text + "\n" +
+                        "Address 2: " + txtAddress2.Text + "\n" +
+                        "City: " + txtCity.Text + "\n" +
+                        "State: " + txtState.Text + "\n" +
+                        "Zip: " + txtZip.Text + "\n" +
+                        "Phone: " + txtPhone.Text + "\n" +
+                        "Email: " + txtEmail.Text + "\n" +
+                        "Healthcare ID: " + txtHealthcareID.Text;
+
+                    cmd.ExecuteNonQuery();
+
+                    dbConnection.Close();
+                }
                 ManageEmployees win = new ManageEmployees();
                 win.Show();
 

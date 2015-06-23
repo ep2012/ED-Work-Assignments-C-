@@ -26,7 +26,6 @@ namespace ED_Work_Assignments
         {
             InitializeComponent();
             dtPicker.Text = DateTime.Today.ToString();
-            //dtPicker.Text = "5/6/2015";
             setWindows();
 
             Users users = new Users();
@@ -41,6 +40,7 @@ namespace ED_Work_Assignments
                 btnUploadAssignment.Visibility = Visibility.Hidden;
                 btnChangeTracker.Visibility = Visibility.Hidden;
                 btnReportCreator.Visibility = Visibility.Hidden;
+                btnManageEmployees.Visibility = Visibility.Hidden;
             }
         }
         private void setWindows()
@@ -49,7 +49,7 @@ namespace ED_Work_Assignments
             DateTime lastDay; 
             DateTime.TryParse(dtPicker.Text.ToString(), out lastDay);
             String otherDate = lastDay.AddDays(1).ToString();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[FirstName] AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time], [REVINT].[dbo].[ED_Shifts].[Id] " +
+            String sqlString = "SELECT CONCAT([REVINT].[dbo].[ED_Employees].[FirstName], ' ' , [REVINT].[dbo].[ED_Employees].[LastName]) AS [Employee], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time], [REVINT].[dbo].[ED_Shifts].[Id] AS [Shift Id] " +
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
                 "JOIN [REVINT].[dbo].[ED_Employees] " +
                 "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
@@ -72,7 +72,7 @@ namespace ED_Work_Assignments
                 OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + "7" , dbConnection);
                 OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + "8" , dbConnection);
                 OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + "2", dbConnection);
-                //OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + "9", dbConnection);
+                OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + "9", dbConnection);
 
                 //Create a table and fill it with the data from the adapter
                 DataTable dtableWOW1 = new DataTable();
@@ -98,7 +98,10 @@ namespace ED_Work_Assignments
 
                 DataTable dtableiPad = new DataTable();
                 dadapteriPad.Fill(dtableiPad);
-                
+
+                DataTable dtableSupervising = new DataTable();
+                dadapterSupervising.Fill(dtableSupervising);
+
                 //set the contents of the gui grid table to the data table created
                 this.dtaWOW1.ItemsSource = dtableWOW1.DefaultView;
                 this.dtaWOW1.CanUserAddRows = false;
@@ -123,6 +126,9 @@ namespace ED_Work_Assignments
 
                 this.dtaiPad.ItemsSource = dtableiPad.DefaultView;
                 this.dtaiPad.CanUserAddRows = false;
+
+                this.dtaSupervising.ItemsSource = dtableSupervising.DefaultView;
+                this.dtaSupervising.CanUserAddRows = false;
 
                 //Close connection
                 dbConnection.Close();
@@ -171,7 +177,7 @@ namespace ED_Work_Assignments
             ((DataGrid)sender).CancelEdit();
             NewAssignment win = new NewAssignment(this, (DataRowView)((DataGrid)sender).SelectedValue,((TabItem) tbControl.SelectedItem).Header.ToString());
 
-            win.Show();
+            //win.Show();
         }
 
         private void btnNextDay_Click(object sender, RoutedEventArgs e)
@@ -189,6 +195,136 @@ namespace ED_Work_Assignments
         private void dta_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             ((DataGrid)sender).CancelEdit();
+        }
+
+        private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            ManageEmployees win = new ManageEmployees();
+
+            win.Show();
+        }
+
+        private void btnUploadAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.DefaultExt = "*.xlsx;*.xlsm:.xls"; // Default file extension
+            dlg.Filter = "Excel Worksheets|*.xlsx"; // Filter files by extension 
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results 
+            if (result == true)
+            {
+                // Open document 
+                String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+                Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook wb = excelApp.Workbooks.Open(dlg.FileName.ToString());
+
+                Microsoft.Office.Interop.Excel.Worksheet excelSheet = wb.ActiveSheet;
+                Microsoft.Office.Interop.Excel.Range range = (Microsoft.Office.Interop.Excel.Range)excelSheet.Cells;
+
+                Microsoft.Office.Interop.Excel.Range last = excelSheet.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+
+                int lastUsedRow = last.Row;
+
+                Mouse.OverrideCursor = Cursors.Wait;
+
+                int notSuccessful = 0;
+                List<int> notSuccessfulRows = new List<int>();
+
+                int row;
+
+                Users users = new Users();
+
+                Seats seats = new Seats();
+
+                for (row = 2; row <= lastUsedRow; row++)
+                {
+                    try
+                    {
+                        using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                        {
+                            //open OdbcConnection object
+                            dbConnection.Open();
+
+                            OdbcCommand cmd = new OdbcCommand();
+
+                            cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Connection = dbConnection;
+
+                            cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(((Microsoft.Office.Interop.Excel.Range)excelSheet.Cells[row, 1]).Value);
+                            cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(((Microsoft.Office.Interop.Excel.Range)excelSheet.Cells[row, 2]).Value);
+                            cmd.Parameters.Add("@start", OdbcType.DateTime).Value = ((Microsoft.Office.Interop.Excel.Range)excelSheet.Cells[row, 3]).Value;
+                            cmd.Parameters.Add("@end", OdbcType.DateTime).Value = ((Microsoft.Office.Interop.Excel.Range)excelSheet.Cells[row, 4]).Value;
+
+                            cmd.ExecuteNonQuery();
+
+                            dbConnection.Close();
+                        }
+                        
+                    }
+                    catch (System.Data.Odbc.OdbcException)
+                    {
+                        Microsoft.Office.Interop.Excel.Range firstRow = (Microsoft.Office.Interop.Excel.Range)excelSheet.Rows[1];
+
+                        firstRow.EntireRow.Font.Bold = true;
+                        firstRow.Cells.Interior.ColorIndex = 36;
+                        notSuccessful++;
+                        notSuccessfulRows.Add(row);
+                    }
+                    using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                    {
+                        //open OdbcConnection object
+                        dbConnection.Open();
+
+                        OdbcCommand cmd = new OdbcCommand();
+
+                        cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Connection = dbConnection;
+
+                        cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                        cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Uploaded file: " + dlg.FileName;
+
+                        cmd.ExecuteNonQuery();
+
+                        dbConnection.Close();
+                    }
+                }
+
+                Mouse.OverrideCursor = null;
+
+                if (notSuccessful > 0)
+                {
+                    var dialogResult = MessageBox.Show("Completed inserting records into database. Could not insert " + notSuccessful.ToString() + " records.\nView the row numbers for these records?", "Finished inserting records", MessageBoxButton.YesNo);
+                    if (dialogResult == MessageBoxResult.Yes)
+                    {
+                        var dialogResult2 = MessageBox.Show(ArrayToString(notSuccessfulRows.ToArray()) + "\n\nCopy to Clipboard?", "Unsuccessful row numbers", MessageBoxButton.YesNo);
+                        if (dialogResult2 == MessageBoxResult.Yes)
+                        {
+                            Clipboard.SetText(ArrayToString(notSuccessfulRows.ToArray()));
+                        }
+                    }
+                }
+
+                wb.Close();
+                setWindows();
+            }
+        }
+        private string ArrayToString(int[] arr)
+        {
+            string builder = "";
+            foreach (int val in arr)
+            {
+                builder = builder + " " + val.ToString() + " ";
+            }
+            builder = builder.Trim();
+            return builder;
         }
 
     }

@@ -56,25 +56,31 @@ namespace ED_Work_Assignments
         {
             InitializeComponent();
 
+            this.Title = "ED Update Work Assignment";
+
             mainWindow = main;
 
             setBindings();
+            try
+            {
+                cboEmployee.Text = row["Employee"].ToString();
 
-            cboEmployee.Text = row["First Name"].ToString() + " " + row["Last Name"].ToString();
+                cboSeat.Text = seat;
 
-            cboSeat.Text = seat;
+                dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
+                dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
 
-            dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
-            dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
+                assignmentType = AssignmentType.Update;
 
-            assignmentType = AssignmentType.Update;
+                id = int.Parse(row["Shift Id"].ToString());
 
-            id = int.Parse(row["Id"].ToString());
+                lblWorkAssignment.Content = updateAssignment;
 
-            lblWorkAssignment.Content = updateAssignment;
-
-            previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
-
+                previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
+                this.Show();            
+            }
+            catch (Exception)
+            { }
         }
 
         private void setBindings()
@@ -268,7 +274,7 @@ namespace ED_Work_Assignments
                     cmd.Connection = dbConnection;
 
                     cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
-                    cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Deleted record for " + previousRecordDetail;
+                    cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Deleted record:\nEmployee: " + previousRecordDetail;
 
                     cmd.ExecuteNonQuery();
 
@@ -283,7 +289,5 @@ namespace ED_Work_Assignments
             }
 
         }
-
-
     }
 }
