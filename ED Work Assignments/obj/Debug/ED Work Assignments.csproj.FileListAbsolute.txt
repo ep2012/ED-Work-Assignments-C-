@@ -71,3 +71,5 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.DataGrid.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.Toolkit.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments_Content.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments_MarkupCompile.lref
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.ResolveComReference.cache
