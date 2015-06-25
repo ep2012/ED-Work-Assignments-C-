@@ -11,14 +11,14 @@
         <Label Content="Seat" HorizontalAlignment="Left" Height="26" Margin="20,93,0,0" VerticalAlignment="Top" Width="90" FontSize="14"/>
         <Label Content="Start" HorizontalAlignment="Left" Height="26" Margin="20,124,0,0" VerticalAlignment="Top" Width="90" FontSize="14"/>
         <Label Content="End" HorizontalAlignment="Left" Height="26" Margin="20,155,0,0" VerticalAlignment="Top" Width="90" FontSize="14"/>
-        <Button x:Name="btnSave" Content="Save" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="11,196,0,0" VerticalAlignment="Top" Width="283" Height="50" Click="btnSave_Click" FontFamily="Perpetua Titling MT" Background="#FFB8F190"/>
-        <Button x:Name="btnCancel" Content="Cancel" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="294,196,0,0" VerticalAlignment="Top" Width="283" Height="50" FontFamily="Perpetua Titling MT" Click="btnCancel_Click" Background="#FFCDCDCD"/>
-        <wpfTool:DateTimePicker x:Name="dtpEnd" HorizontalAlignment="Left" Height="26" Margin="115,155,0,0" VerticalAlignment="Top" Width="454" Background="White"/>
-        <wpfTool:DateTimePicker x:Name="dtpStart" HorizontalAlignment="Left" Height="26" Margin="115,124,0,0" VerticalAlignment="Top" Width="454" Background="White"/>
-        <ComboBox x:Name="cboSeat" HorizontalAlignment="Left" Height="26" Margin="115,93,0,0" VerticalAlignment="Top" Width="454" Background="White"/>
-        <ComboBox x:Name="cboEmployee" HorizontalAlignment="Left" Height="26" Margin="115,62,0,0" VerticalAlignment="Top" Width="454" Background="White"/>
-        <Button x:Name="btnManageEmployees" Content="Manage Employees" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="428,10,0,0" VerticalAlignment="Top" Width="149" Height="34" FontFamily="Perpetua Titling MT" Click="btnManageEmployees_Click" Background="#FFCDCDCD"/>
-        <Button x:Name="btnDeleteAssignment" Content="Delete Assignment" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="279,10,0,0" VerticalAlignment="Top" Width="149" Height="34" FontFamily="Perpetua Titling MT" Click="btnDeleteAssignment_Click" Background="#FFFF7171"/>
+        <Button x:Name="btnSave" Content="Save" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="11,196,0,0" VerticalAlignment="Top" Width="283" Height="50" Click="btnSave_Click" FontFamily="Perpetua Titling MT" Background="#FFB8F190" TabIndex="5"/>
+        <Button x:Name="btnCancel" Content="Cancel" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="294,196,0,0" VerticalAlignment="Top" Width="283" Height="50" FontFamily="Perpetua Titling MT" Click="btnCancel_Click" Background="#FFCDCDCD" TabIndex="6"/>
+        <wpfTool:DateTimePicker x:Name="dtpEnd" HorizontalAlignment="Left" Height="26" Margin="115,155,0,0" VerticalAlignment="Top" Width="454" Background="White" TabIndex="4"/>
+        <wpfTool:DateTimePicker x:Name="dtpStart" HorizontalAlignment="Left" Height="26" Margin="115,124,0,0" VerticalAlignment="Top" Width="454" Background="White" TabIndex="3"/>
+        <ComboBox x:Name="cboSeat" HorizontalAlignment="Left" Height="26" Margin="115,93,0,0" VerticalAlignment="Top" Width="454" Background="White" TabIndex="2"/>
+        <ComboBox x:Name="cboEmployee" HorizontalAlignment="Left" Height="26" Margin="115,62,0,0" VerticalAlignment="Top" Width="454" Background="White" TabIndex="1"/>
+        <Button x:Name="btnManageEmployees" Content="Manage Employees" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="428,10,0,0" VerticalAlignment="Top" Width="149" Height="34" FontFamily="Perpetua Titling MT" Click="btnManageEmployees_Click" Background="#FFCDCDCD" TabIndex="7"/>
+        <Button x:Name="btnDeleteAssignment" Content="Delete Assignment" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="279,10,0,0" VerticalAlignment="Top" Width="149" Height="34" FontFamily="Perpetua Titling MT" Click="btnDeleteAssignment_Click" Background="#FFFF7171" TabIndex="8"/>
 
     </Grid>
 </Window>
