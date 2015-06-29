@@ -61,26 +61,22 @@ namespace ED_Work_Assignments
             mainWindow = main;
 
             setBindings();
-            try
-            {
-                cboEmployee.Text = row["Employee"].ToString();
 
-                cboSeat.Text = seat;
+            cboEmployee.Text = row["Employee"].ToString();
 
-                dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
-                dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
+            cboSeat.Text = seat;
 
-                assignmentType = AssignmentType.Update;
+            dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
+            dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
 
-                id = int.Parse(row["Shift Id"].ToString());
+            assignmentType = AssignmentType.Update;
 
-                lblWorkAssignment.Content = updateAssignment;
+            id = int.Parse(row["Shift Id"].ToString());
 
-                previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
-                this.Show();            
-            }
-            catch (Exception)
-            { }
+            lblWorkAssignment.Content = updateAssignment;
+
+            previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
+
         }
 
         private void setBindings()

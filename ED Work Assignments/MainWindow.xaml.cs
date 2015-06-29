@@ -43,6 +43,7 @@ namespace ED_Work_Assignments
                 btnManageEmployees.Visibility = Visibility.Hidden;
             }
         }
+
         private void setWindows()
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
@@ -55,7 +56,6 @@ namespace ED_Work_Assignments
                 "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
                 "WHERE (StartShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "' OR EndShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') "+
                 "AND Seat = ";
-            //String sqlString = "Select lastName AS [Last Name], firstName AS [First Name], start AS [Start Time], [end] AS [End Time] FROM ed_employeeWorkTable WHERE ((start BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') OR ([end] BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "')) AND seat = '";
             
             //create an OdbcConnection object and connect it to the data source.
             using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
@@ -174,10 +174,9 @@ namespace ED_Work_Assignments
 
         private void dta_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ((DataGrid)sender).CancelEdit();
             NewAssignment win = new NewAssignment(this, (DataRowView)((DataGrid)sender).SelectedValue,((TabItem) tbControl.SelectedItem).Header.ToString());
 
-            //win.Show();
+            win.Show();
         }
 
         private void btnNextDay_Click(object sender, RoutedEventArgs e)
@@ -316,6 +315,7 @@ namespace ED_Work_Assignments
                 setWindows();
             }
         }
+
         private string ArrayToString(int[] arr)
         {
             string builder = "";
