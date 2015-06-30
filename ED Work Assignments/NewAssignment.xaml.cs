@@ -56,27 +56,33 @@ namespace ED_Work_Assignments
         {
             InitializeComponent();
 
-            this.Title = "ED Update Work Assignment";
+            if (!users.isAdmin(Environment.UserName))
+            {
+                this.Close();
+            }
+            else
+            {
+                this.Title = "ED Update Work Assignment";
 
-            mainWindow = main;
+                mainWindow = main;
 
-            setBindings();
+                setBindings();
 
-            cboEmployee.Text = row["Employee"].ToString();
+                cboEmployee.Text = row["Employee"].ToString();
 
-            cboSeat.Text = seat;
+                cboSeat.Text = seat;
 
-            dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
-            dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
+                dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
+                dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
 
-            assignmentType = AssignmentType.Update;
+                assignmentType = AssignmentType.Update;
 
-            id = int.Parse(row["Shift Id"].ToString());
+                id = int.Parse(row["Shift Id"].ToString());
 
-            lblWorkAssignment.Content = updateAssignment;
+                lblWorkAssignment.Content = updateAssignment;
 
-            previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
-
+                previousRecordDetail = cboEmployee.Text + ".\nStarting: " + dtpStart.Value + ".\nEnding: " + dtpEnd.Value + ".\nIn Seat " + cboSeat.Text + ".";
+            }
         }
 
         private void setBindings()

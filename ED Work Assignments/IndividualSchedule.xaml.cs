@@ -26,7 +26,7 @@ namespace ED_Work_Assignments
         public IndividualSchedule()
         {
             InitializeComponent();
-
+            
             name = users.getName(Environment.UserName);
 
             this.Title = "ED " + name + "'s Work Assignments";
