@@ -15,13 +15,23 @@ using System.Windows.Shapes;
 namespace ED_Work_Assignments
 {
     /// <summary>
-    /// Interaction logic for ExcelAssignments.xaml
+    /// Interaction logic for GenerateSchedule.xaml
     /// </summary>
-    public partial class ExcelAssignments : Window
+    public partial class GenerateSchedule : Window
     {
-        public ExcelAssignments()
+        public GenerateSchedule()
         {
             InitializeComponent();
+        }
+
+        private void btnAcceptSchedule_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnGenerateSchedule_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

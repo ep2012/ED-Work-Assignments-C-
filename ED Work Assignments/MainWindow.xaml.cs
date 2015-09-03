@@ -14,6 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime;
+using Wrapper = Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using System.Data.SqlClient;
+
 
 namespace ED_Work_Assignments
 {
@@ -41,6 +46,13 @@ namespace ED_Work_Assignments
                 btnChangeTracker.Visibility = Visibility.Hidden;
                 btnReportCreator.Visibility = Visibility.Hidden;
                 btnManageEmployees.Visibility = Visibility.Hidden;
+                btnGenerateSchedule.Visibility = Visibility.Hidden;
+
+                IndividualSchedule win = new IndividualSchedule();
+                win.Left = Left;
+                win.Top = Top;
+                win.Show();
+                Close();
             }
         }
 
@@ -54,7 +66,8 @@ namespace ED_Work_Assignments
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
                 "JOIN [REVINT].[dbo].[ED_Employees] " +
                 "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
-                "WHERE (StartShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "' OR EndShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') "+
+                "WHERE (StartShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "' OR" +
+                " EndShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') "+
                 "AND Seat = ";
             
             //create an OdbcConnection object and connect it to the data source.
@@ -158,6 +171,9 @@ namespace ED_Work_Assignments
         {
             ChangeTracker win = new ChangeTracker();
 
+            win.Left = Left;
+            win.Top = Top;
+
             win.Show();
         }
 
@@ -165,18 +181,14 @@ namespace ED_Work_Assignments
         {
             ReportCreator win = new ReportCreator();
 
+            win.Left = Left;
+            win.Top = Top;
+
             win.Show();
         }
         public void update()
         {
             setWindows();
-        }
-
-        private void dta_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            NewAssignment win = new NewAssignment(this, (DataRowView)((DataGrid)sender).SelectedValue,((TabItem) tbControl.SelectedItem).Header.ToString());
-
-            win.Show();
         }
 
         private void btnNextDay_Click(object sender, RoutedEventArgs e)
@@ -191,14 +203,12 @@ namespace ED_Work_Assignments
             setWindows();
         }
 
-        private void dta_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            ((DataGrid)sender).CancelEdit();
-        }
-
         private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
         {
             ManageEmployees win = new ManageEmployees();
+
+            win.Left = Left;
+            win.Top = Top;
 
             win.Show();
         }
@@ -217,6 +227,25 @@ namespace ED_Work_Assignments
             // Process open file dialog box results 
             if (result == true)
             {
+                /*
+                String fileName = dlg.FileName;
+
+                string[] columns = new String[4];
+
+                //Opens the Worksheet you want to access 
+                Microsoft.Office.Interop.Excel.Application xlsApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook xlsWkBk = xlsApp.Workbooks.Open(fileName);
+                Microsoft.Office.Interop.Excel.Worksheet xlsWkSt = xlsWkBk.ActiveSheet;
+
+                //Name of the Worksheet techniqually needs a $ at the end 
+                String Worksheet = xlsWkSt.Name + "$";
+
+                //Access the first row and get names of each column 
+                for (int i = 0; i < 4; i++)
+                {
+                    columns[i] = xlsWkSt.Cells[1, (i + 1)].Value2;
+                }
+                */
                 // Open document 
                 String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -326,6 +355,69 @@ namespace ED_Work_Assignments
             builder = builder.Trim();
             return builder;
         }
+        private void dtadblClick(object sender, String tableString)
+        {
+            NewAssignment win = new NewAssignment(this, (DataRowView)((DataGrid)sender).SelectedValue, tableString);
 
+            win.Left = Left;
+            win.Top = Top;
+            win.Show();
+            win.Topmost = true;
+        }
+
+        private void dtaWOW1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "WOW 1");
+        }
+
+        private void dtaWOW2_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "WOW 2");
+        }
+
+        private void dtaCheckIn_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "Check In");
+        }
+
+        private void dtaPOD12_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "POD 1/2");
+        }
+
+        private void dtaCheckOut_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "Check Out");
+        }
+
+        private void dtaPOD34_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "POD 3/4");
+        }
+
+        private void dtaJetPeds_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "Jet/Peds");
+        }
+
+        private void dtaiPad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "iPad");
+        }
+
+        private void dtaSupervising_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            dtadblClick(sender, "Supervising");
+        }
+
+        private void btnGenerateSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateSchedule win = new GenerateSchedule();
+
+            win.Show();
+
+            win.Left = this.Left;
+            win.Top = this.Top;
+        }
     }
 }

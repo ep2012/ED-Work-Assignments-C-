@@ -1,15 +1,36 @@
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe.config
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csprojResolveAssemblyReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.ResolveComReference.cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\AddEditEmployee.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ChangeTracker.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ExcelAssignments.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\IndividualSchedule.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\MainWindow.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ManageEmployees.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\AddEditEmployee.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ChangeTracker.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ExcelAssignments.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\IndividualSchedule.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\MainWindow.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ManageEmployees.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\App.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe.config
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.DataGrid.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.Toolkit.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ReportCreator.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewAssignment.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ReportCreator.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_Content.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.lref
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewAssignment.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.g.resources
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED_Work_Assignments.Properties.Resources.resources
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.GenerateResource.Cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.exe
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\GenerateSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\GenerateSchedule.g.cs

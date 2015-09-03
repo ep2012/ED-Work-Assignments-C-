@@ -52,6 +52,13 @@
     <ApplicationIcon>Graphicloads-Medical-Health-Prescription.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.SQLServer.DTSRuntimeWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.SQLServer.ManagedDTS, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -98,6 +105,10 @@
     <Compile Include="AddEditEmployee.xaml.cs">
       <DependentUpon>AddEditEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GenerateSchedule.xaml.cs">
+      <DependentUpon>GenerateSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleCreator.cs" />
     <Compile Include="ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
@@ -112,7 +123,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ExcelAssignments.xaml">
+    <Page Include="GenerateSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,9 +142,6 @@
     <Compile Include="CboBoxContents.cs" />
     <Compile Include="ChangeTracker.xaml.cs">
       <DependentUpon>ChangeTracker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ExcelAssignments.xaml.cs">
-      <DependentUpon>ExcelAssignments.xaml</DependentUpon>
     </Compile>
     <Compile Include="IndividualSchedule.xaml.cs">
       <DependentUpon>IndividualSchedule.xaml</DependentUpon>
