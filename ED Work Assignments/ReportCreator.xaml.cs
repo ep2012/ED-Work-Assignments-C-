@@ -94,7 +94,7 @@ namespace ED_Work_Assignments
 
                 if (totalHours)
                 {
-                    sqlString += "SUM(DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0) AS [Hours Worked] ";
+                    sqlString += "[REVINT].[dbo].[ED_Seats].Name AS [Seat], SUM(DATEDIFF(MI, [REVINT].[dbo].[ED_Shifts].[StartShift], [REVINT].[dbo].[ED_Shifts].[EndShift])/60.0) AS [Hours Worked] ";
                 }
                 else
                 {
@@ -175,7 +175,7 @@ namespace ED_Work_Assignments
 
                 if (totalHours)
                 {
-                    sqlString += "GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName " +
+                    sqlString += "GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName, [REVINT].[dbo].[ED_Seats].Name " +
                         "ORDER BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName";
                 }
                 else
