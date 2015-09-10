@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ED_Work_Assignments.ChangeTracker"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ED Change Tracker" Height="600" Width="800" Background="#FF9B9999" FontFamily="Lucida Sans" FontSize="19" Left="0" Top="0">
+        Title="ED Change Tracker" Height="600" Width="800" Background="#FF9B9999" FontFamily="Lucida Sans" FontSize="19" Left="0" Top="0" ResizeMode="CanMinimize">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="510" Margin="10,45,0,0" VerticalAlignment="Top" Width="762" Background="#FFC9C7C7">
             <DataGrid x:Name="dtaChanges" HorizontalAlignment="Left" Height="488" Margin="9,11,0,0" VerticalAlignment="Top" Width="742" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>

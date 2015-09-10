@@ -105,9 +105,13 @@
     <Compile Include="AddEditEmployee.xaml.cs">
       <DependentUpon>AddEditEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeTimeOff.xaml.cs">
+      <DependentUpon>EmployeeTimeOff.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GenerateSchedule.xaml.cs">
       <DependentUpon>GenerateSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JunkCode.cs" />
     <Compile Include="ScheduleCreator.cs" />
     <Compile Include="ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
@@ -115,11 +119,22 @@
     <Compile Include="ReportCreator.xaml.cs">
       <DependentUpon>ReportCreator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimeOff.cs" />
+    <Compile Include="VacationRequest.xaml.cs">
+      <DependentUpon>VacationRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VacationRequests.xaml.cs">
+      <DependentUpon>VacationRequests.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddEditEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChangeTracker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployeeTimeOff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +174,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReportCreator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VacationRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VacationRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

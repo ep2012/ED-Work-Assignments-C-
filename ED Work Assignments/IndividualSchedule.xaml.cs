@@ -94,5 +94,17 @@ namespace ED_Work_Assignments
             setWindow();
             this.Title = "ED " + name + "'s Work Assignments";
         }
+
+        private void btnRequestTimeOff_Click(object sender, RoutedEventArgs e)
+        {
+            VacationRequest request = new VacationRequest();
+            
+            request.Left = Left;
+            request.Top = Top;
+
+            request.Show();
+
+            Close();
+        }
     }
 }

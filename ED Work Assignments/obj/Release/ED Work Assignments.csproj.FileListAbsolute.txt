@@ -34,3 +34,9 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.pdb
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\GenerateSchedule.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\GenerateSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequest.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequests.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequest.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequests.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\EmployeeTimeOff.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\EmployeeTimeOff.g.cs
