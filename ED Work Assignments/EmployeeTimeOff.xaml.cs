@@ -24,6 +24,10 @@ namespace ED_Work_Assignments
         public EmployeeTimeOff()
         {
             InitializeComponent();
+
+            dtStart.Text = DateTime.Today.ToString();
+            dtEnd.Text = DateTime.Today.AddDays(7).ToString();
+
             setWindow();
         }
 
@@ -31,7 +35,9 @@ namespace ED_Work_Assignments
         {
             String sqlString = "SELECT A.Id, B.FirstName AS [First Name], B.LastName AS [Last Name], A.StartTime AS [Start Time], A.EndTime AS [End Time], A.DateTimeStamp AS [Date Stamp] " +
                 @"FROM [REVINT].[HEALTHCARE\eliprice].[ED_TimeOff] A " +
-                "JOIN [REVINT].[dbo].[ED_Employees] B ON A.EmployeeId = B.Id";
+                "JOIN [REVINT].[dbo].[ED_Employees] B ON A.EmployeeId = B.Id "+
+                "WHERE (A.StartTime BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR (A.EndTime BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "')";
+
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
             //create an OdbcConnection object and connect it to the data source.
@@ -55,6 +61,10 @@ namespace ED_Work_Assignments
                 //Close connection
                 dbConnection.Close();
             }
+        }
+        private void CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            setWindow();
         }
     }
 }

@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Employee Time Off" Height="600" Width="800" Background="#FF9B9999" FontFamily="Lucida Sans" FontSize="19" Left="0" Top="0" ResizeMode="CanMinimize">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="510" Margin="10,45,0,0" VerticalAlignment="Top" Width="762" Background="#FFC9C7C7">
-            <DataGrid x:Name="dtaTimeOff" HorizontalAlignment="Left" Height="488" Margin="9,11,0,0" VerticalAlignment="Top" Width="742" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="510" Margin="10,45,0,0" VerticalAlignment="Top" Width="762" Background="#FFC9C7C7"/>
+        <DataGrid x:Name="dtaTimeOff" HorizontalAlignment="Left" Height="451" Margin="21,94,0,0" VerticalAlignment="Top" Width="742" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+
         <Label Content="Employee Time Off" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="194" FontSize="20"/>
+        <DatePicker x:Name="dtStart" HorizontalAlignment="Left" Height="33" Margin="323,53,0,0" VerticalAlignment="Top" Width="192" FontSize="20" CalendarClosed="CalendarClosed"/>
+        <DatePicker x:Name="dtEnd" HorizontalAlignment="Left" Height="33" Margin="575,53,0,0" VerticalAlignment="Top" Width="193" FontSize="20" CalendarClosed="CalendarClosed"/>
+        <Label Content="Start" HorizontalAlignment="Left" Margin="258,53,0,0" VerticalAlignment="Top" FontSize="20" Width="60"/>
+        <Label Content="End" HorizontalAlignment="Left" Margin="520,53,0,0" VerticalAlignment="Top" FontSize="20" Width="50"/>
 
     </Grid>
 </Window>
