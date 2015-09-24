@@ -7,139 +7,449 @@ using System.Threading.Tasks;
 
 namespace ED_Work_Assignments
 {
-    public class EmployeeScheduleCreator
-    {
-        Schedule schedule = new Schedule();
-        public EmployeeScheduleCreator()
-        {
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Roles].Title ,[REVINT].[dbo].[ED_Employees].[Id] FROM [REVINT].[dbo].[ED_Employees] JOIN [REVINT].[dbo].[ED_Roles] ON [REVINT].[dbo].[ED_Roles].Id = [REVINT].[dbo].[ED_Employees].Role WHERE [REVINT].[dbo].[ED_Employees].CurrentlyEmployed = 'true' AND [REVINT].[dbo].[ED_Roles].Title = 'Employee' ORDER BY NEWID();";
-            //Loop over all 24 hours of the day for check in and pod 1/2 and make sure that there is someone there 24 hours a day, selecting a random person with an open shift to fill it
-
-            //Loop over all remaining employee work hours and allocate to level 2 (if not full) or level 3 if full
-        }
-        private void scheduleDay(int employee, String startTime, String endTime, String day)
-        {
-            DateTime start;
-            DateTime end;
-            if (!DateTime.TryParse(day + startTime, out start) || !DateTime.TryParse(day + endTime, out end))
-            {
-                return;
-            }
-            else
-            {
-                if (start == end)
-                {
-                    return;
-                }
-                //break up and schedule
-
-            }
-        }
-    }
-    public class SupervisorScheduleCreator
-    {
-        Schedule schedule = new Schedule();
-        public SupervisorScheduleCreator()
-        {
-            List<object> supervisors = new List<object>();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Roles].Title ,[REVINT].[dbo].[ED_Employees].[Id] FROM [REVINT].[dbo].[ED_Employees] JOIN [REVINT].[dbo].[ED_Roles] ON [REVINT].[dbo].[ED_Roles].Id = [REVINT].[dbo].[ED_Employees].Role WHERE [REVINT].[dbo].[ED_Employees].CurrentlyEmployed = 'true' AND [REVINT].[dbo].[ED_Roles].Title = 'Supervisor' ORDER BY NEWID();";
-            new idMaker(sqlString, supervisors);
-            //foreach employee on each day breakup and schedule
-        }
-        private void breakUpDayAndSchedule(int employee, String startTime, String endTime, String day)
-        {
-            DateTime start;
-            DateTime end;
-            if (!DateTime.TryParse(day + startTime, out start) || !DateTime.TryParse(day + endTime, out end))
-            {
-                return;
-            }
-            else
-            {
-                if (start == end)
-                {
-                    return;
-                }
-                //First add all hours to supervisor schedule before scheduling
-                schedule.scheduleSupervisor(employee, start, end);
-                //break up and schedule
-                DateTime tempStart = start;
-                if (tempStart.Subtract(end).TotalHours > 3)
-                {
-                    while (tempStart.Subtract(end).TotalHours > 3)
-                    {
-                        DateTime tempEnd = tempStart.AddHours(3);
-
-                        schedule.ScheduleClocking(employee, tempStart, tempEnd);
-                        tempStart = tempEnd;
-                    }
-                    schedule.ScheduleClocking(employee, tempStart, end);
-                }
-                else
-                {
-                    schedule.ScheduleClocking(employee, start, end);
-                }
-            }
-        }
-    }
-
     //1 = Check In & POD 1/2
     //2 = Check Out & POD 3/4
     //3 = All others Excluding Supervising
     //if !1 filled, fill 1. If not 2 filled, fill 2. Else give to random 3.
+    public class ScheduleMaker
+    {
+        public ScheduleMaker(DateTime start, DateTime end)
+        {
+            if (start == null || end == null)
+            {
+                return;
+            }
+            else
+            {
+                DateTime day = start;
+                while (day < end)
+                {
+                    String schedulestr = "";
+                    if (day.DayOfWeek == DayOfWeek.Sunday)
+                        schedulestr = "sunday";
+                    else if (day.DayOfWeek == DayOfWeek.Monday)
+                        schedulestr = "monday";
+                    else if (day.DayOfWeek == DayOfWeek.Tuesday)
+                        schedulestr = "tuesday";
+                    else if (day.DayOfWeek == DayOfWeek.Wednesday)
+                        schedulestr = "wednesday";
+                    else if (day.DayOfWeek == DayOfWeek.Thursday)
+                        schedulestr = "thursday";
+                    else if (day.DayOfWeek == DayOfWeek.Friday)
+                        schedulestr = "friday";
+                    else if (day.DayOfWeek == DayOfWeek.Saturday)
+                        schedulestr = "saturday";
+
+                    if ((day - start).TotalDays%14 < 7)
+                        schedulestr += "1";
+                    else
+                        schedulestr += "2";
+
+                    scheduleDay(day, schedulestr);
+                    day = day.AddDays(1);
+                }
+            }
+        }
+        public void scheduleDay(DateTime day, String dateStr)
+        {
+            new SupervisorScheduleCreator(day, dateStr);
+            new EmployeeScheduleCreator(day, dateStr);
+        }
+    }
+
+
+
     public class Schedule
     {
-
+        TempScheduler tempScheduler = new TempScheduler();
+        Random random = new Random();
         public Schedule()
         {
 
         }
-        public void ScheduleClocking(int employee, DateTime start, DateTime end)
+        public void scheduleSupervisor(DateTime start, DateTime end, int employee)
         {
-            getBestWorkStation(employee, start, end);
-
+            scheduleEmployee(employee, start, end, 9);
         }
-        public int getBestWorkStation(int employee,DateTime start, DateTime end)
+
+        public void scheduleEndPiece(DateTime start, DateTime end, int employee)
         {
-            //if !check in filled and employee didn't work in station last, return that 
-
-            //else if !POD 1/2 filled and employee didn't work in station last, return that
-
-            //else if !check out filled and employee didn't work in station last, return that
-
-            //else if !POD 3/4 filled and employee didn't work in station last, return that
-            
-            //else return random 3 level workstation
-
-            return 0;
-        }
-        public void scheduleSupervisor(int employee, DateTime start, DateTime end)
-        {
-
-        }
-        public bool isEmployeeFreeAndWorking(int employee, DateTime start, DateTime end)
-        {
-            //adjust to make free and working
-            List<object> checkerList = new List<object>();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Shifts].[Id] FROM [REVINT].[dbo].[ED_Shifts] JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Shifts].[Employee] = [REVINT].[dbo].[ED_Employees].[Id] WHERE [REVINT].[dbo].[ED_Employees].[Id] = " + employee + " AND [REVINT].[dbo].[ED_Shifts].[StartShift] < '" + start + "' AND [REVINT].[dbo].[ED_Shifts].[EndShift] > '" + end + "';";
-            new idMaker(sqlString, checkerList);
-            if (checkerList.Count == 0)
-                return false;
+            if (GenerateDigit(2) == 1)
+            {
+                if (GenerateDigit(2) == 1)
+                {
+                    if (GenerateDigit(3) == 1)
+                    {
+                        scheduleEmployee(employee, start, end, 2);
+                    }
+                    else
+                    {
+                        scheduleEmployee(employee, start, end, 1);
+                    }
+                }
+                else
+                {
+                    if (GenerateDigit(3) == 1)
+                    {
+                        scheduleEmployee(employee, start, end, 8);
+                    }
+                    else
+                    {
+                        scheduleEmployee(employee, start, end, 5);
+                    }
+                }
+            }
             else
-                return true;
+            {
+                if (GenerateDigit(2) == 1)
+                {
+                    if (GenerateDigit(3) == 1)
+                    {
+                        scheduleEmployee(employee, start, end, 3);
+                    }
+                    else
+                    {
+                        scheduleEmployee(employee, start, end, 6);
+                    }
+                }
+                else
+                {
+                    if (GenerateDigit(3) == 1)
+                    {
+                        scheduleEmployee(employee, start, end, 4);
+                    }
+                    else
+                    {
+                        scheduleEmployee(employee, start, end, 7);
+                    }
+                }
+            }
         }
+        public void scheduleInBestWorkstation(DateTime start, DateTime end, int employee)
+        {
+            //if !check in filled, fill it
+            if (isStationOpen(start, end, 1))
+            {
+                scheduleEmployee(employee, start, end, 1);
+            }
+            //else if !POD 1/2 filled, fill it
+            else if (isStationOpen(start, end, 6))
+            {
+                scheduleEmployee(employee, start, end, 6);
+            }
+            //else if !check out filled, fill it
+            else if (isStationOpen(start, end, 5))
+            {
+                scheduleEmployee(employee, start, end, 5);
+            }
+            //else if !POD 3/4 filled, fill it
+            else if (isStationOpen(start, end, 7))
+            {
+                scheduleEmployee(employee, start, end, 7);
+            }
+            //else return random 3 level workstation
+            else 
+            { 
+                if (GenerateDigit(2) == 1)
+                {
+                    if (GenerateDigit(2) == 1)
+                    {
+                        if (GenerateDigit(3) == 1)
+                        {
+                            scheduleEmployee(employee, start, end, 2);
+                        }
+                        else
+                        {
+                            scheduleEmployee(employee, start, end, 1);
+                        }
+                    }
+                    else
+                    {
+                        if (GenerateDigit(3) == 1)
+                        {
+                            scheduleEmployee(employee, start, end, 8);
+                        }
+                        else
+                        {
+                            scheduleEmployee(employee, start, end, 5);
+                        }
+                    }
+                }
+                else
+                {
+                    if (GenerateDigit(2) == 1)
+                    {
+                        if (GenerateDigit(3) == 1)
+                        {
+                            scheduleEmployee(employee, start, end, 3);
+                        }
+                        else
+                        {
+                            scheduleEmployee(employee, start, end, 6);
+                        }
+                    }
+                    else
+                    {
+                        if (GenerateDigit(3) == 1)
+                        {
+                            scheduleEmployee(employee, start, end, 4);
+                        }
+                        else
+                        {
+                            scheduleEmployee(employee, start, end, 7);
+                        }
+                    }
+                }
+            }
+        }
+        private int GenerateDigit(int num)
+        {
+            return random.Next(num);
+        }
+
+        private bool isStationOpen(DateTime start, DateTime end, int station)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE A.[StartShift] <= '" + start + "' AND A.[EndShift] >= '" + end + "' AND A.Seat = " + station + " GROUP BY B.[Id];";
+            new idMaker(sqlString, checkerList);
+            return checkerList.Count == 0;
+        }
+        private void scheduleEmployee(int employee, DateTime start, DateTime end, int station)
+        {
+            tempScheduler.insert(employee, start, end, station);
+        }
+
+        public List<object> whoCanWork(DateTime start, DateTime end, String day)
+        {
+            return whoWorks(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkSupervisor(DateTime start, DateTime end, String day)
+        {
+            return whoWorksSupervisor(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkDay2(DateTime start, DateTime end, String day)
+        {
+            return whoWorksDay2(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkSupervisorDay2(DateTime start, DateTime end, String day)
+        {
+            return whoWorksSupervisorDay2(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+
+        public List<object> whoCanWorkOnlyStart(DateTime start, DateTime end, String day, List <object> days)
+        {
+            return whoWorksOnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkSupervisorOnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksSupervisorOnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksDay2OnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkSupervisorDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksSupervisorDay2OnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+
+        public List<object> whoCanWorkOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksOnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkSupervisorOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksSupervisorOnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksDay2OnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+        public List<object> whoCanWorkSupervisorDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            return whoWorksSupervisorDay2OnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+        }
+
+        public List<object> whoWorks(DateTime start, DateTime end, String day)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "time as time) <= cast('" + start + "' as time) AND cast(A." + day + "timeend as time) >= cast('" + end + "' as time)) OR (cast(A." + day + "time as time) <= cast('" + start + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+        public List<object> whoWorksSupervisor(DateTime start, DateTime end, String day)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "time as time) <= cast('" + start + "' as time) AND cast(A." + day + "timeend as time) >= cast('" + end + "' as time)) OR (cast(A." + day + "time as time) <= cast('" + start + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+        public List<object> whoWorksDay2(DateTime start, DateTime end, String day)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+        public List<object> whoWorksSupervisorDay2(DateTime start, DateTime end, String day)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+
+        public List<object> whoWorksOnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id], cast(A.[EndShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+        public List<object> whoWorksSupervisorOnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id], cast(A.[EndShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+        public List<object> whoWorksDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+        public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+
+        public List<object> whoWorksOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "time as time) <= cast('" + start + "' as time) AND cast(A." + day + "timeend as time) >= cast('" + end + "' as time)) OR (cast(A." + day + "time as time) <= cast('" + start + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+        public List<object> whoWorksSupervisorOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "time as time) <= cast('" + start + "' as time) AND cast(A." + day + "timeend as time) >= cast('" + end + "' as time)) OR (cast(A." + day + "time as time) <= cast('" + start + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+        public List<object> whoWorksDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+        public List<object> whoWorksSupervisorDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList, days);
+            return checkerList;
+        }
+
         public bool doesEmployeeWorkAtStationLast(int employee, int station, DateTime start, DateTime end)
         {
             return false;
         }
-        public List<object> whoWorks(DateTime start, DateTime end)
+        public List<object> whoAlreadyWorks(DateTime start, DateTime end)
         {
             List<object> checkerList = new List<object>();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].[Id] FROM [REVINT].[dbo].[ED_Shifts] JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Shifts].[Employee] = [REVINT].[dbo].[ED_Employees].[Id] WHERE [REVINT].[dbo].[ED_Shifts].[StartShift] < '" + start + "' AND [REVINT].[dbo].[ED_Shifts].[EndShift] > '" + end + "' GROUP BY [REVINT].[dbo].[ED_Employees].[Id];";
+            String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE A.[StartShift] <= '" + start + "' AND A.[EndShift] >= '" + end + "' GROUP BY B.[Id];";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
+        private void clearDay(DateTime day)
+        {
+
+        }
     }
+    
+
+
+    public class EmployeeScheduleCreator
+    {
+        Schedule schedule = new Schedule();
+        public EmployeeScheduleCreator(DateTime day, String dayStr)
+        {
+            DateTime goaldate = day.AddHours(36);
+            DateTime startTime = day;
+            DateTime endTime = day.AddHours(2);
+            while(endTime < goaldate)
+            {
+                List<object> employeesThatCanWork = new List<object>();
+
+                //get employees that can work
+                if ((startTime - day).TotalHours < 24)
+                {
+                    employeesThatCanWork = schedule.whoCanWork(startTime, endTime, dayStr);
+                }
+                else
+                {
+                    employeesThatCanWork = schedule.whoCanWorkDay2(startTime, endTime, dayStr);
+                }
+                
+                //schedule employees
+                foreach(object employee in employeesThatCanWork)
+                {
+                    schedule.scheduleInBestWorkstation(startTime, endTime,Convert.ToInt32(employee));
+                }
+                //increment times
+                startTime = endTime;
+                endTime = endTime.AddHours(2);
+            }
+        }
+    }
+
+
+
+    public class SupervisorScheduleCreator
+    {
+        Schedule schedule = new Schedule();
+
+        public SupervisorScheduleCreator(DateTime day, String dayStr)
+        {
+            DateTime goaldate = day.AddDays(1);
+            DateTime startTime = day;
+            DateTime endTime = day.AddHours(2);
+            while (endTime < goaldate)
+            {
+                List<object> employeesThatCanWork = new List<object>();
+
+                //get employees that can work
+                if ((startTime - day).TotalHours < 24)
+                {
+                    employeesThatCanWork = schedule.whoCanWorkSupervisor(startTime, endTime, dayStr);
+                }
+                else
+                {
+                    employeesThatCanWork = schedule.whoCanWorkSupervisorDay2(startTime, endTime, dayStr);
+                }
+                
+
+                //schedule employees
+                foreach (object employee in employeesThatCanWork)
+                {
+                    schedule.scheduleInBestWorkstation(startTime, endTime, Convert.ToInt32(employee));
+                    schedule.scheduleSupervisor(startTime, endTime, Convert.ToInt32(employee));
+                }
+                //increment times
+                startTime = endTime;
+                endTime = endTime.AddHours(2);
+            }
+        }
+    }
+
+    
 }
 public class idMaker
 {
@@ -164,6 +474,32 @@ public class idMaker
                 for (int i = 0; i < numCols; i++)
                 {
                     ids.Add((object)objID[i].ToString().ToUpper());
+                }
+            }
+        }
+    }
+    public idMaker(String sqlCmdID, List<object> ids, List<object> times)
+    {
+        object[] objID = new object[40];
+
+        String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+        using (OdbcConnection connectionID = new OdbcConnection(cxnString))
+        {
+            OdbcCommand commandID = new OdbcCommand(sqlCmdID, connectionID);
+
+            connectionID.Open();
+
+            OdbcDataReader reader = commandID.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int numCols = reader.GetValues(objID);
+
+                if (numCols == 2)
+                {
+                    ids.Add((object)objID[0].ToString().ToUpper());
+                    times.Add((object)objID[1].ToString());
                 }
             }
         }

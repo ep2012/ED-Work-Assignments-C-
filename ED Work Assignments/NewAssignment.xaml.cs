@@ -47,8 +47,6 @@ namespace ED_Work_Assignments
 
             assignmentType = AssignmentType.New;
 
-            btnDeleteAssignment.Visibility = Visibility.Hidden;
-
             lblWorkAssignment.Content = newAssignment;
         }
 
@@ -239,56 +237,8 @@ namespace ED_Work_Assignments
             this.Close();
         }
 
-        private void btnDeleteAssignment_Click(object sender, RoutedEventArgs e)
+        private void btnMarkAsAbsent_Click(object sender, RoutedEventArgs e)
         {
-            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-            var dialogResult = MessageBox.Show("Are you sure you would like to delete this work assignment?", "Deleting Assignment", MessageBoxButton.YesNo);
-
-            if (dialogResult == MessageBoxResult.Yes)
-            {
-                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
-                {
-                    //open OdbcConnection object
-                    dbConnection.Open();
-
-                    OdbcCommand cmd = new OdbcCommand();
-
-                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_deleteWorkAssignment(?)}";
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Connection = dbConnection;
-
-                    cmd.Parameters.Add("@id", OdbcType.Int).Value = id.ToString();
-
-                    cmd.ExecuteNonQuery();
-
-                    dbConnection.Close();
-                }
-
-                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
-                {
-                    //open OdbcConnection object
-                    dbConnection.Open();
-
-                    OdbcCommand cmd = new OdbcCommand();
-
-                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Connection = dbConnection;
-
-                    cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
-                    cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Deleted record:\nEmployee: " + previousRecordDetail;
-
-                    cmd.ExecuteNonQuery();
-
-                    dbConnection.Close();
-                }
-
-                if (mainWindow.ShowActivated)
-                {
-                    mainWindow.update();
-                }
-                this.Close();
-            }
 
         }
     }

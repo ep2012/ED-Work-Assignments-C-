@@ -34,6 +34,31 @@ namespace ED_Work_Assignments
                 dbConnection.Close();
             }
         }
+        public void insertTimeOff(object employeeId, object startTime, object endTime)
+        {
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].[ED_insertTimeOff](?, ?, ?, ?)}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.Parameters.Add("@EmployeeId", OdbcType.Int).Value = employeeId;
+                cmd.Parameters.Add("@StartTime", OdbcType.DateTime).Value = startTime;
+                cmd.Parameters.Add("@EndTime", OdbcType.DateTime).Value = endTime;
+                cmd.Parameters.Add("@DateTimeStamp", OdbcType.DateTime).Value = DateTime.Now;
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
+        }
         public void acceptTimeOffRequest(object id)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";

@@ -209,8 +209,6 @@ namespace ED_Work_Assignments
             win.Show();
         }
 
-        
-
         private string ArrayToString(int[] arr)
         {
             string builder = "";

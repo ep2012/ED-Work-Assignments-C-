@@ -140,4 +140,96 @@ namespace ED_Work_Assignments
         setWindows();
     }
     */
+    /*
+     * private void btnDeleteAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+            var dialogResult = MessageBox.Show("Are you sure you would like to delete this work assignment?", "Deleting Assignment", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                {
+                    //open OdbcConnection object
+                    dbConnection.Open();
+
+                    OdbcCommand cmd = new OdbcCommand();
+
+                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_deleteWorkAssignment(?)}";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Connection = dbConnection;
+
+                    cmd.Parameters.Add("@id", OdbcType.Int).Value = id.ToString();
+
+                    cmd.ExecuteNonQuery();
+
+                    dbConnection.Close();
+                }
+
+                using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+                {
+                    //open OdbcConnection object
+                    dbConnection.Open();
+
+                    OdbcCommand cmd = new OdbcCommand();
+
+                    cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateChangeTracker(?, ?)}";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Connection = dbConnection;
+
+                    cmd.Parameters.Add("@username", OdbcType.NVarChar, 100).Value = Environment.UserName;
+                    cmd.Parameters.Add("@notes", OdbcType.NVarChar, 4000).Value = "Deleted record:\nEmployee: " + previousRecordDetail;
+
+                    cmd.ExecuteNonQuery();
+
+                    dbConnection.Close();
+                }
+
+                if (mainWindow.ShowActivated)
+                {
+                    mainWindow.update();
+                }
+                this.Close();
+            }
+
+        }
+     */
+    /*
+        public bool isEmployeeFreeAndWorking(int employee, DateTime start, DateTime end)
+        {
+            //adjust to make free and working
+            List<object> checkerList = new List<object>();
+            String sqlString = "SELECT [REVINT].[dbo].[ED_Shifts].[Id] FROM [REVINT].[dbo].[ED_Shifts] JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Shifts].[Employee] = [REVINT].[dbo].[ED_Employees].[Id] WHERE [REVINT].[dbo].[ED_Employees].[Id] = " + employee + " AND [REVINT].[dbo].[ED_Shifts].[StartShift] < '" + start + "' AND [REVINT].[dbo].[ED_Shifts].[EndShift] > '" + end + "';";
+            new idMaker(sqlString, checkerList);
+            if (checkerList.Count == 0)
+                return false;
+            else
+                return true;
+        }
+         */
+    /*
+                if (start == end)
+                {
+                    return;
+                }
+                //First add all hours to supervisor schedule before scheduling
+                schedule.scheduleSupervisor(employee, start, end);
+                //break up and schedule
+                DateTime tempStart = start;
+                if (tempStart.Subtract(end).TotalHours > 3)
+                {
+                    while (tempStart.Subtract(end).TotalHours > 3)
+                    {
+                        DateTime tempEnd = tempStart.AddHours(3);
+
+                        schedule.scheduleClocking(employee, tempStart, tempEnd);
+                        tempStart = tempEnd;
+                    }
+                    schedule.scheduleClocking(employee, tempStart, end);
+                }
+                else
+                {
+                    schedule.scheduleClocking(employee, start, end);
+                }
+                 */
 }

@@ -112,6 +112,9 @@
       <DependentUpon>GenerateSchedule.xaml</DependentUpon>
     </Compile>
     <Compile Include="JunkCode.cs" />
+    <Compile Include="NewTimeOff.xaml.cs">
+      <DependentUpon>NewTimeOff.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScheduleCreator.cs" />
     <Compile Include="ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
@@ -119,6 +122,8 @@
     <Compile Include="ReportCreator.xaml.cs">
       <DependentUpon>ReportCreator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleMaker.cs" />
+    <Compile Include="TempScheduler.cs" />
     <Compile Include="TimeOff.cs" />
     <Compile Include="VacationRequest.xaml.cs">
       <DependentUpon>VacationRequest.xaml</DependentUpon>
@@ -170,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewAssignment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewTimeOff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

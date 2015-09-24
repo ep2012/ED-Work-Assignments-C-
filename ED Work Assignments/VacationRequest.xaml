@@ -12,6 +12,5 @@
         <Button x:Name="btnCancel" Content="Cancel" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="298,132,0,0" VerticalAlignment="Top" Width="283" Height="25" FontFamily="Lucida Sans" Background="#FFCDCDCD" TabIndex="6" Click="btnCancel_Click"/>
         <wpfTool:DateTimePicker x:Name="dtpEnd" HorizontalAlignment="Left" Height="26" Margin="118,91,0,0" VerticalAlignment="Top" Width="454" Background="White" TabIndex="4"/>
         <wpfTool:DateTimePicker x:Name="dtpStart" HorizontalAlignment="Left" Height="26" Margin="118,55,0,0" VerticalAlignment="Top" Width="454" Background="White" TabIndex="3"/>
-        <Button x:Name="btnManageEmployees" Content="Past Requests" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="432,6,0,0" VerticalAlignment="Top" Width="149" Height="34" FontFamily="Lucida Sans" Background="#FFCDCDCD" TabIndex="7"/>
     </Grid>
 </Window>

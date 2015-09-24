@@ -66,5 +66,17 @@ namespace ED_Work_Assignments
         {
             setWindow();
         }
+
+        private void btnTimeOff_Click(object sender, RoutedEventArgs e)
+        {
+            NewTimeOff win = new NewTimeOff();
+
+            win.Left = Left;
+            win.Top = Top;
+
+            win.Show();
+
+            Close();
+        }
     }
 }

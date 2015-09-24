@@ -11,6 +11,7 @@
         <DatePicker x:Name="dtEnd" HorizontalAlignment="Left" Height="33" Margin="575,53,0,0" VerticalAlignment="Top" Width="193" FontSize="20" CalendarClosed="CalendarClosed"/>
         <Label Content="Start" HorizontalAlignment="Left" Margin="258,53,0,0" VerticalAlignment="Top" FontSize="20" Width="60"/>
         <Label Content="End" HorizontalAlignment="Left" Margin="520,53,0,0" VerticalAlignment="Top" FontSize="20" Width="50"/>
+        <Button x:Name="btnTimeOff" Content="New Time Off" HorizontalAlignment="Left" Margin="21,53,0,0" VerticalAlignment="Top" Width="176" Height="33" Click="btnTimeOff_Click"/>
 
     </Grid>
 </Window>
