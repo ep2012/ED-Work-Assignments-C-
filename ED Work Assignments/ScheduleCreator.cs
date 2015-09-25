@@ -309,14 +309,14 @@ namespace ED_Work_Assignments
         public List<OffClocking> whoWorksOnlyEnd(DateTime start, DateTime end, String day)
         {
             List<OffClocking> checkerList = new List<OffClocking>();
-            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 ORDER BY NEWID();";
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "time as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 2 ORDER BY NEWID();";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
         public List<OffClocking> whoWorksSupervisorOnlyEnd(DateTime start, DateTime end, String day)
         {
             List<OffClocking> checkerList = new List<OffClocking>();
-            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 ORDER BY NEWID();";
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "time as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 3 ORDER BY NEWID();";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
@@ -325,28 +325,28 @@ namespace ED_Work_Assignments
         public List<OffClocking> whoWorksOnlyStart(DateTime start, DateTime end, String day)
         {
             List<OffClocking> checkerList = new List<OffClocking>();
-            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 AND NOT (A." + day + "day = 'True') ORDER BY NEWID();";
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "timeend as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 2 AND NOT (A." + day + "day = 'True') ORDER BY NEWID();";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
         public List<OffClocking> whoWorksSupervisorOnlyStart(DateTime start, DateTime end, String day)
         {
             List<OffClocking> checkerList = new List<OffClocking>();
-            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 AND NOT (A." + day + "day = 'True') ORDER BY NEWID();";
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "timeend as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 3 AND NOT (A." + day + "day = 'True') ORDER BY NEWID();";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
         public List<OffClocking> whoWorksDay2OnlyStart(DateTime start, DateTime end, String day)
         {
             List<OffClocking> checkerList = new List<OffClocking>();
-            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 AND (A." + day + "day = 'True') ORDER BY NEWID();";
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "timeend as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 2 AND (A." + day + "day = 'True') ORDER BY NEWID();";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
         public List<OffClocking> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end, String day)
         {
             List<OffClocking> checkerList = new List<OffClocking>();
-            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 AND (A." + day + "day = 'True') ORDER BY NEWID();";
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "timeend as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 3 AND (A." + day + "day = 'True') ORDER BY NEWID();";
             new idMaker(sqlString, checkerList);
             return checkerList;
         }
@@ -417,8 +417,6 @@ public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end
                 {
                     schedule.scheduleInBestWorkstation(startTime, endTime,Convert.ToInt32(employee));
                 }
-
-                /*
                 foreach (OffClocking clockings in employeesThatCanWorkFirstPart)
                 {
                     DateTime end = DateTime.Parse(endTime.ToShortDateString() + " " + clockings.date.ToString());
@@ -429,7 +427,7 @@ public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end
                     DateTime start = DateTime.Parse(startTime.ToShortDateString() + " " + clockings.date.ToString());
                     schedule.scheduleInBestWorkstation(start, endTime, Convert.ToInt32(clockings.id));
                 }
-                */
+                
 
                 //increment times
                 startTime = endTime;
@@ -452,17 +450,21 @@ public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end
             while (endTime < goaldate)
             {
                 List<object> employeesThatCanWork = new List<object>();
+                List<OffClocking> employeesThatCanWorkLastPart = new List<OffClocking>();
+                List<OffClocking> employeesThatCanWorkFirstPart = new List<OffClocking>();
 
                 //get employees that can work
                 if ((startTime - day).TotalHours < 24)
                 {
                     employeesThatCanWork = schedule.whoCanWorkSupervisor(startTime, endTime, dayStr);
+                    employeesThatCanWorkFirstPart = schedule.whoCanWorkSupervisorOnlyStart(startTime, endTime, dayStr);
+                    employeesThatCanWorkLastPart = schedule.whoCanWorkSupervisorOnlyEnd(startTime, endTime, dayStr);
                 }
                 else
                 {
                     employeesThatCanWork = schedule.whoCanWorkSupervisorDay2(startTime, endTime, dayStr);
+                    employeesThatCanWorkFirstPart = schedule.whoCanWorkSupervisorDay2OnlyStart(startTime, endTime, dayStr);
                 }
-                
 
                 //schedule employees
                 foreach (object employee in employeesThatCanWork)
@@ -470,6 +472,20 @@ public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end
                     schedule.scheduleInBestWorkstation(startTime, endTime, Convert.ToInt32(employee));
                     schedule.scheduleSupervisor(startTime, endTime, Convert.ToInt32(employee));
                 }
+                foreach (OffClocking clockings in employeesThatCanWorkFirstPart)
+                {
+                    DateTime end = DateTime.Parse(endTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(startTime, end, Convert.ToInt32(clockings.id));
+                    schedule.scheduleSupervisor(startTime, end, Convert.ToInt32(clockings.id));
+                }
+                foreach (OffClocking clockings in employeesThatCanWorkLastPart)
+                {
+                    DateTime start = DateTime.Parse(startTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(start, endTime, Convert.ToInt32(clockings.id));
+                    schedule.scheduleSupervisor(start, endTime, Convert.ToInt32(clockings.id));
+                }
+
+
                 //increment times
                 startTime = endTime;
                 endTime = endTime.AddHours(2);
