@@ -73,15 +73,15 @@ namespace ED_Work_Assignments
                 dbConnection.Open();
 
                 //Create adapter from connection and sql to obtain desired data
-                OdbcDataAdapter dadapterWOW1 = new OdbcDataAdapter(sqlString + "3" , dbConnection);
-                OdbcDataAdapter dadapterWOW2 = new OdbcDataAdapter(sqlString + "4" , dbConnection);
-                OdbcDataAdapter dadapterCheckIn = new OdbcDataAdapter(sqlString + "1" , dbConnection);
-                OdbcDataAdapter dadapterCheckOut = new OdbcDataAdapter(sqlString + "5" , dbConnection);
-                OdbcDataAdapter dadapterPOD12 = new OdbcDataAdapter(sqlString + "6" , dbConnection);
-                OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + "7" , dbConnection);
-                OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + "8" , dbConnection);
-                OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + "2", dbConnection);
-                OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + "9", dbConnection);
+                OdbcDataAdapter dadapterWOW1 = new OdbcDataAdapter(sqlString + "3 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterWOW2 = new OdbcDataAdapter(sqlString + "4 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterCheckIn = new OdbcDataAdapter(sqlString + "1 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterCheckOut = new OdbcDataAdapter(sqlString + "5 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterPOD12 = new OdbcDataAdapter(sqlString + "6 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + "7 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + "8 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + "2 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + "9 ORDER BY StartShift", dbConnection);
 
                 //Create a table and fill it with the data from the adapter
                 DataTable dtableWOW1 = new DataTable();

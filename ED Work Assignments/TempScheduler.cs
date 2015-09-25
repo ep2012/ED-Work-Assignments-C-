@@ -57,5 +57,25 @@ namespace ED_Work_Assignments
                 dbConnection.Close();
             }
         }
+        public void accept()
+        {
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_acceptTempSchedule}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
+        }
     }
 }

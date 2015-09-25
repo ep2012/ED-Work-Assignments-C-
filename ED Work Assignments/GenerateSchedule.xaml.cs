@@ -33,7 +33,9 @@ namespace ED_Work_Assignments
 
         private void btnAcceptSchedule_Click(object sender, RoutedEventArgs e)
         {
-
+            tempScheduler.accept();
+            tempScheduler.clear();
+            Close();
         }
 
         private void btnGenerateSchedule_Click(object sender, RoutedEventArgs e)

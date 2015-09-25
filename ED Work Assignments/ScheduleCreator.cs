@@ -219,57 +219,64 @@ namespace ED_Work_Assignments
             tempScheduler.insert(employee, start, end, station);
         }
 
+        private List<object> whoHasVacation(DateTime start, DateTime end)
+        {
+            List<object> checkerList = new List<object>();
+            String sqlString = @"SELECT A.[EmployeeId] FROM [REVINT].[HEALTHCARE\eliprice].[ED_TimeOff] A WHERE A.[StartTime] <= '" + start + "' AND A.[EndTime] >= '" + end + "';";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+        private List<OffClocking> whoHasVacation(DateTime start, DateTime end, int nothing)
+        {
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[EmployeeId] FROM [REVINT].[HEALTHCARE\eliprice].[ED_TimeOff] A WHERE A.[StartTime] <= '" + start + "' AND A.[EndTime] >= '" + end + "';";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+
         public List<object> whoCanWork(DateTime start, DateTime end, String day)
         {
-            return whoWorks(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorks(start, end, day).Except(whoAlreadyWorks(start, end)).Except(whoHasVacation(start,end)).ToList();
         }
         public List<object> whoCanWorkSupervisor(DateTime start, DateTime end, String day)
         {
-            return whoWorksSupervisor(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksSupervisor(start, end, day).Except(whoAlreadyWorks(start, end)).Except(whoHasVacation(start, end)).ToList();
         }
         public List<object> whoCanWorkDay2(DateTime start, DateTime end, String day)
         {
-            return whoWorksDay2(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksDay2(start, end, day).Except(whoAlreadyWorks(start, end)).Except(whoHasVacation(start, end)).ToList();
         }
         public List<object> whoCanWorkSupervisorDay2(DateTime start, DateTime end, String day)
         {
-            return whoWorksSupervisorDay2(start, end, day).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksSupervisorDay2(start, end, day).Except(whoAlreadyWorks(start, end)).Except(whoHasVacation(start, end)).ToList();
+        }
+        
+        public List<OffClocking> whoCanWorkOnlyStart(DateTime start, DateTime end, String day)
+        {
+            return whoWorksOnlyStart(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
+        }
+        public List<OffClocking> whoCanWorkSupervisorOnlyStart(DateTime start, DateTime end, String day)
+        {
+            return whoWorksSupervisorOnlyStart(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
         }
 
-        public List<object> whoCanWorkOnlyStart(DateTime start, DateTime end, String day, List <object> days)
+        public List<OffClocking> whoCanWorkOnlyEnd(DateTime start, DateTime end, String day)
         {
-            return whoWorksOnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksOnlyEnd(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
         }
-        public List<object> whoCanWorkSupervisorOnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoCanWorkSupervisorOnlyEnd(DateTime start, DateTime end, String day)
         {
-            return whoWorksSupervisorOnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksSupervisorOnlyEnd(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
         }
-        public List<object> whoCanWorkDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoCanWorkDay2OnlyStart(DateTime start, DateTime end, String day)
         {
-            return whoWorksDay2OnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksDay2OnlyStart(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
         }
-        public List<object> whoCanWorkSupervisorDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoCanWorkSupervisorDay2OnlyStart(DateTime start, DateTime end, String day)
         {
-            return whoWorksSupervisorDay2OnlyStart(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
+            return whoWorksSupervisorDay2OnlyStart(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
         }
-
-        public List<object> whoCanWorkOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
-        {
-            return whoWorksOnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
-        }
-        public List<object> whoCanWorkSupervisorOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
-        {
-            return whoWorksSupervisorOnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
-        }
-        public List<object> whoCanWorkDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
-        {
-            return whoWorksDay2OnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
-        }
-        public List<object> whoCanWorkSupervisorDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
-        {
-            return whoWorksSupervisorDay2OnlyEnd(start, end, day, days).Except(whoAlreadyWorks(start, end)).ToList();
-        }
-
+        
         public List<object> whoWorks(DateTime start, DateTime end, String day)
         {
             List<object> checkerList = new List<object>();
@@ -299,64 +306,66 @@ namespace ED_Work_Assignments
             return checkerList;
         }
 
-        public List<object> whoWorksOnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoWorksOnlyEnd(DateTime start, DateTime end, String day)
         {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id], cast(A.[EndShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
             return checkerList;
         }
-        public List<object> whoWorksSupervisorOnlyStart(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoWorksSupervisorOnlyEnd(DateTime start, DateTime end, String day)
         {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id], cast(A.[EndShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
-            return checkerList;
-        }
-        public List<object> whoWorksDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
-        {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
-            return checkerList;
-        }
-        public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
-        {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + start + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
             return checkerList;
         }
 
-        public List<object> whoWorksOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+
+        public List<OffClocking> whoWorksOnlyStart(DateTime start, DateTime end, String day)
         {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "time as time) <= cast('" + start + "' as time) AND cast(A." + day + "timeend as time) >= cast('" + end + "' as time)) OR (cast(A." + day + "time as time) <= cast('" + start + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 AND NOT (A." + day + "day = 'True') ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
             return checkerList;
         }
-        public List<object> whoWorksSupervisorOnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoWorksSupervisorOnlyStart(DateTime start, DateTime end, String day)
         {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "time as time) <= cast('" + start + "' as time) AND cast(A." + day + "timeend as time) >= cast('" + end + "' as time)) OR (cast(A." + day + "time as time) <= cast('" + start + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 AND NOT (A." + day + "day = 'True') ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
             return checkerList;
         }
-        public List<object> whoWorksDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoWorksDay2OnlyStart(DateTime start, DateTime end, String day)
         {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 2 AND (A." + day + "day = 'True') ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
             return checkerList;
         }
-        public List<object> whoWorksSupervisorDay2OnlyEnd(DateTime start, DateTime end, String day, List<object> days)
+        public List<OffClocking> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end, String day)
         {
-            List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
-            new idMaker(sqlString, checkerList, days);
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"timeend as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast('" + end + "' as time) BETWEEN cast(A." + day + "time as time) AND cast(A." + day + "timeend as time) AND A.Role = 3 AND (A." + day + "day = 'True') ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
             return checkerList;
         }
 
+
+        /*public List<object> whoWorksDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+{
+    List<object> checkerList = new List<object>();
+    String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 2 ORDER BY NEWID();";
+    new idMaker(sqlString, checkerList, days);
+    return checkerList;
+}
+public List<object> whoWorksSupervisorDay2OnlyStart(DateTime start, DateTime end, String day, List<object> days)
+{
+    List<object> checkerList = new List<object>();
+    String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE ((cast(A." + day + "timeend as time) >= cast('" + end + "' as time) AND (A." + day + "day = 'True'))) AND A.Role = 3 ORDER BY NEWID();";
+    new idMaker(sqlString, checkerList, days);
+    return checkerList;
+}*/
         public bool doesEmployeeWorkAtStationLast(int employee, int station, DateTime start, DateTime end)
         {
             return false;
@@ -387,15 +396,20 @@ namespace ED_Work_Assignments
             while(endTime < goaldate)
             {
                 List<object> employeesThatCanWork = new List<object>();
+                List<OffClocking> employeesThatCanWorkLastPart = new List<OffClocking>();
+                List<OffClocking> employeesThatCanWorkFirstPart = new List<OffClocking>();
 
                 //get employees that can work
                 if ((startTime - day).TotalHours < 24)
                 {
                     employeesThatCanWork = schedule.whoCanWork(startTime, endTime, dayStr);
+                    employeesThatCanWorkFirstPart = schedule.whoCanWorkOnlyStart(startTime, endTime, dayStr);
+                    employeesThatCanWorkLastPart = schedule.whoCanWorkOnlyEnd(startTime, endTime, dayStr);
                 }
                 else
                 {
                     employeesThatCanWork = schedule.whoCanWorkDay2(startTime, endTime, dayStr);
+                    employeesThatCanWorkFirstPart = schedule.whoCanWorkDay2OnlyStart(startTime, endTime, dayStr);
                 }
                 
                 //schedule employees
@@ -403,6 +417,20 @@ namespace ED_Work_Assignments
                 {
                     schedule.scheduleInBestWorkstation(startTime, endTime,Convert.ToInt32(employee));
                 }
+
+                /*
+                foreach (OffClocking clockings in employeesThatCanWorkFirstPart)
+                {
+                    DateTime end = DateTime.Parse(endTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(startTime, end, Convert.ToInt32(clockings.id));
+                }
+                foreach (OffClocking clockings in employeesThatCanWorkLastPart)
+                {
+                    DateTime start = DateTime.Parse(startTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(start, endTime, Convert.ToInt32(clockings.id));
+                }
+                */
+
                 //increment times
                 startTime = endTime;
                 endTime = endTime.AddHours(2);
@@ -478,7 +506,7 @@ public class idMaker
             }
         }
     }
-    public idMaker(String sqlCmdID, List<object> ids, List<object> times)
+    public idMaker(String sqlCmdID, List<OffClocking> ids)
     {
         object[] objID = new object[40];
 
@@ -498,10 +526,23 @@ public class idMaker
 
                 if (numCols == 2)
                 {
-                    ids.Add((object)objID[0].ToString().ToUpper());
-                    times.Add((object)objID[1].ToString());
+                    OffClocking offClocking = new OffClocking();
+                    offClocking.id = (object)objID[0].ToString();
+                    offClocking.date = (object)objID[1].ToString();
+                    ids.Add(offClocking);
+                }
+                else if (numCols == 1)
+                {
+                    OffClocking offClocking = new OffClocking();
+                    offClocking.id = (object)objID[0].ToString();
+                    ids.Add(offClocking);
                 }
             }
         }
     }
+}
+public struct OffClocking
+{
+    public object id;
+    public object date;
 }

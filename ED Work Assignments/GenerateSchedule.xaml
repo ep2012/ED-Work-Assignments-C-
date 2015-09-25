@@ -4,8 +4,8 @@
         Title="GenerateSchedule" Height="600" Width="1000" Background="#FF9B9999" FontFamily="Lucida Sans" FontSize="15" Left="0" Top="0">
     <Grid>
         <Label Content="Generate Schedule" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="194" FontSize="20"/>
-        <Button x:Name="btnGenerateSchedule" Content="Generate Schedule" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="810,10,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" Click="btnGenerateSchedule_Click"  FontSize="16" />
-        <Button x:Name="btnAcceptSchedule" Content="Accept Schedule" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="641,10,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" Click="btnAcceptSchedule_Click"  FontSize="16" />
+        <Button x:Name="btnGenerateSchedule" Content="Generate Schedule" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="810,0,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" Click="btnGenerateSchedule_Click"  FontSize="16" />
+        <Button x:Name="btnAcceptSchedule" Content="Accept Schedule" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="641,0,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" Click="btnAcceptSchedule_Click"  FontSize="16" />
         <ScrollViewer HorizontalAlignment="Left" Height="444" Margin="10,83,0,0" VerticalAlignment="Top" Width="964">
             <Grid Height="1500" Background="White">
                 <DataGrid x:Name="dtaWOW1" HorizontalAlignment="Left" Margin="115,500,0,0" VerticalAlignment="Top" Height="90" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
