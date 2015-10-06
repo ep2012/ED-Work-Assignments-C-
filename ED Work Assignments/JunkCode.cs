@@ -232,4 +232,97 @@ namespace ED_Work_Assignments
                     schedule.scheduleClocking(employee, start, end);
                 }
                  */
+    /*
+     * 
+        public List<OffClocking> whoCanWorkOnlyEnd(DateTime start, DateTime end, String day)
+        {
+            return whoWorksOnlyEnd(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
+        }
+        public List<OffClocking> whoCanWorkSupervisorOnlyEnd(DateTime start, DateTime end, String day)
+        {
+            return whoWorksSupervisorOnlyEnd(start, end, day).Except(whoHasVacation(start, end, 0)).ToList();
+        }
+     * 
+     * 
+        public List<OffClocking> whoWorksOnlyEnd(DateTime start, DateTime end, String day)
+        {
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "time as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 2 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+        public List<OffClocking> whoWorksSupervisorOnlyEnd(DateTime start, DateTime end, String day)
+        {
+            List<OffClocking> checkerList = new List<OffClocking>();
+            String sqlString = @"SELECT A.[Id], cast(A." + day + @"time as time) FROM [REVINT].[HEALTHCARE\eliprice].ED_Employees A WHERE cast(A." + day + "time as time) BETWEEN  cast('" + start + "' as time) AND cast('" + end + "' as time) AND A.Role = 3 ORDER BY NEWID();";
+            new idMaker(sqlString, checkerList);
+            return checkerList;
+        }
+     */
+    /*
+                foreach (OffClocking clockings in employeesThatCanWorkLastPart)
+                {
+                    DateTime start = DateTime.Parse(startTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(start, endTime, Convert.ToInt32(clockings.id));
+                    schedule.scheduleSupervisor(start, endTime, Convert.ToInt32(clockings.id));
+                }
+                */
+    /*
+                foreach (OffClocking clockings in employeesThatCanWorkLastPart)
+                {
+                    DateTime start = DateTime.Parse(startTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(start, endTime, Convert.ToInt32(clockings.id));
+                }
+                */
+    /*public class SupervisorScheduleCreator
+    {
+        Schedule schedule = new Schedule();
+        Random random = new Random();
+
+        public SupervisorScheduleCreator(DateTime day, String dayStr)
+        {
+            DateTime goaldate = day.AddDays(1);
+            DateTime startTime = day;
+            DateTime endTime = startTime.AddMinutes(30 * random.Next(4, 9));
+
+            while (endTime < goaldate)
+            {
+                List<object> employeesThatCanWorkSupervisor = new List<object>();
+                //List<OffClocking> employeesThatCanWorkFirstPart = new List<OffClocking>();
+
+                //get employees that can work
+                if ((startTime - day).TotalHours < 24)
+                {
+                    employeesThatCanWorkSupervisor = schedule.whoCanWorkSupervisor(startTime, endTime, dayStr);
+                    //employeesThatCanWorkFirstPart = schedule.whoCanWorkSupervisorOnlyStart(startTime, endTime, dayStr);
+                }
+                else
+                {
+                    employeesThatCanWorkSupervisor = schedule.whoCanWorkSupervisorDay2(startTime, endTime, dayStr);
+                    //employeesThatCanWorkFirstPart = schedule.whoCanWorkSupervisorDay2OnlyStart(startTime, endTime, dayStr);
+                }
+
+                //schedule employees
+                foreach (object employee in employeesThatCanWorkSupervisor)
+                {
+                    schedule.scheduleInBestWorkstation(startTime, endTime, Convert.ToInt32(employee));
+                    schedule.scheduleSupervisor(startTime, endTime, Convert.ToInt32(employee));
+                }
+
+                /*
+                foreach (OffClocking clockings in employeesThatCanWorkFirstPart)
+                {
+                    DateTime end = DateTime.Parse(endTime.ToShortDateString() + " " + clockings.date.ToString());
+                    schedule.scheduleInBestWorkstation(startTime, end, Convert.ToInt32(clockings.id));
+                    schedule.scheduleSupervisor(startTime, end, Convert.ToInt32(clockings.id));
+                }
+                */
+
+                //increment times
+                /*startTime = startTime.AddMinutes(30);
+                endTime = startTime.AddMinutes(30 * random.Next(4, 8));
+            }
+        }
+    }
+    */
 }

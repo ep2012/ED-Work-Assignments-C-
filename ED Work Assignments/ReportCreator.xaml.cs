@@ -188,13 +188,20 @@ namespace ED_Work_Assignments
                 sqlString = "SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement]" +
                     ", COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed], CASE WHEN COUNT([REVINT].[dbo].[ED_Shifts].Id) < [REVINT].[dbo].[ED_Staffing].MinStaffing THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status] " +
                     "FROM [REVINT].[dbo].[ED_Staffing] " +
-                    "LEFT JOIN [REVINT].[dbo].[ED_Shifts] " +
+                    "JOIN [REVINT].[dbo].[ED_Shifts] " +
                     "ON [REVINT].[dbo].[ED_Staffing].TimeSlot BETWEEN CAST([REVINT].[dbo].[ED_Shifts].StartShift AS time) AND CAST([REVINT].[dbo].[ED_Shifts].EndShift AS time)";
                 if (dtTPEnd.Text != "" && dtTPStart.Text != "")
                 {
                     sqlString += "AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].EndShift <'" + dtTPEnd.Text + "'";
                 }
-                sqlString += "GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
+                sqlString += " GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
+                sqlString += " UNION ALL";
+                sqlString += " SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement], COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed], CASE WHEN COUNT([REVINT].[dbo].[ED_Shifts].Id) < [REVINT].[dbo].[ED_Staffing].MinStaffing THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status] ";
+                sqlString += " FROM [REVINT].[dbo].[ED_Staffing] JOIN [REVINT].[dbo].[ED_Shifts] ON ([REVINT].[dbo].[ED_Staffing].TimeSlot = '00:00:00' ";
+                sqlString += " AND (CAST([REVINT].[dbo].[ED_Shifts].EndShift AS date) > CAST([REVINT].[dbo].[ED_Shifts].StartShift AS date) AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].StartShift <'" + dtTPEnd.Text + "'))";
+                sqlString += " GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
+                sqlString += " ORDER BY TimeSlot";
+
             }
             setWindows(sqlString);
             btnExportToExcel.Visibility = Visibility.Visible;

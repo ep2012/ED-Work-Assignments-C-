@@ -42,3 +42,5 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.pdb
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csprojResolveAssemblyReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.g.cs
