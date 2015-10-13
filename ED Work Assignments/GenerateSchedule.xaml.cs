@@ -27,7 +27,7 @@ namespace ED_Work_Assignments
             InitializeComponent();
             tempScheduler.clear();
             dtStart.Text = DateTime.Now.ToString();
-            dtEnd.Text = DateTime.Now.AddDays(14).ToString();
+            dtEnd.Text = DateTime.Now.AddMonths(1).ToString();
             btnAcceptSchedule.Visibility = Visibility.Hidden;
         }
 

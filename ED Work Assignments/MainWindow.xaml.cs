@@ -27,11 +27,11 @@ namespace ED_Work_Assignments
     /// </summary>
     public partial class MainWindow : Window
     {
+        Users users = new Users();
+
         public MainWindow()
         {
             InitializeComponent();
-
-            Users users = new Users();
 
             if (!users.isAdmin(Environment.UserName))
             {
@@ -44,7 +44,7 @@ namespace ED_Work_Assignments
             else
             {
                 dtPicker.Text = DateTime.Today.ToString();
-                setWindows();
+                setWindows(DateTime.Now.ToString(), DateTime.Now.AddDays(1).ToString());
 
                 String name = users.getName(Environment.UserName);
 
@@ -52,20 +52,20 @@ namespace ED_Work_Assignments
             }
         }
 
-        private void setWindows()
+        private void setWindows(String date, String otherDate)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-            DateTime lastDay; 
-            DateTime.TryParse(dtPicker.Text.ToString(), out lastDay);
-            String otherDate = lastDay.AddDays(1).ToString();
+            //DateTime lastDay; 
+            //DateTime.TryParse(date, out lastDay);
+            //String otherDate = lastDay.AddDays(1).ToString();
             String sqlString = "SELECT CONCAT([REVINT].[dbo].[ED_Employees].[FirstName], ' ' , [REVINT].[dbo].[ED_Employees].[LastName]) AS [Employee], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time], [REVINT].[dbo].[ED_Shifts].[Id] AS [Shift Id] " +
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
-                "JOIN [REVINT].[dbo].[ED_Employees] " +
+                "LEFT JOIN [REVINT].[dbo].[ED_Employees] " +
                 "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
-                "WHERE (StartShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "' OR" +
-                " EndShift BETWEEN '" + dtPicker.Text.ToString() + "' AND '" + otherDate + "') "+
+                "WHERE (StartShift BETWEEN '" + date + "' AND '" + otherDate + "' OR" +
+                " EndShift BETWEEN '" + date + "' AND '" + otherDate + "') "+
                 "AND Seat = ";
-            
+            //dtPicker.Text.ToString()
             //create an OdbcConnection object and connect it to the data source.
             using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
             {
@@ -138,15 +138,18 @@ namespace ED_Work_Assignments
 
                 this.dtaSupervising.ItemsSource = dtableSupervising.DefaultView;
                 this.dtaSupervising.CanUserAddRows = false;
+                BindingMaker bindingMaker = new BindingMaker(sqlString + " 3");
+                Binding binding = new Binding();
+                binding.Source = dtaCheckIn.Items;
 
-                //Close connection
-                dbConnection.Close();
+                    //Close connection
+                    dbConnection.Close();
             }
         }
 
         private void dtPicker_CalendarClosed(object sender, RoutedEventArgs e)
         {
-            setWindows();
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddDays(1).ToString());
         }
 
         private void btnAddAssignment_Click(object sender, RoutedEventArgs e)
@@ -184,19 +187,19 @@ namespace ED_Work_Assignments
         }
         public void update()
         {
-            setWindows();
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddDays(1).ToString());
         }
 
         private void btnNextDay_Click(object sender, RoutedEventArgs e)
         {
             dtPicker.Text = DateTime.Parse(dtPicker.Text).AddDays(1).ToString();
-            setWindows();
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddDays(1).ToString());
         }
 
         private void btnPreviousDay_Click(object sender, RoutedEventArgs e)
         {
             dtPicker.Text = DateTime.Parse(dtPicker.Text).AddDays(-1).ToString();
-            setWindows();
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddDays(1).ToString());
         }
 
         private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
@@ -311,6 +314,53 @@ namespace ED_Work_Assignments
             win.Top = Top;
 
             win.Show();
+        }
+        private void dtaLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            try
+            {
+                if ((((System.Data.DataRowView)(e.Row.DataContext)).Row.ItemArray[0].ToString()).Equals(" "))
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.Orange);
+                }
+                else if (((System.Data.DataRowView)(e.Row.DataContext)).Row.ItemArray[0].ToString() == users.getName(Environment.UserName))
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    e.Row.Background = new SolidColorBrush(Colors.White);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void btnNewAssignmentManual_Click(object sender, RoutedEventArgs e)
+        {
+            NewAssignment win = new NewAssignment(this);
+
+            win.Left = Left;
+            win.Top = Top;
+
+            win.Show();
+        }
+
+        private void btnDayView_Click(object sender, RoutedEventArgs e)
+        {
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddDays(1).ToString());
+        }
+
+        private void btnWeekView_Click(object sender, RoutedEventArgs e)
+        {
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddDays(7).ToString());
+        }
+
+        private void btnMonthView_Click(object sender, RoutedEventArgs e)
+        {
+            setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddMonths(1).ToString());
         }
     }
 }

@@ -185,23 +185,51 @@ namespace ED_Work_Assignments
             }
             else
             {
-                sqlString = "SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement]" +
-                    ", COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed], CASE WHEN COUNT([REVINT].[dbo].[ED_Shifts].Id) < [REVINT].[dbo].[ED_Staffing].MinStaffing THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status] " +
+                if (dtTPStart.Text != null)
+                {
+                    sqlString = "SELECT Staffing.TimeSlot AS [Time Slot], Staffing.MinStaffing AS [Minimum Staffing Requirement]" +
+                        ", COUNT(Shifts.Id) AS [Amount Staffed]" +
+                        ", CASE WHEN COUNT(Shifts.Id) < Staffing.MinStaffing THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status]" +
+                        " FROM [REVINT].[dbo].[ED_Staffing] Staffing" +
+                        " LEFT JOIN [REVINT].[dbo].[ED_Shifts] Shifts" +
+                        " ON CONVERT(datetime, CONCAT('" + DateTime.Parse(dtTPStart.Text).ToShortDateString() + " ', Staffing.TimeSlot)) BETWEEN Shifts.StartShift AND Shifts.EndShift AND Shifts.Employee IS NOT NULL" +
+                        " GROUP BY Staffing.Id, Staffing.TimeSlot, Staffing.MinStaffing";
+                    //" [REVINT].[dbo].[ED_Staffing].TimeSlot BETWEEN CAST([REVINT].[dbo].[ED_Shifts].StartShift AS time) AND CAST([REVINT].[dbo].[ED_Shifts].EndShift AS time)";
+                }
+                else
+                {
+                    sqlString = "";
+                }
+                /*
+                if (dtTPEnd.Text != "" && dtTPStart.Text != "")
+                {
+                    sqlString += "AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].EndShift <'" + dtTPEnd.Text + "'";
+                }*/
+                /*
+                sqlString = "WITH StaffingReport AS (SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement]" +
+                    ", COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed]" +
                     "FROM [REVINT].[dbo].[ED_Staffing] " +
-                    "JOIN [REVINT].[dbo].[ED_Shifts] " +
+                    "LEFT JOIN [REVINT].[dbo].[ED_Shifts] " +
                     "ON [REVINT].[dbo].[ED_Staffing].TimeSlot BETWEEN CAST([REVINT].[dbo].[ED_Shifts].StartShift AS time) AND CAST([REVINT].[dbo].[ED_Shifts].EndShift AS time)";
                 if (dtTPEnd.Text != "" && dtTPStart.Text != "")
                 {
                     sqlString += "AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].EndShift <'" + dtTPEnd.Text + "'";
                 }
-                sqlString += " GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
+                sqlString += " AND NOT [REVINT].[dbo].[ED_Shifts].[Employee] IS NULL GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
                 sqlString += " UNION ALL";
-                sqlString += " SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement], COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed], CASE WHEN COUNT([REVINT].[dbo].[ED_Shifts].Id) < [REVINT].[dbo].[ED_Staffing].MinStaffing THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status] ";
-                sqlString += " FROM [REVINT].[dbo].[ED_Staffing] JOIN [REVINT].[dbo].[ED_Shifts] ON ([REVINT].[dbo].[ED_Staffing].TimeSlot = '00:00:00' ";
-                sqlString += " AND (CAST([REVINT].[dbo].[ED_Shifts].EndShift AS date) > CAST([REVINT].[dbo].[ED_Shifts].StartShift AS date) AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].StartShift <'" + dtTPEnd.Text + "'))";
-                sqlString += " GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing";
-                sqlString += " ORDER BY TimeSlot";
-
+                sqlString += " SELECT [REVINT].[dbo].[ED_Staffing].TimeSlot AS [Time Slot], [REVINT].[dbo].[ED_Staffing].MinStaffing AS [Minimum Staffing Requirement], COUNT([REVINT].[dbo].[ED_Shifts].Id) AS [Amount Staffed]";
+                sqlString += " FROM [REVINT].[dbo].[ED_Staffing] LEFT JOIN [REVINT].[dbo].[ED_Shifts] ON [REVINT].[dbo].[ED_Staffing].TimeSlot = '00:00:00' ";
+                sqlString += " AND (CAST([REVINT].[dbo].[ED_Shifts].EndShift AS date) > CAST([REVINT].[dbo].[ED_Shifts].StartShift AS date))";
+                if (dtTPEnd.Text != "" && dtTPStart.Text != "")
+                {
+                   sqlString += " AND [REVINT].[dbo].[ED_Shifts].StartShift >'" + dtTPStart.Text + "'AND [REVINT].[dbo].[ED_Shifts].StartShift <'" + dtTPEnd.Text + "'";
+                }
+                sqlString += " AND NOT [REVINT].[dbo].[ED_Shifts].[Employee] IS NULL GROUP BY [REVINT].[dbo].[ED_Staffing].Id, [REVINT].[dbo].[ED_Staffing].TimeSlot, [REVINT].[dbo].[ED_Staffing].MinStaffing)";
+                sqlString += " SELECT [Time Slot], [Minimum Staffing Requirement], SUM ([Amount Staffed]) AS [Amount Staffed]"+
+                    ", CASE WHEN SUM([Amount Staffed]) < [Minimum Staffing Requirement] THEN 'Understaffed' ELSE 'Sufficiently Staffed' END AS [Staffing Status]" +
+                    "  FROM StaffingReport GROUP BY [Time Slot], [Minimum Staffing Requirement] ORDER BY [Time Slot]";
+                */
+                //sqlString = sqlString;
             }
             setWindows(sqlString);
             btnExportToExcel.Visibility = Visibility.Visible;

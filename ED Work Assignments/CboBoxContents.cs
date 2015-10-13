@@ -131,7 +131,17 @@ namespace ED_Work_Assignments
                 return employeeID[strName];
             }
         }
-
+        public String getNameFromId(String id)
+        {
+            if (!employeeID.ContainsValue(id))
+            {
+                return "Unknown Username";
+            }
+            else
+            {
+                return employeeID.FirstOrDefault(x => x.Value.Contains(id)).Key;
+            }
+        }
         public int getComboIndex(String strName)
         {
             return employeeComboBox[strName]; 
@@ -194,6 +204,15 @@ namespace ED_Work_Assignments
             }
         }
     }
+    public class BindingMaker : ObservableCollection<string>
+    {
+        Dictionary<String, String> seatIDs = new Dictionary<String, String>();
+
+        public BindingMaker(String sqlString)
+        {
+            new bindingMaker(sqlString, seatIDs, this);
+        }
+    }
     public class Roles : ObservableCollection<string>
     {
         Dictionary<String, String> titleIDs = new Dictionary<String, String>();
@@ -247,6 +266,35 @@ namespace ED_Work_Assignments
                     for (int i = 0; i < numCols; i++)
                     {
                         dictionary.Add(obj[i].ToString(), objID[i].ToString());
+                        comboClass.Add(obj[i].ToString());
+                    }
+                }
+            }
+        }
+    }
+    public class bindingMaker
+    {
+        public bindingMaker(String sqlCmd, Dictionary<String, String> dictionary, ObservableCollection<string> comboClass)
+        {
+            object[] obj = new object[10];
+
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+
+            using (OdbcConnection connection = new OdbcConnection(cxnString))
+            {
+                OdbcCommand command = new OdbcCommand(sqlCmd, connection);
+
+                connection.Open();
+
+                OdbcDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int numCols = reader.GetValues(obj);
+
+                    for (int i = 0; i < numCols; i++)
+                    {
                         comboClass.Add(obj[i].ToString());
                     }
                 }
