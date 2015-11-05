@@ -21,26 +21,26 @@ namespace ED_Work_Assignments
     /// </summary>
     public partial class GenerateSchedule : Window
     {
-        TempScheduler tempScheduler = new TempScheduler();
         public GenerateSchedule()
         {
             InitializeComponent();
-            tempScheduler.clear();
+            TempScheduler.clear();
             dtStart.Text = DateTime.Now.ToString();
             dtEnd.Text = DateTime.Now.AddMonths(1).ToString();
+
             btnAcceptSchedule.Visibility = Visibility.Hidden;
         }
 
         private void btnAcceptSchedule_Click(object sender, RoutedEventArgs e)
         {
-            tempScheduler.accept();
-            tempScheduler.clear();
+            TempScheduler.accept();
+            TempScheduler.clear();
             Close();
         }
 
         private void btnGenerateSchedule_Click(object sender, RoutedEventArgs e)
         {
-            tempScheduler.clear();
+            TempScheduler.clear();
             ScheduleMaker maker = new ScheduleMaker(DateTime.Parse(dtStart.Text), DateTime.Parse(dtEnd.Text));
             setWindows();
             btnAcceptSchedule.Visibility = Visibility.Visible;
@@ -52,11 +52,11 @@ namespace ED_Work_Assignments
             
             String sqlString = "SELECT CONCAT(B.[FirstName], ' ' , B.[LastName]) AS [Employee], A.[StartShift] AS [Start Time], A.[EndShift] AS [End Time], A.[Id] AS [Shift Id] " +
                 @"FROM [REVINT].[HEALTHCARE\eliprice].ED_ScheduleMakerShifts A " +
-                "JOIN [REVINT].[dbo].[ED_Employees] B " +
+                "LEFT JOIN [REVINT].[dbo].[ED_Employees] B " +
                 "ON B.Id = A.[Employee] " +
                 "WHERE (StartShift BETWEEN '" + dtStart.Text + "' AND '" + dtEnd.Text + "' OR" +
                 " EndShift BETWEEN '" + dtStart.Text + "' AND '" + dtEnd.Text + "') " +
-                "AND Seat = ";
+                "";
 
             //create an OdbcConnection object and connect it to the data source.
             using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
@@ -65,15 +65,17 @@ namespace ED_Work_Assignments
                 dbConnection.Open();
 
                 //Create adapter from connection and sql to obtain desired data
-                OdbcDataAdapter dadapterWOW1 = new OdbcDataAdapter(sqlString + "3 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterWOW2 = new OdbcDataAdapter(sqlString + "4 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterCheckIn = new OdbcDataAdapter(sqlString + "1 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterCheckOut = new OdbcDataAdapter(sqlString + "5 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterPOD12 = new OdbcDataAdapter(sqlString + "6 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + "7 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + "8 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + "2 ORDER BY StartShift", dbConnection);
-                OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + "9 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterWOW1 = new OdbcDataAdapter(sqlString + " AND Seat = 3 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterWOW2 = new OdbcDataAdapter(sqlString + " AND Seat = 4 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterCheckIn = new OdbcDataAdapter(sqlString + " AND Seat = 1 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterCheckOut = new OdbcDataAdapter(sqlString + " AND Seat = 5 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterPOD12 = new OdbcDataAdapter(sqlString + " AND Seat = 6 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterPOD34 = new OdbcDataAdapter(sqlString + " AND Seat = 7 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterJetPeds = new OdbcDataAdapter(sqlString + " AND Seat = 8 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapteriPad = new OdbcDataAdapter(sqlString + " AND Seat = 2 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterSupervising = new OdbcDataAdapter(sqlString + " AND Seat = 9 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterOverStaffing = new OdbcDataAdapter(sqlString + " AND Seat = 10 ORDER BY StartShift", dbConnection);
+                OdbcDataAdapter dadapterStaffingHoles = new OdbcDataAdapter(sqlString + " AND A.[Employee] IS NULL ORDER BY StartShift", dbConnection);
 
                 //Create a table and fill it with the data from the adapter
                 DataTable dtableWOW1 = new DataTable();
@@ -103,6 +105,12 @@ namespace ED_Work_Assignments
                 DataTable dtableSupervising = new DataTable();
                 dadapterSupervising.Fill(dtableSupervising);
 
+                DataTable dtableOverStaffing = new DataTable();
+                dadapterOverStaffing.Fill(dtableOverStaffing);
+
+                DataTable dtableStaffingHoles = new DataTable();
+                dadapterStaffingHoles.Fill(dtableStaffingHoles);
+
                 //set the contents of the gui grid table to the data table created
                 this.dtaWOW1.ItemsSource = dtableWOW1.DefaultView;
                 this.dtaWOW1.CanUserAddRows = false;
@@ -131,6 +139,11 @@ namespace ED_Work_Assignments
                 this.dtaSupervising.ItemsSource = dtableSupervising.DefaultView;
                 this.dtaSupervising.CanUserAddRows = false;
 
+                this.dtaOverStaffing.ItemsSource = dtableOverStaffing.DefaultView;
+                this.dtaOverStaffing.CanUserAddRows = false;
+
+                this.dtaMinStaffingHoles.ItemsSource = dtableStaffingHoles.DefaultView;
+                this.dtaMinStaffingHoles.CanUserAddRows = false;
                 //Close connection
                 dbConnection.Close();
             }

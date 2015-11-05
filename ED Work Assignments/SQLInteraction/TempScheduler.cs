@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace ED_Work_Assignments
 {
-    public class TempScheduler
+    public static class TempScheduler
     {
-        Users users = new Users();
-        Seats seats = new Seats();
-
-        public void insert(int employee, DateTime start, DateTime end, int station)
+        public static void insert(int employee, DateTime start, DateTime end, int station)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -37,7 +34,7 @@ namespace ED_Work_Assignments
                 dbConnection.Close();
             }
         }
-        public void insertBlank(DateTime start, DateTime end, int station)
+        public static void insertBlank(DateTime start, DateTime end, int station)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -62,7 +59,7 @@ namespace ED_Work_Assignments
                 dbConnection.Close();
             }
         }
-        public void clear()
+        public static void clear()
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -82,7 +79,7 @@ namespace ED_Work_Assignments
                 dbConnection.Close();
             }
         }
-        public void accept()
+        public static void accept()
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 

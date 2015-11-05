@@ -7,16 +7,18 @@
         <Button x:Name="btnGenerateSchedule" Content="Generate Schedule" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="810,0,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" Click="btnGenerateSchedule_Click"  FontSize="16" />
         <Button x:Name="btnAcceptSchedule" Content="Accept Schedule" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="641,0,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" Click="btnAcceptSchedule_Click"  FontSize="16" />
         <ScrollViewer HorizontalAlignment="Left" Height="467" Margin="10,83,0,0" VerticalAlignment="Top" Width="964">
-            <Grid Height="1500" Background="White">
-                <DataGrid x:Name="dtaWOW1" HorizontalAlignment="Left" Margin="115,325,0,0" VerticalAlignment="Top" Height="200" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaWOW2" HorizontalAlignment="Left" Margin="115,530,0,0" VerticalAlignment="Top" Height="200" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaCheckIn" HorizontalAlignment="Left" Margin="115,115,0,0" VerticalAlignment="Top" Height="100" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaCheckOut" HorizontalAlignment="Left" Margin="115,735,0,0" VerticalAlignment="Top" Height="200" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaPOD12" HorizontalAlignment="Left" Margin="115,940,0,0" VerticalAlignment="Top" Height="200" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaPOD34" HorizontalAlignment="Left" Margin="115,1145,0,0" VerticalAlignment="Top" Height="200" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaJetPeds" HorizontalAlignment="Left" Margin="115,1350,0,0" VerticalAlignment="Top" Height="140" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaiPad" HorizontalAlignment="Left" Margin="115,220,0,0" VerticalAlignment="Top" Height="100" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
-                <DataGrid x:Name="dtaSupervising" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Height="100" Width="822" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+            <Grid Height="1710" Background="White">
+                <DataGrid x:Name="dtaWOW1" HorizontalAlignment="Left" Margin="137,325,0,0" VerticalAlignment="Top" Height="200" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaWOW2" HorizontalAlignment="Left" Margin="137,530,0,0" VerticalAlignment="Top" Height="200" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaCheckIn" HorizontalAlignment="Left" Margin="137,115,0,0" VerticalAlignment="Top" Height="100" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaCheckOut" HorizontalAlignment="Left" Margin="137,735,0,0" VerticalAlignment="Top" Height="200" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaPOD12" HorizontalAlignment="Left" Margin="137,940,0,0" VerticalAlignment="Top" Height="200" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaPOD34" HorizontalAlignment="Left" Margin="137,1145,0,0" VerticalAlignment="Top" Height="200" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaJetPeds" HorizontalAlignment="Left" Margin="137,1350,0,0" VerticalAlignment="Top" Height="140" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaiPad" HorizontalAlignment="Left" Margin="137,220,0,0" VerticalAlignment="Top" Height="100" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaSupervising" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top" Height="100" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaOverStaffing" HorizontalAlignment="Left" Margin="137,1495,0,0" VerticalAlignment="Top" Height="100" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
+                <DataGrid x:Name="dtaMinStaffingHoles" HorizontalAlignment="Left" Margin="137,1600,0,0" VerticalAlignment="Top" Height="100" Width="800" IsReadOnly="True" AlternatingRowBackground="#FFE0E0E0" SelectionMode="Single" HeadersVisibility="Column"/>
                 <Label Content="Supervising:" HorizontalAlignment="Center" Margin="10,10,837,0" VerticalAlignment="Top" Height="27" Width="100"/>
                 <Label Content="WOW 1:" HorizontalAlignment="Center" Margin="10,325,857,0" VerticalAlignment="Top" Height="26" Width="80"/>
                 <Label Content="WOW 2:" HorizontalAlignment="Center" Margin="10,530,857,0" VerticalAlignment="Top" Height="27" Width="80"/>
@@ -26,6 +28,8 @@
                 <Label Content="POD 3/4:" HorizontalAlignment="Center" Margin="10,1145,837,0" VerticalAlignment="Top" Height="27" Width="100"/>
                 <Label Content="Jet/Peds:" HorizontalAlignment="Center" Margin="10,1350,837,0" VerticalAlignment="Top" Height="27" Width="100"/>
                 <Label Content="iPad:" HorizontalAlignment="Center" Margin="10,220,837,0" VerticalAlignment="Top" Height="27" Width="100"/>
+                <Label Content="Overstaffing:" HorizontalAlignment="Center" Margin="10,1495,832,0" VerticalAlignment="Top" Height="27" Width="105"/>
+                <Label Content="Staffing Holes:" HorizontalAlignment="Center" Margin="10,1600,815,0" VerticalAlignment="Top" Height="27" Width="122"/>
             </Grid>
         </ScrollViewer>
         <DatePicker x:Name="dtStart" HorizontalAlignment="Left" Height="33" Margin="529,45,0,0" VerticalAlignment="Top" Width="192" FontSize="20"/>

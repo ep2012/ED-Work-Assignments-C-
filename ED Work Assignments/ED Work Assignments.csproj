@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -105,12 +108,15 @@
     <Compile Include="AddEditEmployee.xaml.cs">
       <DependentUpon>AddEditEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes and Structures\EmployeeScheduleCreator.cs" />
+    <Compile Include="SQLInteraction\EmployeeShift.cs" />
     <Compile Include="EmployeeTimeOff.xaml.cs">
       <DependentUpon>EmployeeTimeOff.xaml</DependentUpon>
     </Compile>
     <Compile Include="GenerateSchedule.xaml.cs">
       <DependentUpon>GenerateSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IdMakers.cs" />
     <Compile Include="JunkCode.cs" />
     <Compile Include="NewTimeOff.xaml.cs">
       <DependentUpon>NewTimeOff.xaml</DependentUpon>
@@ -118,16 +124,17 @@
     <Compile Include="ProgressBar.xaml.cs">
       <DependentUpon>ProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleCreator.cs" />
     <Compile Include="ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReportCreator.xaml.cs">
       <DependentUpon>ReportCreator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleMaker.cs" />
-    <Compile Include="TempScheduler.cs" />
-    <Compile Include="TimeOff.cs" />
+    <Compile Include="Classes and Structures\Schedule.cs" />
+    <Compile Include="Classes and Structures\ScheduleMaker.cs" />
+    <Compile Include="Classes and Structures\Structures.cs" />
+    <Compile Include="SQLInteraction\TempScheduler.cs" />
+    <Compile Include="SQLInteraction\TimeOff.cs" />
     <Compile Include="VacationRequest.xaml.cs">
       <DependentUpon>VacationRequest.xaml</DependentUpon>
     </Compile>
@@ -279,6 +286,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="UIAutomationClient">
+      <Guid>{944DE083-8FB8-45CF-BCB7-C477ACB2F897}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="VBIDE">
       <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>5</VersionMajor>
@@ -290,6 +306,11 @@
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

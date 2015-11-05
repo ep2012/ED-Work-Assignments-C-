@@ -1,5 +1,5 @@
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe.config
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.pdb
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Aero.dll
@@ -7,6 +7,7 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.DataGrid.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.Toolkit.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Interop.UIAutomationClient.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.ResolveComReference.cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\AddEditEmployee.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ChangeTracker.baml
@@ -16,9 +17,11 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\MainWindow.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ManageEmployees.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewTimeOff.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ReportCreator.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequest.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequests.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\App.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\AddEditEmployee.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ChangeTracker.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\EmployeeTimeOff.g.cs
@@ -28,6 +31,7 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ManageEmployees.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewAssignment.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewTimeOff.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ReportCreator.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequest.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequests.g.cs
@@ -41,6 +45,3 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.GenerateResource.Cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.pdb
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csprojResolveAssemblyReference.cache
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.g.cs

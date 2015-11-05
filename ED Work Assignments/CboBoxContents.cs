@@ -187,10 +187,10 @@ namespace ED_Work_Assignments
 
         public Seats()
         {
-            String seatSQL = "SELECT Name FROM [REVINT].[dbo].[ED_Seats] ORDER BY Name";
-            String seatIDSQL = "SELECT Id FROM [REVINT].[dbo].[ED_Seats] ORDER BY Name";
+            String seatSQL = "SELECT Id, Name FROM [REVINT].[dbo].[ED_Seats] ORDER BY Name";
+            //String seatIDSQL = "SELECT Id FROM [REVINT].[dbo].[ED_Seats] ORDER BY Name";
 
-            new comboMaker(seatSQL, seatIDSQL, seatIDs, this);
+            new newcomboMaker(seatSQL, seatIDs, this);
         }
         public String getID(string strName)
         {
@@ -236,6 +236,36 @@ namespace ED_Work_Assignments
             }
         }
     }
+    public class newcomboMaker
+    {
+        public newcomboMaker(String sqlCmd, Dictionary<String, String> dictionary, ObservableCollection<string> comboClass)
+        {
+            object[] obj = new object[10];
+
+            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
+            using (OdbcConnection connection = new OdbcConnection(cxnString))
+            {
+                OdbcCommand command = new OdbcCommand(sqlCmd, connection);
+
+                connection.Open();
+
+                OdbcDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int numCols = reader.GetValues(obj);
+
+                    if (numCols >= 2)
+                    {
+                        dictionary.Add(obj[1].ToString(), obj[0].ToString());
+                        comboClass.Add(obj[1].ToString());
+                    }
+                }
+            }
+        }
+    }
+
     public class comboMaker
     {
         public comboMaker(String sqlCmd, String sqlCmdID, Dictionary<String, String> dictionary, ObservableCollection<string> comboClass)

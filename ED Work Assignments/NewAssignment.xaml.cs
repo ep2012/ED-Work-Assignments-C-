@@ -94,8 +94,11 @@ namespace ED_Work_Assignments
             binding2.Source = seats;
             cboSeat.SetBinding(ListBox.ItemsSourceProperty, binding2);
         }
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            save(users.getID(cboEmployee.Text), seats.getID(cboSeat.Text));
+        }
+        public void save(String employeeID, String seatID)
         {
             if (validInputs())
             {
@@ -117,8 +120,8 @@ namespace ED_Work_Assignments
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Connection = dbConnection;
 
-                            cmd.Parameters.Add("@employee", OdbcType.Int).Value = users.getID(cboEmployee.Text);
-                            cmd.Parameters.Add("@seat", OdbcType.Int).Value = seats.getID(cboSeat.Text);
+                            cmd.Parameters.Add("@employee", OdbcType.Int).Value = employeeID;
+                            cmd.Parameters.Add("@seat", OdbcType.Int).Value = seatID;
                             cmd.Parameters.Add("@start", OdbcType.DateTime).Value = dtpStart.Value;
                             cmd.Parameters.Add("@end", OdbcType.DateTime).Value = dtpEnd.Value;
 
