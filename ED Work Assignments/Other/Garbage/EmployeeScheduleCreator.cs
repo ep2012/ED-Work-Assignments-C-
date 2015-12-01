@@ -25,7 +25,6 @@ namespace ED_Work_Assignments
                 schedule.scheduleWhoWorks(startTime, endTime, employeeShifts, SchedulingType.Check);
                 schedule.scheduleWhoWorks(startTime, endTime, employeeShifts, SchedulingType.PartCheck);
 
-
                 //increment time
                 startTime = startTime.AddMinutes(30);
             }

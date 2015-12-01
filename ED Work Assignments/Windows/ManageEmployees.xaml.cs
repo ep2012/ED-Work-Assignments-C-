@@ -25,12 +25,12 @@ namespace ED_Work_Assignments
         {
             InitializeComponent();
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Employees].FirstName AS [First Name], [REVINT].[dbo].[ED_Employees].LastName AS [Last Name] , [REVINT].[dbo].[ED_Roles].Title, [REVINT].[dbo].[ED_Employees].[Address1] AS [Address 1], [REVINT].[dbo].[ED_Employees].[Address2] AS [Address 2] ,[REVINT].[dbo].[ED_Employees].[City],[REVINT].[dbo].[ED_Employees].[State],[REVINT].[dbo].[ED_Employees].[Zip],[REVINT].[dbo].[ED_Employees].[Phone],[REVINT].[dbo].[ED_Employees].[Email],[REVINT].[dbo].[ED_Employees].[UserName] AS [Healthcare ID],[REVINT].[dbo].[ED_Employees].[Id]  " +
-                "FROM [REVINT].[dbo].[ED_Employees] "+
-                "JOIN [REVINT].[dbo].[ED_Roles] "+
-                "ON [REVINT].[dbo].[ED_Roles].Id = [REVINT].[dbo].[ED_Employees].Role "+
-                "WHERE [REVINT].[dbo].[ED_Employees].CurrentlyEmployed = 'true' " +
-                "ORDER BY [REVINT].[dbo].[ED_Employees].FirstName,[REVINT].[dbo].[ED_Employees].LastName";
+            String sqlString = "SELECT A.FirstName AS [First Name], A.LastName AS [Last Name] , B.Title, A.[Address1] AS [Address 1], A.[Address2] AS [Address 2] ,A.[City], A.[State],A.[Zip],A.[Phone],A.[Email],A.[UserName] AS [Healthcare ID],A.[Id]  " +
+                @"FROM [REVINT].[healthcare\eliprice].[ED_Employees] A "+
+                "JOIN [REVINT].[dbo].[ED_Roles] B "+
+                "ON B.Id = A.Role "+
+                "WHERE A.CurrentlyEmployed = 'true' " +
+                "ORDER BY A.FirstName,A.LastName";
             
             //create an OdbcConnection object and connect it to the data source.
             using (OdbcConnection dbConnection = new OdbcConnection(cxnString))

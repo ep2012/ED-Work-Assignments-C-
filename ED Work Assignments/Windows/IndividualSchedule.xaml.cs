@@ -55,7 +55,7 @@ namespace ED_Work_Assignments
 
             String sqlString = "Select [REVINT].[dbo].[ED_Shifts].StartShift AS [Start Time], [REVINT].[dbo].[ED_Shifts].EndShift AS [End Time], [REVINT].[dbo].[ED_Seats].Name AS [Seat] "+
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
-                "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].Employee " +
+                "JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ON [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].Employee " +
                 "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].Id = [REVINT].[dbo].[ED_Shifts].Seat " +
                 "WHERE ([REVINT].[dbo].[ED_Shifts].Employee = '" + users.getID(name) + "') AND (([REVINT].[dbo].[ED_Shifts].StartShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR ([REVINT].[dbo].[ED_Shifts].EndShift BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "')) " +
                 "ORDER BY [REVINT].[dbo].[ED_Shifts].StartShift";

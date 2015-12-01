@@ -90,7 +90,7 @@ namespace ED_Work_Assignments
 
             if (!minStaffing)
             {
-                sqlString = "SELECT CONCAT([REVINT].[dbo].[ED_Employees].[FirstName], ' ' , [REVINT].[dbo].[ED_Employees].[LastName]) AS [Employee], ";
+                sqlString = "SELECT CONCAT([REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[FirstName], ' ' , [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[LastName]) AS [Employee], ";
 
                 if (totalHours)
                 {
@@ -103,8 +103,8 @@ namespace ED_Work_Assignments
 
                 sqlString += "FROM [REVINT].[dbo].[ED_Shifts] ";
                 sqlString += "JOIN [REVINT].[dbo].[ED_Seats] ON [REVINT].[dbo].[ED_Seats].[Id] = [REVINT].[dbo].[ED_Shifts].Seat ";
-                sqlString += "JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Employees].[Id] = [REVINT].[dbo].[ED_Shifts].Employee ";
-                sqlString += "JOIN [REVINT].[dbo].[ED_Roles] ON [REVINT].[dbo].[ED_Roles].[Id] = [REVINT].[dbo].[ED_Employees].[Role] ";
+                sqlString += "JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ON [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[Id] = [REVINT].[dbo].[ED_Shifts].Employee ";
+                sqlString += "JOIN [REVINT].[dbo].[ED_Roles] ON [REVINT].[dbo].[ED_Roles].[Id] = [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[Role] ";
 
                 if (cboEmployee.Text != "" || cboSeat.Text != "" || cboRole.Text != "" || dtTPEnd.Text != "" || dtTPStart.Text != "" || tmDayEnd.Value.ToString() != "" || tmDayStart.Value.ToString() != "")
                 {
@@ -114,7 +114,7 @@ namespace ED_Work_Assignments
                     if (cboEmployee.Text != "")
                     {
                         String[] firstLast = cboEmployee.Text.ToString().Split(null);
-                        sqlString += "([REVINT].[dbo].[ED_Employees].[FirstName] = '" + firstLast[0] + "' AND [REVINT].[dbo].[ED_Employees].LastName = '" + firstLast[1] + "') ";
+                        sqlString += "([REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[FirstName] = '" + firstLast[0] + "' AND [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].LastName = '" + firstLast[1] + "') ";
                         first = false;
                     }
                     if (cboSeat.Text != "")
@@ -175,8 +175,8 @@ namespace ED_Work_Assignments
 
                 if (totalHours)
                 {
-                    sqlString += "GROUP BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName, [REVINT].[dbo].[ED_Seats].Name " +
-                        "ORDER BY [REVINT].[dbo].[ED_Employees].LastName, [REVINT].[dbo].[ED_Employees].FirstName";
+                    sqlString += "GROUP BY [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].LastName, [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].FirstName, [REVINT].[dbo].[ED_Seats].Name " +
+                        "ORDER BY [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].LastName, [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].FirstName";
                 }
                 else
                 {

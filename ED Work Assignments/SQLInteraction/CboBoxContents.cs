@@ -43,12 +43,12 @@ namespace ED_Work_Assignments
 
             using (connectionFirstName = new OdbcConnection(cxnString))
             {
-                OdbcCommand commandFirstName = new OdbcCommand("SELECT FirstName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionFirstName);
-                OdbcCommand commandLastName = new OdbcCommand("SELECT LastName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionLastName);
-                OdbcCommand commandUserName = new OdbcCommand("SELECT UserName FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionUserName);
-                OdbcCommand commandRole = new OdbcCommand("SELECT Role FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionRole);
-                OdbcCommand commandEmployed = new OdbcCommand("SELECT CurrentlyEmployed FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionEmployed);
-                OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[dbo].[ED_Employees] ORDER BY FirstName, LastName", connectionID);
+                OdbcCommand commandFirstName = new OdbcCommand("SELECT FirstName FROM [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ORDER BY FirstName, LastName", connectionFirstName);
+                OdbcCommand commandLastName = new OdbcCommand("SELECT LastName FROM [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ORDER BY FirstName, LastName", connectionLastName);
+                OdbcCommand commandUserName = new OdbcCommand("SELECT UserName FROM [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ORDER BY FirstName, LastName", connectionUserName);
+                OdbcCommand commandRole = new OdbcCommand("SELECT Role FROM [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ORDER BY FirstName, LastName", connectionRole);
+                OdbcCommand commandEmployed = new OdbcCommand("SELECT CurrentlyEmployed FROM [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ORDER BY FirstName, LastName", connectionEmployed);
+                OdbcCommand commandID = new OdbcCommand("SELECT Id FROM [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ORDER BY FirstName, LastName", connectionID);
 
                 connectionFirstName.Open();
                 connectionLastName.Open();

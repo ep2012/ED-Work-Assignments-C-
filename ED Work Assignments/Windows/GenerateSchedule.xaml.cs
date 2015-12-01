@@ -24,7 +24,7 @@ namespace ED_Work_Assignments
         public GenerateSchedule()
         {
             InitializeComponent();
-            TempScheduler.clear();
+            TempSchedulerSQL.clear();
             dtStart.Text = DateTime.Now.ToString();
             dtEnd.Text = DateTime.Now.AddMonths(1).ToString();
 
@@ -33,15 +33,15 @@ namespace ED_Work_Assignments
 
         private void btnAcceptSchedule_Click(object sender, RoutedEventArgs e)
         {
-            TempScheduler.accept();
-            TempScheduler.clear();
+            TempSchedulerSQL.accept();
+            TempSchedulerSQL.clear();
             Close();
         }
 
         private void btnGenerateSchedule_Click(object sender, RoutedEventArgs e)
         {
-            TempScheduler.clear();
-            ScheduleMaker maker = new ScheduleMaker(DateTime.Parse(dtStart.Text), DateTime.Parse(dtEnd.Text));
+            TempSchedulerSQL.clear();
+            ScheduleMaker maker = new ScheduleMaker(DateTime.Parse(dtStart.Text), DateTime.Parse(dtEnd.Text), SchedulingMode.Type1);
             setWindows();
             btnAcceptSchedule.Visibility = Visibility.Visible;
         }
@@ -52,7 +52,7 @@ namespace ED_Work_Assignments
             
             String sqlString = "SELECT CONCAT(B.[FirstName], ' ' , B.[LastName]) AS [Employee], A.[StartShift] AS [Start Time], A.[EndShift] AS [End Time], A.[Id] AS [Shift Id] " +
                 @"FROM [REVINT].[HEALTHCARE\eliprice].ED_ScheduleMakerShifts A " +
-                "LEFT JOIN [REVINT].[dbo].[ED_Employees] B " +
+                "LEFT JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B " +
                 "ON B.Id = A.[Employee] " +
                 "WHERE (StartShift BETWEEN '" + dtStart.Text + "' AND '" + dtEnd.Text + "' OR" +
                 " EndShift BETWEEN '" + dtStart.Text + "' AND '" + dtEnd.Text + "') " +
@@ -147,6 +147,14 @@ namespace ED_Work_Assignments
                 //Close connection
                 dbConnection.Close();
             }
+        }
+
+        private void btnGenerateSchedule2_Click(object sender, RoutedEventArgs e)
+        {
+            TempSchedulerSQL.clear();
+            ScheduleMaker maker = new ScheduleMaker(DateTime.Parse(dtStart.Text), DateTime.Parse(dtEnd.Text), SchedulingMode.Type2);
+            setWindows();
+            btnAcceptSchedule.Visibility = Visibility.Visible;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ED_Work_Assignments
                     String id = user.getID(user.getName(Environment.UserName));
                     if (!id.Equals("-1"))
                     {
-                        (new TimeOff()).insertTimeOffRequest(id, dtpStart.Text, dtpEnd.Text);
+                        TimeOffSQL.insertTimeOffRequest(id, dtpStart.Text, dtpEnd.Text);
                         Close();
                     }
                     else

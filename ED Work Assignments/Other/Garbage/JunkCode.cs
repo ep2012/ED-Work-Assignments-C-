@@ -199,7 +199,7 @@ namespace ED_Work_Assignments
         {
             //adjust to make free and working
             List<object> checkerList = new List<object>();
-            String sqlString = "SELECT [REVINT].[dbo].[ED_Shifts].[Id] FROM [REVINT].[dbo].[ED_Shifts] JOIN [REVINT].[dbo].[ED_Employees] ON [REVINT].[dbo].[ED_Shifts].[Employee] = [REVINT].[dbo].[ED_Employees].[Id] WHERE [REVINT].[dbo].[ED_Employees].[Id] = " + employee + " AND [REVINT].[dbo].[ED_Shifts].[StartShift] < '" + start + "' AND [REVINT].[dbo].[ED_Shifts].[EndShift] > '" + end + "';";
+            String sqlString = "SELECT [REVINT].[dbo].[ED_Shifts].[Id] FROM [REVINT].[dbo].[ED_Shifts] JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] ON [REVINT].[dbo].[ED_Shifts].[Employee] = [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[Id] WHERE [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[Id] = " + employee + " AND [REVINT].[dbo].[ED_Shifts].[StartShift] < '" + start + "' AND [REVINT].[dbo].[ED_Shifts].[EndShift] > '" + end + "';";
             new idMaker(sqlString, checkerList);
             if (checkerList.Count == 0)
                 return false;
@@ -518,8 +518,8 @@ public class Schedule
     public bool isStationOpen(DateTime start, DateTime end, int station, int num)
     {
         List<object> checkerList = new List<object>();
-        //String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + ";";
-        String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + ";";
+        //String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + ";";
+        String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + ";";
 
         new idMaker(sqlString, checkerList);
         return checkerList.Count < num;
@@ -527,7 +527,7 @@ public class Schedule
     private bool didEmployeeWorkAtStationLast(DateTime start, int station, int employee)
     {
         List<object> checkerList = new List<object>();
-        String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE A.[EndShift] = '" + start + "' AND A.Seat = " + station + " AND A.[Employee] = " + employee + ";";
+        String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE A.[EndShift] = '" + start + "' AND A.Seat = " + station + " AND A.[Employee] = " + employee + ";";
 
         new idMaker(sqlString, checkerList);
         return checkerList.Count > 0;
@@ -539,8 +539,8 @@ public class Schedule
         List<object> returnList = new List<object>();
         endTime = new DateTime();
 
-        String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE (((A.[StartShift] <= '" + start + "') AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + " GROUP BY B.[Id];";
-        String returnString = @"SELECT A.[StartShift] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + " ORDER BY A.[EndShift];";
+        String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE (((A.[StartShift] <= '" + start + "') AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + " GROUP BY B.[Id];";
+        String returnString = @"SELECT A.[StartShift] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) AND A.Seat = " + station + " ORDER BY A.[EndShift];";
 
         new idMaker(sqlString, checkerList);
         new idMaker(returnString, returnList);
@@ -615,8 +615,8 @@ public class Schedule
 
         List<object> peopleThatWork = whoWorks(start, end, day);
             
-        String sqlString2 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[StartShift] > '" + start + "' AND A.[StartShift] < '" + end + "');";
-        String sqlString3 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[EndShift] > '" + start + "' AND A.[EndShift] < '" + end + "');";
+        String sqlString2 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[StartShift] > '" + start + "' AND A.[StartShift] < '" + end + "');";
+        String sqlString3 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[EndShift] > '" + start + "' AND A.[EndShift] < '" + end + "');";
 
         new idMaker(sqlString2, checkerList2);
         new idMaker(sqlString3, checkerList3);
@@ -660,8 +660,8 @@ public class Schedule
 
         List<object> peopleThatWork = whoWorksDay2(start, end, day);
 
-        String sqlString2 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[StartShift] > '" + start + "' AND A.[StartShift] < '" + end + "');";
-        String sqlString3 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[EndShift] > '" + start + "' AND A.[EndShift] < '" + end + "');";
+        String sqlString2 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[StartShift] > '" + start + "' AND A.[StartShift] < '" + end + "');";
+        String sqlString3 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[EndShift] > '" + start + "' AND A.[EndShift] < '" + end + "');";
 
         new idMaker(sqlString2, checkerList2);
         new idMaker(sqlString3, checkerList3);
@@ -782,8 +782,8 @@ public class Schedule
     {
         List<object> checkerList = new List<object>();
         List<object> checkerList2 = new List<object>();
-        String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) GROUP BY B.[Id];";
-        String sqlString2 = "SELECT B.[Id] FROM [REVINT].[dbo].[ED_Shifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) GROUP BY B.[Id];";
+        String sqlString = @"SELECT B.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) GROUP BY B.[Id];";
+        String sqlString2 = "SELECT B.[Id] FROM [REVINT].[dbo].[ED_Shifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND ((A.[StartShift] BETWEEN '" + start + "' AND '" + end + "') OR (A.[StartShift] <= '" + start + "' AND (A.[EndShift] > '" + start + "'))) GROUP BY B.[Id];";
         new idMaker(sqlString, checkerList);
         new idMaker(sqlString, checkerList2);
 
@@ -938,8 +938,8 @@ public class Schedule
 
         List<object> peopleThatWork = whoWorksDay2(start, end, day);
 
-        String sqlString2 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[StartShift] > '" + start + "' AND A.[StartShift] < '" + end + "');";
-        String sqlString3 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[EndShift] > '" + start + "' AND A.[EndShift] < '" + end + "');";
+        String sqlString2 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[StartShift] > '" + start + "' AND A.[StartShift] < '" + end + "');";
+        String sqlString3 = @"SELECT B.[Id], cast(A.[StartShift] as time) FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE NOT(A.Seat = 9) AND (A.[EndShift] > '" + start + "' AND A.[EndShift] < '" + end + "');";
 
         new idMaker(sqlString2, checkerList2);
         new idMaker(sqlString3, checkerList3);

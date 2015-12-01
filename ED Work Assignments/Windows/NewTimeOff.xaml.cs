@@ -42,7 +42,7 @@ namespace ED_Work_Assignments
                 {
                     Users user = new Users();
 
-                    (new TimeOff()).insertTimeOff(user.getID(cboEmployee.Text), dtpStart.Text, dtpEnd.Text);
+                    TimeOffSQL.insertTimeOff(user.getID(cboEmployee.Text), dtpStart.Text, dtpEnd.Text);
                     Close();
                 }
                 else

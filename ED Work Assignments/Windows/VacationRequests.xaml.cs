@@ -17,27 +17,21 @@ using System.Windows.Shapes;
 namespace ED_Work_Assignments
 {
     /// <summary>
-    /// Interaction logic for EmployeeTimeOff.xaml
+    /// Interaction logic for VacationRequests.xaml
     /// </summary>
-    public partial class EmployeeTimeOff : Window
+    public partial class VacationRequests : Window
     {
-        public EmployeeTimeOff()
+        public VacationRequests()
         {
             InitializeComponent();
-
-            dtStart.Text = DateTime.Today.ToString();
-            dtEnd.Text = DateTime.Today.AddDays(7).ToString();
-
             setWindow();
         }
 
         private void setWindow()
         {
-            String sqlString = "SELECT A.Id, B.FirstName AS [First Name], B.LastName AS [Last Name], A.StartTime AS [Start Time], A.EndTime AS [End Time], A.DateTimeStamp AS [Date Stamp] " +
-                @"FROM [REVINT].[HEALTHCARE\eliprice].[ED_TimeOff] A " +
-                "JOIN [REVINT].[dbo].[ED_Employees] B ON A.EmployeeId = B.Id "+
-                "WHERE (A.StartTime BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "') OR (A.EndTime BETWEEN '" + dtStart.Text.ToString() + "' AND '" + dtEnd.Text.ToString() + "')";
-
+            String sqlString = "SELECT A.Id, B.FirstName AS [First Name], B.LastName AS [Last Name], A.StartTime AS [Start Time], A.EndTime AS [End Time], A.DateTimeStamp AS [Date Stamp] "+
+                @"FROM [REVINT].[HEALTHCARE\eliprice].[ED_TimeOffRequests] A "+
+                "JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.EmployeeId = B.Id";
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
             //create an OdbcConnection object and connect it to the data source.
@@ -55,28 +49,22 @@ namespace ED_Work_Assignments
 
                 //set the contents of the gui grid table to the data table created
                 //this.tblView.AutoGenerateColumns = false;
-                this.dtaTimeOff.ItemsSource = dtable.DefaultView;
-                this.dtaTimeOff.CanUserAddRows = false;
+                this.dtaRequests.ItemsSource = dtable.DefaultView;
+                this.dtaRequests.CanUserAddRows = false;
 
                 //Close connection
                 dbConnection.Close();
             }
         }
-        private void CalendarClosed(object sender, RoutedEventArgs e)
+
+        private void btnAcceptSchedule_Click(object sender, RoutedEventArgs e)
         {
+            object id = ((DataRowView)(dtaRequests).SelectedValue)["Id"].ToString();
+            if (id.ToString() != "")
+            {
+                TimeOffSQL.acceptTimeOffRequest(id);
+            }
             setWindow();
         }
-
-        private void btnTimeOff_Click(object sender, RoutedEventArgs e)
-        {
-            NewTimeOff win = new NewTimeOff();
-
-            win.Left = Left;
-            win.Top = Top;
-
-            win.Show();
-
-            Close();
-        }
-    }
+    };
 }

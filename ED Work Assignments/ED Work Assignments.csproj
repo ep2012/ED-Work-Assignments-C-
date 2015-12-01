@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Graphicloads-Medical-Health-Prescription.ico</ApplicationIcon>
+    <ApplicationIcon>Other\Graphicloads-Medical-Health-Prescription.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -101,116 +101,125 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Other\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddEditEmployee.xaml.cs">
+    <Compile Include="SQLInteraction\ChangeTracker.cs" />
+    <Compile Include="SQLInteraction\EmployeeInformation.cs" />
+    <Compile Include="Windows\AddEditEmployee.xaml.cs">
       <DependentUpon>AddEditEmployee.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes and Structures\EmployeeScheduleCreator.cs" />
+    <Compile Include="Other\Garbage\EmployeeScheduleCreator.cs" />
     <Compile Include="SQLInteraction\EmployeeShift.cs" />
-    <Compile Include="EmployeeTimeOff.xaml.cs">
+    <Compile Include="Windows\EditEmployeeSchedule.xaml.cs">
+      <DependentUpon>EditEmployeeSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EmployeeTimeOff.xaml.cs">
       <DependentUpon>EmployeeTimeOff.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GenerateSchedule.xaml.cs">
+    <Compile Include="Windows\GenerateSchedule.xaml.cs">
       <DependentUpon>GenerateSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IdMakers.cs" />
-    <Compile Include="JunkCode.cs" />
-    <Compile Include="NewTimeOff.xaml.cs">
+    <Compile Include="SQLInteraction\IdMakers.cs" />
+    <Compile Include="Other\Garbage\JunkCode.cs" />
+    <Compile Include="Windows\NewTimeOff.xaml.cs">
       <DependentUpon>NewTimeOff.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgressBar.xaml.cs">
+    <Compile Include="Windows\ProgressBar.xaml.cs">
       <DependentUpon>ProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManageEmployees.xaml.cs">
+    <Compile Include="Windows\ManageEmployees.xaml.cs">
       <DependentUpon>ManageEmployees.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportCreator.xaml.cs">
+    <Compile Include="Windows\ReportCreator.xaml.cs">
       <DependentUpon>ReportCreator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes and Structures\Schedule.cs" />
+    <Compile Include="Other\Garbage\Schedule.cs" />
     <Compile Include="Classes and Structures\ScheduleMaker.cs" />
     <Compile Include="Classes and Structures\Structures.cs" />
     <Compile Include="SQLInteraction\TempScheduler.cs" />
     <Compile Include="SQLInteraction\TimeOff.cs" />
-    <Compile Include="VacationRequest.xaml.cs">
+    <Compile Include="Windows\VacationRequest.xaml.cs">
       <DependentUpon>VacationRequest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VacationRequests.xaml.cs">
+    <Compile Include="Windows\VacationRequests.xaml.cs">
       <DependentUpon>VacationRequests.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddEditEmployee.xaml">
+    <Page Include="Windows\AddEditEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangeTracker.xaml">
+    <Page Include="Windows\ChangeTracker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EmployeeTimeOff.xaml">
+    <Page Include="Windows\EditEmployeeSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GenerateSchedule.xaml">
+    <Page Include="Windows\EmployeeTimeOff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IndividualSchedule.xaml">
+    <Page Include="Windows\GenerateSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\IndividualSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Other\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CboBoxContents.cs" />
-    <Compile Include="ChangeTracker.xaml.cs">
+    <Compile Include="SQLInteraction\CboBoxContents.cs" />
+    <Compile Include="Windows\ChangeTracker.xaml.cs">
       <DependentUpon>ChangeTracker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IndividualSchedule.xaml.cs">
+    <Compile Include="Windows\IndividualSchedule.xaml.cs">
       <DependentUpon>IndividualSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ManageEmployees.xaml">
+    <Page Include="Windows\ManageEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NewAssignment.xaml">
+    <Page Include="Windows\NewAssignment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NewTimeOff.xaml">
+    <Page Include="Windows\NewTimeOff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProgressBar.xaml">
+    <Page Include="Windows\ProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportCreator.xaml">
+    <Page Include="Windows\ReportCreator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VacationRequest.xaml">
+    <Page Include="Windows\VacationRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VacationRequests.xaml">
+    <Page Include="Windows\VacationRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewAssignment.xaml.cs">
+    <Compile Include="Windows\NewAssignment.xaml.cs">
       <DependentUpon>NewAssignment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -237,18 +246,18 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Other\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Graphicloads-Medical-Health-Prescription.ico" />
+    <Resource Include="Other\Graphicloads-Medical-Health-Prescription.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Xceed.Wpf.AvalonDock.dll" />
-    <Content Include="Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
-    <Content Include="Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
-    <Content Include="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
-    <Content Include="Xceed.Wpf.DataGrid.dll" />
-    <Content Include="Xceed.Wpf.Toolkit.dll" />
+    <Content Include="Other\Xceed.Wpf.AvalonDock.dll" />
+    <Content Include="Other\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <Content Include="Other\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <Content Include="Other\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <Content Include="Other\Xceed.Wpf.DataGrid.dll" />
+    <Content Include="Other\Xceed.Wpf.Toolkit.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

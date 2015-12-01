@@ -22,5 +22,5 @@ namespace ED_Work_Assignments
         public TimeSpan shiftTimeSpan;
         public DateTime startTime;
     }
-
+    public enum SchedulingMode {Type1, Type2};
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ED_Work_Assignments;
 
 namespace ED_Work_Assignments
 {
@@ -10,7 +11,10 @@ namespace ED_Work_Assignments
     public class Schedule
     {
         Users users = new Users();
+        private static Random rng = new Random();
         Random random = new Random();
+        TimeSpan JetPedsStart = TimeSpan.Parse("12:00");
+
         public Schedule()
         {
 
@@ -18,6 +22,9 @@ namespace ED_Work_Assignments
         public void scheduleWhoWorks(DateTime start, DateTime end, List<EmployeeShift> employeeShifts, SchedulingType type)
         {
             TimeSpan timeSpan = end.Subtract(start);
+
+            employeeShifts = employeeShifts.OrderBy(item => rng.Next()).ToList();
+
             if (type == SchedulingType.Part || type == SchedulingType.PartCheck)
             {
                 foreach (EmployeeShift employeeShift in employeeShifts.ToList())
@@ -47,11 +54,73 @@ namespace ED_Work_Assignments
                 }
             }
         }
+        public void justScheduleThem(DateTime start, DateTime end, EmployeeShift employeeShift)
+        {
+            if (isStationOpen(start, end, 1, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 1);
+            }
+            else if (isStationOpen(start, end, 5, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 5);
+            }
+            else if (isStationOpen(start, end, 3, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 3);
+            }
+            else if (isStationOpen(start, end, 4, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 4);
+            }
+            else if (isStationOpen(start, end, 6, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 6);
+            }
+            else if (isStationOpen(start, end, 7, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 7);
+            }
+            else if (isStationOpen(start, end, 3, 2))
+            {
+                scheduleEmployee(employeeShift, start, end, 3);
+            }
+            else if (isStationOpen(start, end, 4, 2))
+            {
+                scheduleEmployee(employeeShift, start, end, 4);
+            }
+            else if (isStationOpen(start, end, 6, 2))
+            {
+                scheduleEmployee(employeeShift, start, end, 6);
+            }
+            else if (isStationOpen(start, end, 7, 2))
+            {
+                scheduleEmployee(employeeShift, start, end, 7);
+            }
+            else if (isStationOpen(start, end, 2, 1))
+            {
+                scheduleEmployee(employeeShift, start, end, 2);
+            }
+            else if (isStationOpen(start, end, 8, 1) && (start.TimeOfDay >= JetPedsStart))
+            {
+                if (end.Date > start.Date)
+                {
+                    scheduleEmployee(employeeShift, start, DateTime.Parse(end.ToShortDateString() + " 00:00"), 8);
+                }
+                else
+                {
+                    scheduleEmployee(employeeShift, start, end, 8);
+                }
+            }
+            else
+            {
+                scheduleEmployee(employeeShift, start, start.AddMinutes(30), 10);
+            }
+        }
 
         public void scheduleInBestWorkstation(DateTime start, DateTime end, EmployeeShift employeeShift, SchedulingType type)
         {
             int employee = Convert.ToInt32(employeeShift.employee);
-            if (type == SchedulingType.Check)
+            /*if (type == SchedulingType.Check)
             {
                 if (isStationOpen(start, end, 1, 1) && !didEmployeeWorkAtStationLast(start, 1, employee))
                 {
@@ -62,7 +131,7 @@ namespace ED_Work_Assignments
                     scheduleEmployee(employeeShift, start, end, 5);
                 }
             }
-            else if (type == SchedulingType.Fill)
+            else */if (type == SchedulingType.Fill)
             {
                 if (isStationOpen(start, end, 6, 1) && !didEmployeeWorkAtStationLast(start, 6, employee))
                 {
@@ -92,20 +161,31 @@ namespace ED_Work_Assignments
                 {
                     scheduleEmployee(employeeShift, start, end, 3);
                 }
-                else if (isStationOpen(start, end, 4, 2))
+                else if (isStationOpen(start, end, 4, 2) && !didEmployeeWorkAtStationLast(start, 4, employee))
                 {
                     scheduleEmployee(employeeShift, start, end, 4);
                 }
-                else if (isStationOpen(start, end, 2, 1))
+                else if (isStationOpen(start, end, 8, 1) && (start.TimeOfDay >= JetPedsStart) && !didEmployeeWorkAtStationLast(start, 8, employee))
+                {
+                    if (end.Date > start.Date)
+                    {
+                        scheduleEmployee(employeeShift, start, DateTime.Parse(end.ToShortDateString() + " 00:00"), 8);
+                    }
+                    else
+                    {
+                        scheduleEmployee(employeeShift, start, end, 8);
+                    }
+                }
+                else if (isStationOpen(start, end, 2, 1) && !didEmployeeWorkAtStationLast(start, 2, employee))
                 {
                     scheduleEmployee(employeeShift, start, end, 2);
                 }
                 else
                 {
-                    scheduleEmployee(employeeShift, start, start.AddMinutes(30), 10);
+                    justScheduleThem(start, end, employeeShift);
                 }
             }
-            else if (type == SchedulingType.Part || type == SchedulingType.PartCheck)
+            else if (type == SchedulingType.Part || type == SchedulingType.PartCheck )
             {
                 if (isStationOpen(start, end, 1, 1) && !didEmployeeWorkAtStationLast(start, 1, employee))
                 {
@@ -117,45 +197,56 @@ namespace ED_Work_Assignments
                 }
                 else if (type == SchedulingType.Part)
                 {
-                    if (isStationOpen(start, end, 6, 1) && !didEmployeeWorkAtStationLast(start, 6, employee))
+                    if (isStationOpen(start, end, 4, 1) && !didEmployeeWorkAtStationLast(start, 4, employee))
                     {
-                        scheduleEmployee(employeeShift, start, end, 6);
-                    }
-                    else if (isStationOpen(start, end, 7, 1) && !didEmployeeWorkAtStationLast(start, 7, employee))
-                    {
-                        scheduleEmployee(employeeShift, start, end, 7);
+                        scheduleEmployee(employeeShift, start, end, 4);
                     }
                     else if (isStationOpen(start, end, 3, 1) && !didEmployeeWorkAtStationLast(start, 3, employee))
                     {
                         scheduleEmployee(employeeShift, start, end, 3);
                     }
-                    else if (isStationOpen(start, end, 4, 1) && !didEmployeeWorkAtStationLast(start, 4, employee))
+                    else if (isStationOpen(start, end, 7, 1) && !didEmployeeWorkAtStationLast(start, 7, employee))
                     {
-                        scheduleEmployee(employeeShift, start, end, 4);
+                        scheduleEmployee(employeeShift, start, end, 7);
                     }
-                    else if (isStationOpen(start, end, 6, 2) && !didEmployeeWorkAtStationLast(start, 6, employee))
+                    else if (isStationOpen(start, end, 6, 1) && !didEmployeeWorkAtStationLast(start, 6, employee))
                     {
                         scheduleEmployee(employeeShift, start, end, 6);
                     }
-                    else if (isStationOpen(start, end, 7, 2) && !didEmployeeWorkAtStationLast(start, 7, employee))
+                    else if (isStationOpen(start, end, 4, 2) && !didEmployeeWorkAtStationLast(start, 4, employee))
                     {
-                        scheduleEmployee(employeeShift, start, end, 7);
+                        scheduleEmployee(employeeShift, start, end, 4);
                     }
                     else if (isStationOpen(start, end, 3, 2) && !didEmployeeWorkAtStationLast(start, 3, employee))
                     {
                         scheduleEmployee(employeeShift, start, end, 3);
                     }
-                    else if (isStationOpen(start, end, 4, 2))
+                    else if (isStationOpen(start, end, 7, 2) && !didEmployeeWorkAtStationLast(start, 7, employee))
                     {
-                        scheduleEmployee(employeeShift, start, end, 4);
+                        scheduleEmployee(employeeShift, start, end, 7);
                     }
-                    else if (isStationOpen(start, end, 2, 1))
+                    else if (isStationOpen(start, end, 6, 2) && !didEmployeeWorkAtStationLast(start, 6, employee))
+                    {
+                        scheduleEmployee(employeeShift, start, end, 6);
+                    }
+                    else if (isStationOpen(start, end, 8, 1) && (start.TimeOfDay >= JetPedsStart) && !didEmployeeWorkAtStationLast(start, 8, employee))
+                    {
+                        if (end.Date > start.Date)
+                        {
+                            scheduleEmployee(employeeShift, start, DateTime.Parse(end.ToShortDateString() + " 00:00"), 8);
+                        }
+                        else
+                        {
+                            scheduleEmployee(employeeShift, start, end, 8);
+                        }
+                    }
+                    else if (isStationOpen(start, end, 2, 1) && !didEmployeeWorkAtStationLast(start, 2, employee))
                     {
                         scheduleEmployee(employeeShift, start, end, 2);
                     }
                     else
                     {
-                        scheduleEmployee(employeeShift, start, start.AddMinutes(30), 10);
+                        justScheduleThem(start, end, employeeShift);
                     }
                 }
             }
@@ -182,7 +273,7 @@ namespace ED_Work_Assignments
         private bool didEmployeeWorkAtStationLast(DateTime start, int station, int employee)
         {
             List<object> checkerList = new List<object>();
-            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[dbo].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE A.[EndShift] = '" + start + "' AND A.Seat = " + station + " AND A.[Employee] = " + employee + ";";
+            String sqlString = @"SELECT A.[Id] FROM [REVINT].[HEALTHCARE\eliprice].[ED_ScheduleMakerShifts] A JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] B ON A.[Employee] = B.[Id] WHERE A.[EndShift] = '" + start + "' AND A.Seat = " + station + " AND A.[Employee] = " + employee + ";";
 
             new idMaker(sqlString, checkerList);
             return checkerList.Count > 0;
@@ -190,7 +281,7 @@ namespace ED_Work_Assignments
         public void scheduleEmployee(EmployeeShift employeeShift, DateTime start, DateTime end, int station)
         {
             TimeSpan timeSpan = end.Subtract(start);
-            TempScheduler.insert(Convert.ToInt32(employeeShift.employee), start, end, station);
+            TempSchedulerSQL.insert(Convert.ToInt32(employeeShift.employee), start, end, station);
 
             foreach (Shift shift in employeeShift.shifts.ToList())
             {
@@ -299,8 +390,9 @@ namespace ED_Work_Assignments
                 DateTime start = new DateTime();
                 DateTime end = new DateTime();
                 getOpenShiftRange(time, station, out start, out end);
-                TempScheduler.insertBlank(start, end, station);
+                TempSchedulerSQL.insertBlank(start, end, station);
             }
         }
-    }
+    } 
 }
+

@@ -58,10 +58,10 @@ namespace ED_Work_Assignments
             //DateTime lastDay; 
             //DateTime.TryParse(date, out lastDay);
             //String otherDate = lastDay.AddDays(1).ToString();
-            String sqlString = "SELECT CONCAT([REVINT].[dbo].[ED_Employees].[FirstName], ' ' , [REVINT].[dbo].[ED_Employees].[LastName]) AS [Employee], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time], [REVINT].[dbo].[ED_Shifts].[Id] AS [Shift Id] " +
+            String sqlString = "SELECT CONCAT([REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[FirstName], ' ' , [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].[LastName]) AS [Employee], [REVINT].[dbo].[ED_Shifts].[StartShift] AS [Start Time], [REVINT].[dbo].[ED_Shifts].[EndShift] AS [End Time], [REVINT].[dbo].[ED_Shifts].[Id] AS [Shift Id] " +
                 "FROM [REVINT].[dbo].[ED_Shifts] " +
-                "LEFT JOIN [REVINT].[dbo].[ED_Employees] " +
-                "ON [REVINT].[dbo].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
+                "LEFT JOIN [REVINT].[HEALTHCARE\\eliprice].[ED_Employees] " +
+                "ON [REVINT].[HEALTHCARE\\eliprice].[ED_Employees].Id = [REVINT].[dbo].[ED_Shifts].[Employee] " +
                 "WHERE (StartShift BETWEEN '" + date + "' AND '" + otherDate + "' OR" +
                 " EndShift BETWEEN '" + date + "' AND '" + otherDate + "') "+
                 "AND Seat = ";

@@ -32,7 +32,7 @@
                 </LinearGradientBrush>
             </RadioButton.Background>
         </RadioButton>
-        <Button x:Name="btnGenerateReport" Content="Generate Report" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  HorizontalAlignment="Left" Margin="552,502,0,0" VerticalAlignment="Top" Width="221" Height="50" Click="btnGenerateReport_Click" Background="#FFCDCDCD"/>
+        <Button x:Name="btnGenerateReport" Content="Generate Report" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  HorizontalAlignment="Left" Margin="552,502,0,0" VerticalAlignment="Top" Width="221" Height="50" Click="btnGenerateReport_Click" Background="#FFB8F190"/>
         <Label Content= "Role" HorizontalAlignment="Left" Height="26" Margin="10,113,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="cboRole" HorizontalAlignment="Left" Height="26" Margin="135,113,0,0" VerticalAlignment="Top" Width="209" Background="White"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="49" Margin="10,239,0,0" VerticalAlignment="Top" Width="763" Background="#FFC9C7C7"/>
@@ -45,6 +45,6 @@
             </RadioButton.Background>
         </RadioButton>
         <Button x:Name="btnClear" Content="Clear" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  HorizontalAlignment="Left" Margin="552,10,0,0" VerticalAlignment="Top" Width="221" Height="31" Click="btnClear_Click" Background="#FFCDCDCD"/>
-        <Button x:Name="btnExportToExcel" Content="Export To Excel" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  HorizontalAlignment="Left" Margin="10,502,0,0" VerticalAlignment="Top" Width="221" Height="50" Click="btnExportToExcel_Click"  Background="#FFCDCDCD"/>
+        <Button x:Name="btnExportToExcel" Content="Export To Excel" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  HorizontalAlignment="Left" Margin="10,502,0,0" VerticalAlignment="Top" Width="221" Height="50" Click="btnExportToExcel_Click"  Background="#FFB8F190"/>
     </Grid>
 </Window>

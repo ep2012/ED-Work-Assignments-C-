@@ -1,3 +1,36 @@
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csprojResolveAssemblyReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Interop.UIAutomationClient.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.ResolveComReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ChangeTracker.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EditEmployeeSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EmployeeTimeOff.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\GenerateSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\IndividualSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\MainWindow.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ManageEmployees.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\NewTimeOff.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ProgressBar.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ReportCreator.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\VacationRequest.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\VacationRequests.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Other\App.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ChangeTracker.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EditEmployeeSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EmployeeTimeOff.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\GenerateSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\IndividualSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\MainWindow.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ManageEmployees.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\NewAssignment.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\NewTimeOff.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ProgressBar.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ReportCreator.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\VacationRequest.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\VacationRequests.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Other\App.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_Content.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.lref
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe.config
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.pdb
@@ -7,39 +40,9 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.DataGrid.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.Toolkit.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Interop.UIAutomationClient.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.ResolveComReference.cache
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\AddEditEmployee.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ChangeTracker.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\EmployeeTimeOff.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\GenerateSchedule.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\IndividualSchedule.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\MainWindow.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ManageEmployees.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewTimeOff.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ReportCreator.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequest.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequests.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\App.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\AddEditEmployee.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ChangeTracker.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\EmployeeTimeOff.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\GenerateSchedule.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\IndividualSchedule.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\MainWindow.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ManageEmployees.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewAssignment.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewTimeOff.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ProgressBar.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ReportCreator.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequest.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\VacationRequests.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\App.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_Content.g.cs
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.cache
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.lref
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\NewAssignment.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AddEditEmployee.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AddEditEmployee.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\NewAssignment.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.g.resources
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED_Work_Assignments.Properties.Resources.resources
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.GenerateResource.Cache

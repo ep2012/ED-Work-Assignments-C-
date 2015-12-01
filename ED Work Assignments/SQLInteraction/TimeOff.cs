@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ED_Work_Assignments
 {
-    public class TimeOff
+    public static class TimeOffSQL
     {
-        public void insertTimeOffRequest(object employeeId, object startTime, object endTime)
+        public static void insertTimeOffRequest(object employeeId, object startTime, object endTime)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -33,8 +33,9 @@ namespace ED_Work_Assignments
 
                 dbConnection.Close();
             }
+            ChangeTrackerSQL.add("Requested time off " + startTime.ToString() + " until " + endTime.ToString() + "\nRequested: " + DateTime.Now.ToString());
         }
-        public void insertTimeOff(object employeeId, object startTime, object endTime)
+        public static void insertTimeOff(object employeeId, object startTime, object endTime)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -58,8 +59,9 @@ namespace ED_Work_Assignments
 
                 dbConnection.Close();
             }
+            ChangeTrackerSQL.add("Added time off " + startTime.ToString() + " until " + endTime.ToString() + " for EmployeeId " + employeeId.ToString() + "\nAdded: " + DateTime.Now.ToString());
         }
-        public void acceptTimeOffRequest(object id)
+        public static void acceptTimeOffRequest(object id)
         {
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
@@ -81,6 +83,7 @@ namespace ED_Work_Assignments
 
                 dbConnection.Close();
             }
+            ChangeTrackerSQL.add("Accepted time off request - " + DateTime.Now);
         }
     }
 }

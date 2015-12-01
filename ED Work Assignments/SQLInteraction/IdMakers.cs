@@ -11,7 +11,7 @@ namespace ED_Work_Assignments
     {
         public idMaker(String sqlCmdID, List<object> ids)
         {
-            object[] objID = new object[40];
+            object[] objID = new object[50];
 
             String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 

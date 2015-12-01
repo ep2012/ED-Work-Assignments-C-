@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ED_Work_Assignments
 {
-    public static class TempScheduler
+    public static class TempSchedulerSQL
     {
         public static void insert(int employee, DateTime start, DateTime end, int station)
         {
@@ -98,6 +98,8 @@ namespace ED_Work_Assignments
 
                 dbConnection.Close();
             }
+
+            ChangeTrackerSQL.add("Accepted Generated Schedule.");
         }
     }
 }
