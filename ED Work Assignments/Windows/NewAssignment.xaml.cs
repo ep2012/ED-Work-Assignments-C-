@@ -35,6 +35,13 @@ namespace ED_Work_Assignments
         String updateAssignment = "Update Work Assignment";
         String previousRecordDetail;
 
+        DateTime start;
+        DateTime end;
+
+        String employee;
+
+        object seat;
+
         int id;
 
         public NewAssignment(MainWindow main)
@@ -67,11 +74,17 @@ namespace ED_Work_Assignments
                 setBindings();
 
                 cboEmployee.Text = row["Employee"].ToString();
+                employee = row["Employee"].ToString();
 
                 cboSeat.Text = seat;
 
+                this.seat = seat;
+
                 dtpEnd.Value = DateTime.Parse(row["End Time"].ToString());
                 dtpStart.Value = DateTime.Parse(row["Start Time"].ToString());
+
+                start = DateTime.Parse(row["Start Time"].ToString());
+                end = DateTime.Parse(row["End Time"].ToString());
 
                 assignmentType = AssignmentType.Update;
 
@@ -204,7 +217,6 @@ namespace ED_Work_Assignments
                 }
                 this.Close();
             }
-
         }
         private bool validInputs()
         {
@@ -242,7 +254,18 @@ namespace ED_Work_Assignments
 
         private void btnMarkAsAbsent_Click(object sender, RoutedEventArgs e)
         {
+            var dialogResult = MessageBox.Show("Are you sure you would like to mark "+employee+" as absent?", "Marking "+employee+" as absent", MessageBoxButton.YesNo);
 
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                //EmployeeScheduleSQL.deleteClocking(id);
+                var dialogResult2 = MessageBox.Show("Would you like the schedule to automatically fill the hole?", "Fill hole automatically?", MessageBoxButton.YesNo);
+
+                if (dialogResult2 == MessageBoxResult.Yes)
+                {
+                    (new ScheduleMaker()).markAsAbsent(start, end, seats.getID(seat.ToString()), id);
+                }
+            }
         }
     }
 }

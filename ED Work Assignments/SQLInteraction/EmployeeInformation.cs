@@ -9,7 +9,7 @@ namespace ED_Work_Assignments
 {
     public static class EmployeeInformationSQL
     {
-        static String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+        private static String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
         public static void add(object firstName, object lastName, object role, object address1, object address2, object city, object state, object zip, object phone, object email, object healthcareID)
         {
@@ -136,6 +136,8 @@ namespace ED_Work_Assignments
 
     public static class EmployeeScheduleSQL 
     {
+        private static String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
+
         public static void getSchedules(object id, out List<object> values)
         {
             values = new List<object>();
@@ -155,6 +157,26 @@ namespace ED_Work_Assignments
                 ", friday2time, friday2timeend, friday2day " +
                 ", saturday2time, saturday2timeend, saturday2day " +
                 "FROM [REVINT].[healthcare\\eliprice].[ED_Employees] A WHERE Id = " + id.ToString(), values);
+        }
+        public static void deleteClocking(object id)
+        {
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_deleteWorkAssignment(?)}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.Parameters.Add("@id", OdbcType.Int).Value = id.ToString();
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
         }
 
     }
