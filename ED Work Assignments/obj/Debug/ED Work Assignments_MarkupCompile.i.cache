@@ -9,12 +9,12 @@ ED_Work_Assignments
 none
 false
 DEBUG;TRACE
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\App.xaml
-8-152851199
-62034163576
-18-663494465
-24-1429115064
-AddEditEmployee.xaml;ChangeTracker.xaml;GenerateSchedule.xaml;IndividualSchedule.xaml;MainWindow.xaml;ManageEmployees.xaml;NewAssignment.xaml;ReportCreator.xaml;
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\Other\App.xaml
+141129751279
+6-470821044
+341051333520
+27-887984120
+Windows\AddEditEmployee.xaml;Windows\ChangeTracker.xaml;Windows\EditEmployeeSchedule.xaml;Windows\EmployeeTimeOff.xaml;Windows\GenerateSchedule.xaml;Windows\IndividualSchedule.xaml;Windows\MainWindow.xaml;Windows\ManageEmployees.xaml;Windows\NewAssignment.xaml;Windows\NewTimeOff.xaml;Windows\ProgressBar.xaml;Windows\ReportCreator.xaml;Windows\VacationRequest.xaml;Windows\VacationRequests.xaml;
 
 True
 

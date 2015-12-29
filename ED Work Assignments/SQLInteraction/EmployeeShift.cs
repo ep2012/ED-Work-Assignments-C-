@@ -66,7 +66,5 @@ namespace ED_Work_Assignments
                 }
             }
         }
-
-    }
-    
+    }   
 }

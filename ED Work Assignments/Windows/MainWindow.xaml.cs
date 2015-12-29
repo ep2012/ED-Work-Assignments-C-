@@ -14,10 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
-using Microsoft.SqlServer.Dts.Runtime;
-using Wrapper = Microsoft.SqlServer.Dts.Runtime.Wrapper;
-using System.Data.SqlClient;
 
 
 namespace ED_Work_Assignments

@@ -1,6 +1,15 @@
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csprojResolveAssemblyReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe.config
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.DataGrid.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.Toolkit.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Interop.UIAutomationClient.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.ResolveComReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AddEditEmployee.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ChangeTracker.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EditEmployeeSchedule.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EmployeeTimeOff.baml
@@ -14,6 +23,7 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\VacationRequest.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\VacationRequests.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Other\App.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AddEditEmployee.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\ChangeTracker.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EditEmployeeSchedule.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\EmployeeTimeOff.g.cs
@@ -31,20 +41,12 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\R
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_Content.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments_MarkupCompile.lref
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe.config
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.exe
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\ED Work Assignments.pdb
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Aero.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.Metro.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.DataGrid.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Release\Xceed.Wpf.Toolkit.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AddEditEmployee.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AddEditEmployee.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\NewAssignment.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.g.resources
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED_Work_Assignments.Properties.Resources.resources
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csproj.GenerateResource.Cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\ED Work Assignments.csprojResolveAssemblyReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AbsentAutoFillResults.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Release\Windows\AbsentAutoFillResults.g.cs

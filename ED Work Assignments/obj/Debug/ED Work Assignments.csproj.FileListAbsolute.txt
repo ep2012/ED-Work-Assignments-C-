@@ -38,4 +38,52 @@ C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED W
 C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ReportCreator.baml
 C:\Users\eliprice\Documents\Visual Studio 2013\Projects\ED Work Assignments\ED Work Assignments\obj\Debug\ReportCreator.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.exe.config
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.exe
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Microsoft.SqlServer.DTSRuntimeWrap.dll
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Interop.UIAutomationClient.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.ResolveComReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\AddEditEmployee.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ChangeTracker.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\EditEmployeeSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\EmployeeTimeOff.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\GenerateSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\IndividualSchedule.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\MainWindow.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ManageEmployees.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\NewTimeOff.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ProgressBar.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ReportCreator.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\VacationRequest.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\VacationRequests.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Other\App.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\AddEditEmployee.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ChangeTracker.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\EditEmployeeSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\EmployeeTimeOff.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\GenerateSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\IndividualSchedule.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\MainWindow.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ManageEmployees.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\NewAssignment.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\NewTimeOff.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ProgressBar.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ReportCreator.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\VacationRequest.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\VacationRequests.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Other\App.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments_Content.g.cs
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments_MarkupCompile.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments_MarkupCompile.lref
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\NewAssignment.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.g.resources
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED_Work_Assignments.Properties.Resources.resources
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.GenerateResource.Cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.exe
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.pdb

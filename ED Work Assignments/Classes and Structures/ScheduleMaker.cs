@@ -658,7 +658,7 @@ namespace ED_Work_Assignments
             String stationstr = station.ToString();
             
             //Delete clocking
-            //EmployeeScheduleSQL.deleteClocking(id);
+            EmployeeScheduleSQL.deleteClocking(id);
 
             if (stationstr == "1" || stationstr == "5")
             {
@@ -711,6 +711,8 @@ namespace ED_Work_Assignments
                 if (shiftEndTime >= end)
                 {
                     startout = end;
+
+                    //alter 
                 }
                 else
                 {

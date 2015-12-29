@@ -2,78 +2,80 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
-        Title="EditEmployeeSchedule" Height="550" Width="663">
+        Title="EditEmployeeSchedule" Height="550" Width="650">
     <Grid>
-        <wpfTool:TimePicker x:Name="tmSunday1Start" HorizontalAlignment="Left" Height="26" Margin="142,33,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Sunday 1 Schedule:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmSunday1Start" HorizontalAlignment="Left" Height="26" Margin="142,33,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Sunday 1:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,33,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmSunday1End" HorizontalAlignment="Left" Height="26" Margin="346,33,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,38,0,0"/>
-        <wpfTool:TimePicker x:Name="tmMonday1Start" HorizontalAlignment="Left" Height="26" Margin="142,67,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Monday 1 Schedule:" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmSunday1End" HorizontalAlignment="Left" Height="26" Margin="346,33,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkSunday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,38,0,0"/>
+        <wpfTool:TimePicker x:Name="tmMonday1Start" HorizontalAlignment="Left" Height="26" Margin="142,67,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Monday 1:" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,67,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmMonday1End" HorizontalAlignment="Left" Height="26" Margin="346,67,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,72,0,0"/>
-        <wpfTool:TimePicker x:Name="tmTuesday1Start" HorizontalAlignment="Left" Height="26" Margin="142,101,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Tuesday 1 Schedule:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmMonday1End" HorizontalAlignment="Left" Height="26" Margin="346,67,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkMonday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,72,0,0"/>
+        <wpfTool:TimePicker x:Name="tmTuesday1Start" HorizontalAlignment="Left" Height="26" Margin="142,101,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Tuesday 1:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,101,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmTuesday1End" HorizontalAlignment="Left" Height="26" Margin="346,101,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,106,0,0"/>
-        <wpfTool:TimePicker x:Name="tmWednesday1Start" HorizontalAlignment="Left" Height="26" Margin="142,133,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Wednesday 1 Schedule:" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmTuesday1End" HorizontalAlignment="Left" Height="26" Margin="346,101,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkTuesday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,106,0,0"/>
+        <wpfTool:TimePicker x:Name="tmWednesday1Start" HorizontalAlignment="Left" Height="26" Margin="142,133,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Wednesday 1:" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,133,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmWednesday1End" HorizontalAlignment="Left" Height="26" Margin="346,133,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,138,0,0"/>
-        <wpfTool:TimePicker x:Name="tmThursday1Start" HorizontalAlignment="Left" Height="26" Margin="142,166,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Thursday 1 Schedule:" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmWednesday1End" HorizontalAlignment="Left" Height="26" Margin="346,133,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkWednesday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,138,0,0"/>
+        <wpfTool:TimePicker x:Name="tmThursday1Start" HorizontalAlignment="Left" Height="26" Margin="142,166,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Thursday 1:" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,166,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmThursday1End" HorizontalAlignment="Left" Height="26" Margin="346,166,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,171,0,0"/>
-        <wpfTool:TimePicker x:Name="tmFriday1Start" HorizontalAlignment="Left" Height="26" Margin="142,196,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Friday 1 Schedule:" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmThursday1End" HorizontalAlignment="Left" Height="26" Margin="346,166,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkThursday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,171,0,0"/>
+        <wpfTool:TimePicker x:Name="tmFriday1Start" HorizontalAlignment="Left" Height="26" Margin="142,196,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Friday 1:" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,196,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmFriday1End" HorizontalAlignment="Left" Height="26" Margin="346,196,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,201,0,0"/>
-        <wpfTool:TimePicker x:Name="tmSaturday1Start" HorizontalAlignment="Left" Height="26" Margin="142,226,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Saturday 1 Schedule:" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmFriday1End" HorizontalAlignment="Left" Height="26" Margin="346,196,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkFriday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,201,0,0"/>
+        <wpfTool:TimePicker x:Name="tmSaturday1Start" HorizontalAlignment="Left" Height="26" Margin="142,226,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <Label Content="Saturday 1:" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,226,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmSaturday1End" HorizontalAlignment="Left" Height="26" Margin="346,226,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,231,0,0"/>
-        <wpfTool:TimePicker x:Name="tmSunday2Start" HorizontalAlignment="Left" Height="26" Margin="142,257,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Sunday 2 Schedule:" HorizontalAlignment="Left" Margin="10,257,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmSaturday1End" HorizontalAlignment="Left" Height="26" Margin="346,226,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
+        <CheckBox x:Name="chkSaturday1Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,231,0,0"/>
+        <wpfTool:TimePicker x:Name="tmSunday2Start" HorizontalAlignment="Left" Height="26" Margin="142,257,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Sunday 2:" HorizontalAlignment="Left" Margin="10,257,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,257,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmSunday2End" HorizontalAlignment="Left" Height="26" Margin="346,257,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,262,0,0"/>
-        <wpfTool:TimePicker x:Name="tmMonday2Start" HorizontalAlignment="Left" Height="26" Margin="142,288,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Monday 2 Schedule:" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmSunday2End" HorizontalAlignment="Left" Height="26" Margin="346,257,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkSunday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,262,0,0"/>
+        <wpfTool:TimePicker x:Name="tmMonday2Start" HorizontalAlignment="Left" Height="26" Margin="142,288,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Monday 2:" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,288,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmMonday2End" HorizontalAlignment="Left" Height="26" Margin="346,288,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,293,0,0"/>
-        <wpfTool:TimePicker x:Name="tmTuesday2Start" HorizontalAlignment="Left" Height="26" Margin="142,319,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Tuesday 2 Schedule:" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmMonday2End" HorizontalAlignment="Left" Height="26" Margin="346,288,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkMonday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,293,0,0"/>
+        <wpfTool:TimePicker x:Name="tmTuesday2Start" HorizontalAlignment="Left" Height="26" Margin="142,319,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Tuesday 2:" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,319,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmTuesday2End" HorizontalAlignment="Left" Height="26" Margin="346,319,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,324,0,0"/>
-        <wpfTool:TimePicker x:Name="tmWednesday2Start" HorizontalAlignment="Left" Height="26" Margin="142,349,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Wednesday 2 Schedule:" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmTuesday2End" HorizontalAlignment="Left" Height="26" Margin="346,319,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkTuesday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,324,0,0"/>
+        <wpfTool:TimePicker x:Name="tmWednesday2Start" HorizontalAlignment="Left" Height="26" Margin="142,349,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Wednesday 2:" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,349,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmWednesday2End" HorizontalAlignment="Left" Height="26" Margin="346,349,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,354,0,0"/>
-        <wpfTool:TimePicker x:Name="tmThursday2Start" HorizontalAlignment="Left" Height="26" Margin="142,379,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Thursday 2 Schedule:" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmWednesday2End" HorizontalAlignment="Left" Height="26" Margin="346,349,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkWednesday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,354,0,0"/>
+        <wpfTool:TimePicker x:Name="tmThursday2Start" HorizontalAlignment="Left" Height="26" Margin="142,379,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Thursday 2:" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,379,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmThursday2End" HorizontalAlignment="Left" Height="26" Margin="346,379,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,384,0,0"/>
-        <wpfTool:TimePicker x:Name="tmFriday2Start" HorizontalAlignment="Left" Height="26" Margin="142,410,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Friday 2 Schedule:" HorizontalAlignment="Left" Margin="10,410,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmThursday2End" HorizontalAlignment="Left" Height="26" Margin="346,379,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkThursday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,384,0,0"/>
+        <wpfTool:TimePicker x:Name="tmFriday2Start" HorizontalAlignment="Left" Height="26" Margin="142,410,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Friday 2:" HorizontalAlignment="Left" Margin="10,410,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,410,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmFriday2End" HorizontalAlignment="Left" Height="26" Margin="346,410,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,415,0,0"/>
-        <wpfTool:TimePicker x:Name="tmSaturday2Start" HorizontalAlignment="Left" Height="26" Margin="142,439,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <Label Content="Saturday 2 Schedule:" HorizontalAlignment="Left" Margin="10,439,0,0" VerticalAlignment="Top"/>
+        <wpfTool:TimePicker x:Name="tmFriday2End" HorizontalAlignment="Left" Height="26" Margin="346,410,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkFriday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,415,0,0"/>
+        <wpfTool:TimePicker x:Name="tmSaturday2Start" HorizontalAlignment="Left" Height="26" Margin="142,439,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <Label Content="Saturday 2:" HorizontalAlignment="Left" Margin="10,439,0,0" VerticalAlignment="Top"/>
         <Label Content="until" HorizontalAlignment="Left" Margin="308,439,0,0" VerticalAlignment="Top"/>
-        <wpfTool:TimePicker x:Name="tmSaturday2End" HorizontalAlignment="Left" Height="26" Margin="346,439,0,0" VerticalAlignment="Top" Width="161" Background="White"/>
-        <CheckBox Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,444,0,0"/>
-        <CheckBox x:Name="chkWeek1EqualsWeek2" Content="Week 1 = Week 2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,12,0,0"/>
+        <wpfTool:TimePicker x:Name="tmSaturday2End" HorizontalAlignment="Left" Height="26" Margin="346,439,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
+        <CheckBox x:Name="chkSaturday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,444,0,0"/>
+        <Button x:Name="btnSaveSchedule" Content="Save Schedule" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="10,478,0,0" VerticalAlignment="Top" Width="135" Background="#FFB8F190" Click="btnSaveSchedule_Click"/>
+        <Label x:Name="lblWeek1Hours" Content="Week 1 Hours: XXX" HorizontalAlignment="Left" Margin="150,475,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblWeek2Hours" Content="Week 2 Hours: XXX" HorizontalAlignment="Left" Margin="266,475,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
