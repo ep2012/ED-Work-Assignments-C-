@@ -66,5 +66,16 @@ namespace ED_Work_Assignments
             }
             setWindow();
         }
+
+        private void btnPlannedTimeOff_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeTimeOff win = new EmployeeTimeOff();
+
+            win.Left = Left;
+            win.Top = Top;
+
+            win.Show();
+            this.Close();
+        }
     };
 }

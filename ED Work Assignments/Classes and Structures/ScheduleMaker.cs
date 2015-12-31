@@ -23,11 +23,7 @@ namespace ED_Work_Assignments
 
         public ScheduleMaker(DateTime start, DateTime end, SchedulingMode schedulingMode)
         {
-            if (start == null || end == null)
-            {
-                return;
-            }
-            else
+            if (start != null && end != null)
             {
                 DateTime scheduleStartTime = new DateTime();
                 scheduleStartTime = DateTime.Parse("9/27/2015");
@@ -81,7 +77,11 @@ namespace ED_Work_Assignments
 
                     progBar.updateProg(Convert.ToInt32((day - start).TotalDays));
                     Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background,
-                                              new Action(delegate { }));
+                        new Action(
+                            delegate {
+                            }
+                        )
+                    );
                 }
             }
         }
@@ -269,7 +269,7 @@ namespace ED_Work_Assignments
         {
             TimeSpan timeSpan = end.Subtract(start);
 
-            int shiftLenfth = 4;
+            double shiftLenfth = 4;
 
             employeeShifts = employeeShifts.OrderBy(item => rng.Next()).ToList();
 
@@ -278,7 +278,7 @@ namespace ED_Work_Assignments
                 foreach (Shift shift in employeeShift.shifts.ToList())
                 {
                     //Length of half of the remaining shift
-                    int halfShiftSpan = new TimeSpan(shift.shiftTimeSpan.Ticks / 2).Hours;
+                    double halfShiftSpan = (new TimeSpan(shift.shiftTimeSpan.Ticks / 2).Minutes)/60;
                     if (shift.startTime == start && halfShiftSpan > shiftLenfth)
                     {
                         scheduleInBestWorkstation(start, start.AddHours(halfShiftSpan), employeeShift, type);
@@ -287,7 +287,8 @@ namespace ED_Work_Assignments
                     {
                         scheduleInBestWorkstation(start, shift.startTime.Add(shift.shiftTimeSpan), employeeShift, type);
                     }
-                    /*else if (shift.startTime < start && shift.startTime.Add(shift.shiftTimeSpan) > start && type == SchedulingType.Check)
+                    /*
+                    else if (shift.startTime < start && shift.startTime.Add(shift.shiftTimeSpan) > start && type == SchedulingType.Check)
                     {
                         //timespan, from parameter start time half way through the end of the shift
                         TimeSpan newSpan = new TimeSpan(shift.startTime.Add(shift.shiftTimeSpan).Subtract(start).Ticks / 2);
@@ -299,7 +300,8 @@ namespace ED_Work_Assignments
                         {
                             scheduleInBestWorkstation(start, shift.startTime.Add(shift.shiftTimeSpan), employeeShift, type);
                         }
-                    }*/
+                    }
+                    */
                 }
                 if (type == SchedulingType.Check)
                 {
@@ -690,33 +692,55 @@ namespace ED_Work_Assignments
         {
             //base case
 
-            List<object> checkerIdList = new List<object>();
+            List<object> checkerEmployeeList = new List<object>();
             List<object> checkerShiftList = new List<object>();
+            List<object> checkerStartTimes = new List<object>();
+            List<object> checkerIds = new List<object>();
+
 
             String sqlString = "SELECT A.Employee FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[StartShift] <= '" + start + "' AND A.[EndShift] > '" + start + "' AND A.Seat = '" + oldstation + "' ORDER BY A.[EndShift];";
             String sqlString2 = "SELECT A.[EndShift] FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[StartShift] <= '" + start + "' AND A.[EndShift] > '" + start + "' AND A.Seat = '" + oldstation + "' ORDER BY A.[EndShift];";
+            String sqlString3 = "SELECT A.[StartShift] FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[StartShift] <= '" + start + "' AND A.[EndShift] > '" + start + "' AND A.Seat = '" + oldstation + "' ORDER BY A.[EndShift];";
+            String sqlString4 = "SELECT A.[Id] FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[StartShift] <= '" + start + "' AND A.[EndShift] > '" + start + "' AND A.Seat = '" + oldstation + "' ORDER BY A.[EndShift];";
 
-            new idMaker(sqlString, checkerIdList);
+
+            new idMaker(sqlString, checkerEmployeeList);
             new idMaker(sqlString2, checkerShiftList);
+            new idMaker(sqlString3, checkerStartTimes);
+            new idMaker(sqlString4, checkerIds);
 
-            if (checkerIdList[0] != null && checkerShiftList[0] != null)
+            if (checkerEmployeeList.Count > 0)
             {
-                //adjust shift to new start/end time(s)
-
-
-                //add new clocking
-
-
-                DateTime shiftEndTime = DateTime.Parse(checkerShiftList[0].ToString());
-                if (shiftEndTime >= end)
+                if (checkerEmployeeList[0] != null && checkerShiftList[0] != null)
                 {
-                    startout = end;
+                    //recover beginning of shift
+                    DateTime previousShiftStartTime = DateTime.Parse(checkerStartTimes[0].ToString());
+                    if (previousShiftStartTime < start)
+                    {
+                        EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], oldstation, previousShiftStartTime, start);
+                    }
 
-                    //alter 
+
+                    DateTime previousShiftEndTime = DateTime.Parse(checkerShiftList[0].ToString());
+                    //change center of shift and recover end shift
+                    if (previousShiftEndTime > end)
+                    {
+                        EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], newstation, start, end);
+                        EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], oldstation, end, previousShiftEndTime);
+                        startout = end;
+                    }
+                    else
+                    {
+                        EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], newstation, start, previousShiftEndTime);
+                        startout = previousShiftEndTime;
+                    }
+
+                    //delete old clocking
+                    EmployeeScheduleSQL.deleteClocking(checkerIds[0]);
                 }
                 else
                 {
-                    startout = shiftEndTime;
+                    startout = start.AddMinutes(30);
                 }
             }
             else

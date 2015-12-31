@@ -11,9 +11,7 @@ namespace ED_Work_Assignments
     {
         public static void insertTimeOffRequest(object employeeId, object startTime, object endTime)
         {
-            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-
-            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            using (OdbcConnection dbConnection = new OdbcConnection(Connection.cxnString))
             {
                 //open OdbcConnection object
                 dbConnection.Open();
@@ -37,9 +35,7 @@ namespace ED_Work_Assignments
         }
         public static void insertTimeOff(object employeeId, object startTime, object endTime)
         {
-            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-
-            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            using (OdbcConnection dbConnection = new OdbcConnection(Connection.cxnString))
             {
                 //open OdbcConnection object
                 dbConnection.Open();
@@ -63,9 +59,7 @@ namespace ED_Work_Assignments
         }
         public static void acceptTimeOffRequest(object id)
         {
-            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
-
-            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            using (OdbcConnection dbConnection = new OdbcConnection(Connection.cxnString))
             {
                 //open OdbcConnection object
                 dbConnection.Open();

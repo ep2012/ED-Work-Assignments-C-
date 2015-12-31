@@ -22,9 +22,8 @@ namespace ED_Work_Assignments
         public static void EmployeeShiftCreator(String sqlCmdIDStartEndDay, List<EmployeeShift> comprehensiveEmployeeShifts, DateTime date)
         {
             object[] objID = new object[40];
-            String cxnString = "Driver={SQL Server};Server=HC-sql7;Database=REVINT;Trusted_Connection=yes;";
 
-            using (OdbcConnection connectionID = new OdbcConnection(cxnString))
+            using (OdbcConnection connectionID = new OdbcConnection(Connection.cxnString))
             {
                 OdbcCommand commandID = new OdbcCommand(sqlCmdIDStartEndDay, connectionID);
 

@@ -9,6 +9,7 @@
         <Label Content="Time Off Requests" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="194" FontSize="20"/>
         <Button x:Name="btnAcceptAll" Content="Accept All Requests" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="608,10,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" FontSize="16" />
         <Button x:Name="btnAcceptSchedule" Content="Accept Request" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="439,10,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" FontSize="16" Click="btnAcceptSchedule_Click"/>
+        <Button x:Name="btnPlannedTimeOff" Content="Planned Time Off" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="164" Height="30" BorderBrush="Black" Background="#FFB8F190" FontFamily="Lucida Sans" FontSize="16" Click="btnPlannedTimeOff_Click"/>
 
     </Grid>
 </Window>

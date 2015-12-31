@@ -46,7 +46,6 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.DataGrid.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Xceed.Wpf.Toolkit.dll
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\bin\Debug\Microsoft.SqlServer.DTSRuntimeWrap.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Interop.UIAutomationClient.dll
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.ResolveComReference.cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\AddEditEmployee.baml
@@ -62,7 +61,6 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ReportCreator.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\VacationRequest.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\VacationRequests.baml
-C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Other\App.baml
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\AddEditEmployee.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\ChangeTracker.g.cs
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\EditEmployeeSchedule.g.cs
@@ -87,3 +85,6 @@ C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\D
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csproj.GenerateResource.Cache
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.exe
 C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.pdb
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\ED Work Assignments.csprojResolveAssemblyReference.cache
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\AbsentAutoFillResults.baml
+C:\Users\eliprice\Documents\GitHub\ED Work Assignments\ED Work Assignments\obj\Debug\Windows\AbsentAutoFillResults.g.cs

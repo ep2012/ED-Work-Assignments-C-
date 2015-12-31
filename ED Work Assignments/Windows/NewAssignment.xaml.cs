@@ -55,6 +55,8 @@ namespace ED_Work_Assignments
             assignmentType = AssignmentType.New;
 
             lblWorkAssignment.Content = newAssignment;
+
+            btnMarkAsAbsent.Visibility = Visibility.Hidden;
         }
 
         public NewAssignment(MainWindow main, DataRowView row, String seat)
@@ -240,7 +242,7 @@ namespace ED_Work_Assignments
 
         private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
         {
-            ManageEmployees win = new ManageEmployees();
+            ManageEmployees win = new ManageEmployees(ManageEmployeeType.Information);
 
             win.Show();
 
@@ -265,6 +267,11 @@ namespace ED_Work_Assignments
                 {
                     (new ScheduleMaker()).markAsAbsent(start, end, seats.getID(seat.ToString()), id);
                 }
+                if (mainWindow.ShowActivated)
+                {
+                    mainWindow.update();
+                }
+                Close();
             }
         }
     }

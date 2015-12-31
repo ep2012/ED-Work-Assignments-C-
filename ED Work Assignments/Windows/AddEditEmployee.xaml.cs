@@ -160,7 +160,7 @@ namespace ED_Work_Assignments
 
         private void openMain()
         {
-            ManageEmployees win = new ManageEmployees();
+            ManageEmployees win = new ManageEmployees(ManageEmployeeType.Information);
 
             win.Show();
 
@@ -202,7 +202,7 @@ namespace ED_Work_Assignments
                 EmployeeInformationSQL.delete(txtFirstName.Text, txtLastName.Text, cboRole.Text, txtAddress1.Text, txtAddress2.Text, txtCity.Text, txtState.Text, txtZip.Text, txtPhone.Text, txtEmail.Text, txtHealthcareID.Text, id);
                 
 
-                ManageEmployees win = new ManageEmployees();
+                ManageEmployees win = new ManageEmployees(ManageEmployeeType.Information);
                 win.Show();
 
                 this.Close();

@@ -200,7 +200,7 @@ namespace ED_Work_Assignments
 
         private void btnManageEmployees_Click(object sender, RoutedEventArgs e)
         {
-            ManageEmployees win = new ManageEmployees();
+            ManageEmployees win = new ManageEmployees(ManageEmployeeType.Information);
 
             win.Left = Left;
             win.Top = Top;
@@ -357,6 +357,16 @@ namespace ED_Work_Assignments
         private void btnMonthView_Click(object sender, RoutedEventArgs e)
         {
             setWindows(dtPicker.Text.ToString(), DateTime.Parse(dtPicker.Text.ToString()).AddMonths(1).ToString());
+        }
+
+        private void btnManageEmployeeSchedules_Click(object sender, RoutedEventArgs e)
+        {
+            ManageEmployees win = new ManageEmployees(ManageEmployeeType.Schedule);
+
+            win.Left = Left;
+            win.Top = Top;
+
+            win.Show();
         }
     }
 }

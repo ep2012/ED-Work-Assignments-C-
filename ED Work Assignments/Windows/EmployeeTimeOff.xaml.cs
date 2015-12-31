@@ -78,5 +78,17 @@ namespace ED_Work_Assignments
 
             Close();
         }
+
+        private void btnVacationRequests_Click(object sender, RoutedEventArgs e)
+        {
+            VacationRequests win = new VacationRequests();
+
+            win.Left = Left;
+            win.Top = Top;
+
+            win.Show();
+
+            Close();
+        }
     }
 }

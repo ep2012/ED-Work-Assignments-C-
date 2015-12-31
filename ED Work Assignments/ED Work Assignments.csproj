@@ -99,6 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="SQLInteraction\ChangeTracker.cs" />
+    <Compile Include="SQLInteraction\Connection.cs" />
     <Compile Include="SQLInteraction\EmployeeInformation.cs" />
     <Compile Include="Windows\AbsentAutoFillResults.xaml.cs">
       <DependentUpon>AbsentAutoFillResults.xaml</DependentUpon>

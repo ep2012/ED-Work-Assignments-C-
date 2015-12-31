@@ -291,5 +291,54 @@ namespace ED_Work_Assignments
             }
         }
 
+        public static void updateClocking(object employeeID, object seatID, object start, object end, object id)
+        {
+
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_updateWorkAssignment(?,?,?,?,?)}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.Parameters.Add("@employee", OdbcType.Int).Value = employeeID;
+                cmd.Parameters.Add("@seat", OdbcType.Int).Value = seatID;
+                cmd.Parameters.Add("@start", OdbcType.DateTime).Value = start;
+                cmd.Parameters.Add("@end", OdbcType.DateTime).Value = end;
+                cmd.Parameters.Add("@id", OdbcType.Int).Value = id;
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
+        }
+
+        public static void addClocking(object employeeID, object seatID, object start, object end)
+        {
+            using (OdbcConnection dbConnection = new OdbcConnection(cxnString))
+            {
+                //open OdbcConnection object
+                dbConnection.Open();
+
+                OdbcCommand cmd = new OdbcCommand();
+
+                cmd.CommandText = "{CALL [REVINT].[HEALTHCARE\\eliprice].ed_newWorkAssignment(?, ?, ?, ?)}";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Connection = dbConnection;
+
+                cmd.Parameters.Add("@employee", OdbcType.Int).Value = employeeID;
+                cmd.Parameters.Add("@seat", OdbcType.Int).Value = seatID;
+                cmd.Parameters.Add("@start", OdbcType.DateTime).Value = start;
+                cmd.Parameters.Add("@end", OdbcType.DateTime).Value = end;
+
+                cmd.ExecuteNonQuery();
+
+                dbConnection.Close();
+            }
+        }
     }
 }

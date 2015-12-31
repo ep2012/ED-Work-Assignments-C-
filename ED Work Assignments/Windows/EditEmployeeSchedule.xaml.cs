@@ -220,7 +220,7 @@ namespace ED_Work_Assignments
                 isFullTime(), 
                 id);
 
-            ManageEmployees win = new ManageEmployees();
+            ManageEmployees win = new ManageEmployees(ManageEmployeeType.Schedule);
 
             win.Left = Left;
             win.Top = Top;
