@@ -265,7 +265,11 @@ namespace ED_Work_Assignments
 
                 if (dialogResult2 == MessageBoxResult.Yes)
                 {
-                    (new ScheduleMaker()).markAsAbsent(start, end, seats.getID(seat.ToString()), id);
+                    List <MarkAsAbsentShift> deletedShifts = new List<MarkAsAbsentShift>();
+                    List <MarkAsAbsentShift> newShifts = new List<MarkAsAbsentShift>();
+
+                    (new ScheduleMaker()).markAsAbsent(start, end, seats.getID(seat.ToString()), id, deletedShifts, newShifts);
+
                 }
                 if (mainWindow.ShowActivated)
                 {

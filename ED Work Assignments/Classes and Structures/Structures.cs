@@ -23,4 +23,11 @@ namespace ED_Work_Assignments
         public DateTime startTime;
     }
     public enum SchedulingMode {Type1, Type2};
+    public struct MarkAsAbsentShift
+    {
+        public object Name;
+        public object Seat;
+        public object Start;
+        public object End;
+    }
 }

@@ -655,10 +655,40 @@ namespace ED_Work_Assignments
                 TempSchedulerSQL.insertBlank(start, end, station);
             }
         }
-        public void markAsAbsent(DateTime start, DateTime end, object station, object id)
+        public void markAsAbsent(DateTime start, DateTime end, object station, object id, List <MarkAsAbsentShift> deletedShifts, List <MarkAsAbsentShift> newShifts)
         {
             String stationstr = station.ToString();
-            
+
+            List<object> employeeName = new List<object>();
+
+            String sqlString = @"SELECT A.Employee FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[Id] = " + id + ";";
+
+            new idMaker(sqlString, employeeName);
+            if (employeeName.Count > 0)
+            {
+                sqlString = @"SELECT A.FirstName + ' '  + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + employeeName[0] + ";";
+                employeeName = new List<object>();
+                new idMaker(sqlString, employeeName);
+                MarkAsAbsentShift deletedShift = new MarkAsAbsentShift();
+                if (employeeName.Count > 0)
+                {
+                    deletedShift.Name = employeeName[0];
+                    
+                    sqlString = @"SELECT A.Name FROM [REVINT].[dbo].[ED_Seats] A WHERE A.[Id] = " + station + ";";
+                    List<object> seatName = new List<object>();
+
+                    new idMaker(sqlString, seatName);
+                    if (seatName.Count > 0)
+                    {
+                        deletedShift.Start = start;
+                        deletedShift.End = end;
+                        deletedShift.Seat = seatName[0];
+
+                        deletedShifts.Add(deletedShift);
+                    }
+                }
+            }
+
             //Delete clocking
             EmployeeScheduleSQL.deleteClocking(id);
 
@@ -667,14 +697,14 @@ namespace ED_Work_Assignments
                 DateTime startout;
                 while (start < end)
                 {
-                    bumpUpToFillStation(start, end, station, out startout);
+                    bumpUpToFillStation(start, end, station, out startout, deletedShifts, newShifts);
                     start = startout;
                 }
             }
             doMinStaffing(start);
             doMinStaffing(end);
         }
-        private void bumpUpToFillStation(DateTime start, DateTime end, object station, out DateTime startout)
+        private void bumpUpToFillStation(DateTime start, DateTime end, object station, out DateTime startout, List<MarkAsAbsentShift> deletedShifts, List<MarkAsAbsentShift> newShifts)
         {
             startout = new DateTime();
             int oldstation = getLowestFilledStation(start);
@@ -684,11 +714,11 @@ namespace ED_Work_Assignments
             }
             else
             {
-                bumpFromStationToAnother(oldstation, station, start, end, out startout);
+                bumpFromStationToAnother(oldstation, station, start, end, out startout, deletedShifts, newShifts);
             }
             
         }
-        private void bumpFromStationToAnother(object oldstation, object newstation, DateTime start, DateTime end, out DateTime startout)
+        private void bumpFromStationToAnother(object oldstation, object newstation, DateTime start, DateTime end, out DateTime startout, List<MarkAsAbsentShift> deletedShifts, List<MarkAsAbsentShift> newShifts)
         {
             //base case
 
@@ -718,10 +748,12 @@ namespace ED_Work_Assignments
                     if (previousShiftStartTime < start)
                     {
                         EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], oldstation, previousShiftStartTime, start);
+                        //add clocking to added shifts
                     }
 
 
                     DateTime previousShiftEndTime = DateTime.Parse(checkerShiftList[0].ToString());
+
                     //change center of shift and recover end shift
                     if (previousShiftEndTime > end)
                     {
@@ -736,6 +768,7 @@ namespace ED_Work_Assignments
                     }
 
                     //delete old clocking
+                    //Add deleted clocking to deleted shifts
                     EmployeeScheduleSQL.deleteClocking(checkerIds[0]);
                 }
                 else

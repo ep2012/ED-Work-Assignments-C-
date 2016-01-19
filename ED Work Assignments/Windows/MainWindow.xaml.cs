@@ -32,9 +32,12 @@ namespace ED_Work_Assignments
             if (!users.isAdmin(Environment.UserName))
             {
                 IndividualSchedule win = new IndividualSchedule();
+
                 win.Left = Left;
                 win.Top = Top;
+
                 win.Show();
+
                 Close();
             }
             else
@@ -138,8 +141,8 @@ namespace ED_Work_Assignments
                 Binding binding = new Binding();
                 binding.Source = dtaCheckIn.Items;
 
-                    //Close connection
-                    dbConnection.Close();
+                //Close connection
+                dbConnection.Close();
             }
         }
 
