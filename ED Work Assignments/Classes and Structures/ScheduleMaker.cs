@@ -562,10 +562,12 @@ namespace ED_Work_Assignments
             {
                 return 6;
             }
-            /*else if (isStationOpen(time, time, 8, 1))
+            /*
+            else if (isStationOpen(time, time, 8, 1))
             {
                 return 8;
-            }*/
+            }
+            */
             else if (isStationOpen(time, time, 2, 1))
             {
                 return 2;
@@ -666,7 +668,7 @@ namespace ED_Work_Assignments
             new idMaker(sqlString, employeeName);
             if (employeeName.Count > 0)
             {
-                sqlString = @"SELECT A.FirstName + ' '  + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + employeeName[0] + ";";
+                sqlString = @"SELECT A.FirstName + ' ' + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + employeeName[0] + ";";
                 employeeName = new List<object>();
                 new idMaker(sqlString, employeeName);
                 MarkAsAbsentShift deletedShift = new MarkAsAbsentShift();
@@ -704,6 +706,7 @@ namespace ED_Work_Assignments
             doMinStaffing(start);
             doMinStaffing(end);
         }
+
         private void bumpUpToFillStation(DateTime start, DateTime end, object station, out DateTime startout, List<MarkAsAbsentShift> deletedShifts, List<MarkAsAbsentShift> newShifts)
         {
             startout = new DateTime();
@@ -718,6 +721,7 @@ namespace ED_Work_Assignments
             }
             
         }
+
         private void bumpFromStationToAnother(object oldstation, object newstation, DateTime start, DateTime end, out DateTime startout, List<MarkAsAbsentShift> deletedShifts, List<MarkAsAbsentShift> newShifts)
         {
             //base case
@@ -747,28 +751,176 @@ namespace ED_Work_Assignments
                     DateTime previousShiftStartTime = DateTime.Parse(checkerStartTimes[0].ToString());
                     if (previousShiftStartTime < start)
                     {
-                        EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], oldstation, previousShiftStartTime, start);
+                        
                         //add clocking to added shifts
+                        List<object> employeeName = new List<object>();
+
+                        
+                        String sqlEmployeeString = @"SELECT A.FirstName + ' ' + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + checkerEmployeeList[0] + ";";
+                        employeeName = new List<object>();
+                        new idMaker(sqlEmployeeString, employeeName);
+                        MarkAsAbsentShift addedShift = new MarkAsAbsentShift();
+                        if (employeeName.Count > 0)
+                        {
+                            addedShift.Name = employeeName[0];
+
+                            sqlEmployeeString = @"SELECT A.Name FROM [REVINT].[dbo].[ED_Seats] A WHERE A.[Id] = " + oldstation + ";";
+                            List<object> seatName = new List<object>();
+
+                            new idMaker(sqlEmployeeString, seatName);
+                            if (seatName.Count > 0)
+                            {
+                                addedShift.Start = previousShiftStartTime;
+                                addedShift.End = start;
+                                addedShift.Seat = seatName[0];
+
+                                newShifts.Add(addedShift);
+                            }
+                        }
+
                     }
 
+                    EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], oldstation, previousShiftStartTime, start);
 
                     DateTime previousShiftEndTime = DateTime.Parse(checkerShiftList[0].ToString());
 
                     //change center of shift and recover end shift
                     if (previousShiftEndTime > end)
                     {
+                        //add clocking to added shifts
+                        List<object> employeeName = new List<object>();
+
+                        String sqlEmployeeString = @"SELECT A.FirstName + ' ' + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + checkerEmployeeList[0] + ";";
+                        
+                        employeeName = new List<object>();
+                        new idMaker(sqlEmployeeString, employeeName);
+                        MarkAsAbsentShift addedShift = new MarkAsAbsentShift();
+                        MarkAsAbsentShift addedShift2 = new MarkAsAbsentShift();
+
+                        if (employeeName.Count > 0)
+                        {
+                            addedShift.Name = employeeName[0];
+                            addedShift2.Name = employeeName[0];
+
+                            sqlEmployeeString = @"SELECT A.Name FROM [REVINT].[dbo].[ED_Seats] A WHERE A.[Id] = " + newstation + ";";
+                            List<object> seatName = new List<object>();
+
+                            new idMaker(sqlEmployeeString, seatName);
+                            if (seatName.Count > 0)
+                            {
+                                addedShift.Start = start;
+                                addedShift.End = end;
+                                addedShift.Seat = seatName[0];
+
+                                newShifts.Add(addedShift);
+                            }
+
+                            sqlEmployeeString = @"SELECT A.Name FROM [REVINT].[dbo].[ED_Seats] A WHERE A.[Id] = " + oldstation + ";";
+                            seatName = new List<object>();
+
+                            new idMaker(sqlEmployeeString, seatName);
+                            if (seatName.Count > 0)
+                            {
+                                addedShift.Start = end;
+                                addedShift.End = previousShiftEndTime;
+                                addedShift.Seat = seatName[0];
+
+                                newShifts.Add(addedShift);
+                            }
+                        }
+
                         EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], newstation, start, end);
                         EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], oldstation, end, previousShiftEndTime);
                         startout = end;
                     }
                     else
                     {
+                        //add clocking to added shifts
+                        List<object> employeeName = new List<object>();
+
+                        String sqlEmployeeString = @"SELECT A.FirstName + ' ' + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + checkerEmployeeList[0] + ";";
+                        employeeName = new List<object>();
+                        new idMaker(sqlEmployeeString, employeeName);
+                        MarkAsAbsentShift addedShift = new MarkAsAbsentShift();
+
+                        if (employeeName.Count > 0)
+                        {
+                            addedShift.Name = employeeName[0];
+
+                            sqlEmployeeString = @"SELECT A.Name FROM [REVINT].[dbo].[ED_Seats] A WHERE A.[Id] = " + newstation + ";";
+                            List<object> seatName = new List<object>();
+
+                            new idMaker(sqlEmployeeString, seatName);
+                            if (seatName.Count > 0)
+                            {
+                                addedShift.Start = start;
+                                addedShift.End = previousShiftEndTime;
+                                addedShift.Seat = seatName[0];
+
+                                newShifts.Add(addedShift);
+                            }
+                        }
+
                         EmployeeScheduleSQL.addClocking(checkerEmployeeList[0], newstation, start, previousShiftEndTime);
                         startout = previousShiftEndTime;
                     }
 
-                    //delete old clocking
                     //Add deleted clocking to deleted shifts
+                    List<object> employeeName2 = new List<object>();
+
+                    String sqlEmployeeString2 = @"SELECT A.Employee FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[Id] = " + checkerIds[0] + ";";
+
+                    new idMaker(sqlEmployeeString2, employeeName2);
+                    if (employeeName2.Count > 0)
+                    {
+                        sqlEmployeeString2 = @"SELECT A.FirstName + ' ' + A.LastName FROM [REVINT].[healthcare\eliprice].[ED_Employees] A WHERE A.[Id] = " + employeeName2[0] + ";";
+                        employeeName2 = new List<object>();
+                        new idMaker(sqlEmployeeString2, employeeName2);
+                        MarkAsAbsentShift deletedShift = new MarkAsAbsentShift();
+                        if (employeeName2.Count > 0)
+                        {
+                            deletedShift.Name = employeeName2[0];
+
+                            sqlEmployeeString2 = @"SELECT A.Seat FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[Id] = " + checkerIds[0] + ";";
+
+                            List<object> seatName = new List<object>();
+
+                            new idMaker(sqlEmployeeString2, seatName);
+
+                            if (seatName.Count > 0)
+                            {
+                                sqlEmployeeString2 = @"SELECT A.Name FROM [REVINT].[dbo].[ED_Seats] A WHERE A.[Id] = " + seatName[0] + ";";
+                                seatName = new List<object>();
+
+                                new idMaker(sqlEmployeeString2, seatName);
+                                if (seatName.Count > 0)
+                                {
+                                    deletedShift.Seat = seatName[0];
+
+                                    sqlEmployeeString2 = @"SELECT A.StartShift FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[Id] = " + checkerIds[0] + ";";
+
+                                    employeeName2 = new List<object>();
+                                    new idMaker(sqlEmployeeString2, employeeName2);
+                                    if (employeeName2.Count > 0)
+                                    {
+                                        deletedShift.Start = employeeName2[0];
+
+                                        sqlEmployeeString2 = @"SELECT A.EndShift FROM [REVINT].[dbo].[ED_Shifts] A WHERE A.[Id] = " + checkerIds[0] + ";";
+
+                                        employeeName2 = new List<object>();
+                                        new idMaker(sqlEmployeeString2, employeeName2);
+                                        if (employeeName2.Count > 0)
+                                        {
+                                            deletedShift.End = employeeName2[0];
+
+                                            deletedShifts.Add(deletedShift);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //delete old clocking
                     EmployeeScheduleSQL.deleteClocking(checkerIds[0]);
                 }
                 else

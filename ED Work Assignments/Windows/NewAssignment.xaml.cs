@@ -270,6 +270,11 @@ namespace ED_Work_Assignments
 
                     (new ScheduleMaker()).markAsAbsent(start, end, seats.getID(seat.ToString()), id, deletedShifts, newShifts);
 
+                    AbsentAutoFillResults win = new AbsentAutoFillResults(deletedShifts, newShifts);
+                    win.Left = Left;
+                    win.Top = Top;
+
+                    win.Show();
                 }
                 if (mainWindow.ShowActivated)
                 {

@@ -1,13 +1,12 @@
-﻿<Window x:Class="ED_Work_Assignments.Windows.AbsentAutoFillResults"
+﻿<Window x:Class="ED_Work_Assignments.AbsentAutoFillResults"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AbsentAutoFillResults" Height="400" Width="715" FontFamily="Lucida Sans" Background="#FF9B9999">
+        Title="AbsentAutoFillResults" Height="450" Width="715" FontFamily="Lucida Sans" Background="#FF9B9999">
     <Grid>
-        <DataGrid x:Name="dtaAlteredShifts" HorizontalAlignment="Left" Height="100" Margin="10,250,0,0" VerticalAlignment="Top" Width="678"/>
-        <DataGrid x:Name="dtaPriorShifts" HorizontalAlignment="Left" Height="125" Margin="10,90,0,0" VerticalAlignment="Top" Width="678"/>
-        <Label Content="Absent Auto Fill Results" HorizontalAlignment="Center" Margin="180,11,171,0" VerticalAlignment="Top" FontSize="30"/>
-        <Label Content="Deleted Shifts" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
-        <Label Content="New Shifts" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Height="25"/>
-
+        <DataGrid x:Name="dtaNewShifts" HorizontalAlignment="Left" Height="150" Margin="10,250,0,0" VerticalAlignment="Top" Width="678"/>
+        <DataGrid x:Name="dtaDeletedShifts" HorizontalAlignment="Left" Height="125" Margin="10,90,0,0" VerticalAlignment="Top" Width="678"/>
+        <Label Content="Absent Auto Fill Results" HorizontalAlignment="Center" Margin="10,11,10,0" VerticalAlignment="Top" FontSize="30" Width="687"/>
+        <Label Content="Old Shifts" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+        <Label Content="New/Modified Shifts" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Height="25"/>
     </Grid>
 </Window>
