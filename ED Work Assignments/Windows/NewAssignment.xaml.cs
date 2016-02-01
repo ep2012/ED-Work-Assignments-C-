@@ -276,6 +276,10 @@ namespace ED_Work_Assignments
 
                     win.Show();
                 }
+                else
+                {
+                    (new ScheduleMaker()).markAsAbsentNoScheduleFill(start, end, id);
+                }
                 if (mainWindow.ShowActivated)
                 {
                     mainWindow.update();

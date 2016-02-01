@@ -217,11 +217,25 @@ namespace ED_Work_Assignments
 
             foreach (SupervisorClocking clocking in dayList)
             {
-                TempSchedulerSQL.insert(Convert.ToInt32(clocking.id), DateTime.Parse(date.ToShortDateString() + " " + clocking.start.ToString()), DateTime.Parse(date.ToShortDateString() + " " + clocking.end.ToString()), 9);
+                scheduleSupervisorsHelper(Convert.ToInt32(clocking.id), DateTime.Parse(date.ToShortDateString() + " " + clocking.start.ToString()), DateTime.Parse(date.ToShortDateString() + " " + clocking.end.ToString()));
             }
             foreach (SupervisorClocking clocking in nightList)
             {
-                TempSchedulerSQL.insert(Convert.ToInt32(clocking.id), DateTime.Parse(date.ToShortDateString() + " " + clocking.start.ToString()), DateTime.Parse(date.AddDays(1).ToShortDateString() + " " + clocking.end.ToString()), 9);
+                scheduleSupervisorsHelper(Convert.ToInt32(clocking.id), DateTime.Parse(date.ToShortDateString() + " " + clocking.start.ToString()), DateTime.Parse(date.AddDays(1).ToShortDateString() + " " + clocking.end.ToString()));
+            }
+        }
+
+        private void scheduleSupervisorsHelper(int empid, DateTime start, DateTime end)
+        {
+            List<object> lst = new List<object>();
+            
+            String sqlStr = @"SELECT A.[Id] FROM [REVINT].dbo.ED_Shifts A WHERE Employee = " + empid +" AND SEAT = 9 AND StartShift = '" + start + "' AND EndShift = '" + end + "';";
+            
+            new idMaker(sqlStr, lst);
+
+            if (lst.Count == 0)
+            {
+                TempSchedulerSQL.insert(empid, start, end, 9);
             }
         }
 
@@ -657,6 +671,14 @@ namespace ED_Work_Assignments
                 TempSchedulerSQL.insertBlank(start, end, station);
             }
         }
+        public void markAsAbsentNoScheduleFill(DateTime start, DateTime end, object id)
+        {
+            EmployeeScheduleSQL.deleteClocking(id);
+            doMinStaffing(start);
+            doMinStaffing(end);
+        }
+
+
         public void markAsAbsent(DateTime start, DateTime end, object station, object id, List <MarkAsAbsentShift> deletedShifts, List <MarkAsAbsentShift> newShifts)
         {
             String stationstr = station.ToString();

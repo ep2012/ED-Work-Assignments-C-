@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
-        Title="EditEmployeeSchedule" Height="550" Width="650" FontFamily="Lucida Sans" Background="#FF9B9999">
+        Title="EditEmployeeSchedule" Height="550" Width="650" FontFamily="Lucida Sans" Background="#FF9B9999" ResizeMode="CanMinimize">
     <Grid>
         <wpfTool:TimePicker x:Name="tmSunday1Start" HorizontalAlignment="Left" Height="26" Margin="142,33,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week1_DataContextChanged"/>
         <Label Content="Sunday 1:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
@@ -74,8 +74,9 @@
         <Label Content="until" HorizontalAlignment="Left" Margin="308,439,0,0" VerticalAlignment="Top"/>
         <wpfTool:TimePicker x:Name="tmSaturday2End" HorizontalAlignment="Left" Height="26" Margin="346,439,0,0" VerticalAlignment="Top" Width="161" Background="White" DataContextChanged ="Week2_DataContextChanged"/>
         <CheckBox x:Name="chkSaturday2Overnight" Content="Overnight" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="533,444,0,0"/>
-        <Button x:Name="btnSaveSchedule" Content="Save Schedule" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="10,478,0,0" VerticalAlignment="Top" Width="135" Background="#FFB8F190" Click="btnSaveSchedule_Click"/>
-        <Label x:Name="lblWeek1Hours" Content="Week 1 Hours: XXX" HorizontalAlignment="Left" Margin="150,475,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblWeek2Hours" Content="Week 2 Hours: XXX" HorizontalAlignment="Left" Margin="266,475,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSaveSchedule" Content="Save Schedule" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="10,475,0,0" VerticalAlignment="Top" Width="135" Background="#FFB8F190" Click="btnSaveSchedule_Click" Height="25"/>
+        <Label x:Name="lblWeek1Hours" Content="Week 1 Hours: XXX" HorizontalAlignment="Left" Margin="215,475,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblWeek2Hours" Content="Week 2 Hours: XXX" HorizontalAlignment="Left" Margin="346,475,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnGetHours" Content="Get # Hours Worked" BorderThickness="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="472,475,0,0" VerticalAlignment="Top" Width="135" Background="#FFB8F190" Click="btnGetHours_Click" Height="25"/>
     </Grid>
 </Window>

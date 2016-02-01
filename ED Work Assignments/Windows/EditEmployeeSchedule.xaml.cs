@@ -259,5 +259,11 @@ namespace ED_Work_Assignments
         {
             calculateWeek2Hours();
         }
+
+        private void btnGetHours_Click(object sender, RoutedEventArgs e)
+        {
+            calculateWeek1Hours();
+            calculateWeek2Hours();
+        }
     }
 }
